@@ -6,8 +6,8 @@ import { ReactComponent as TnbcIcon } from "../../assets/tnbcLogo.svg"
 function Navbar() {
 
     return (
-        <div className = "navsection">
-        <div className = "navbar">
+        <div >
+        <div className = "nav-bar">
             <div className = "navbar-heading">
                 <div className = "navbar-icon">
                     <TnbcIcon/>

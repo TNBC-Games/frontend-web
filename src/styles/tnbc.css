@@ -1,4 +1,4 @@
-.navbar {
+.nav-bar {
     height: 36px;
     width: 95vw;
     display: flex;
@@ -17,9 +17,10 @@ img{
     width: 100%;
 }
 
-.navsection {
+.nav-section {
     background: black;
     display: flex;
+    position: fixed;
     justify-content: center;
     height: 100px;
 }
@@ -100,6 +101,7 @@ img{
     background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
     cursor: pointer;
     text-decoration: none;
+    z-index: 2;
 }
 
 .tnbc-body {
@@ -107,8 +109,9 @@ img{
 }
 
 .tnbc-description {
-    height:631px;
-    padding: 90px;
+    align-items: center;
+    background-image: url("../assets/spaceImage.png");
+    height:610px;
     color: #ffffff;
 }
 
@@ -120,6 +123,7 @@ img{
     color: #FFFFFF;
     width: 534px;
     height: 144px;
+    z-index: 2;
 }
 
 .earn-tnbc-description {
@@ -255,6 +259,7 @@ input:focus {
 
 .sign-up-text{
     margin-left: 10px;
+    margin-bottom: 0px;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -271,7 +276,7 @@ input:focus {
 .tnbc-comp{
     width: 100vw;
     height:631px;
-    padding: 90px;
+    padding: 150px 90px 90px 90px;
     color: #ffffff;
 }
 
@@ -519,7 +524,7 @@ input:focus {
     height: 818px;
     width: 100%;
     background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0, 0.4); 
+    background-color: rgba(0,0,0, 0.7); 
     position: absolute;
 }
 
@@ -528,6 +533,12 @@ input:focus {
     width:322px;   
 }
 
-.tournament-image{
-
+.tnbc-description-overlay {
+    align-items: center; 
+    position: relative;
+    padding: 140px 90px 90px 90px;
+    width: 100%;
+    height: 100%;
+    background: #1f010147;
+    z-index: 2;
 }
