@@ -1,0 +1,533 @@
+.navbar {
+    height: 36px;
+    width: 95vw;
+    display: flex;
+    z-index: 10;
+    margin-top: 32px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: fixed;
+    top:0px;
+    opacity: 100;
+}
+
+img{
+    width: 100%;
+}
+
+.navsection {
+    background: black;
+    display: flex;
+    justify-content: center;
+    height: 100px;
+}
+.navbar-heading{
+    display: flex;
+}
+
+.navbar-name{
+    padding-top: 10px;
+    color: #ffffff;
+    font-weight: 800;
+    font-style: "normal";
+    font-size: 24px;
+    line-height: 36px;
+    align-items: center;
+    justify-content: center
+}
+
+.navbar-section {
+    display: flex;
+
+
+}
+
+.menu-button {
+    padding:10px 30px 10px 30px;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ml-40{
+    margin-left: 40px !important;
+}
+
+.mt-30{
+    margin-top: 30px;
+}
+
+.sign-in {
+    height:40px;
+    width:102px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+.join-free {
+    height:40px;
+    width:122px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #000000;
+    background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.tnbc-body {
+    display: flex;
+}
+
+.tnbc-description {
+    height:631px;
+    padding: 90px;
+    color: #ffffff;
+}
+
+.earn-tnbc-heading {
+    font-style: normal;
+    font-weight: 790;
+    font-size: 48px;
+    line-height: 72px;
+    color: #FFFFFF;
+    width: 534px;
+    height: 144px;
+}
+
+.earn-tnbc-description {
+    width: 534px;
+    height: 70px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.mt-40 {
+    margin-top: 50px;
+}
+
+.mr-30 {
+    margin-right: 50px;
+}
+
+.ml-30 {
+    margin-left: 50px;
+}
+
+.formInput {
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    padding: 22px 0px 22px 0px;
+    padding-left: 30px;
+    width: 50%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus {
+    outline: none !important;
+    border-color: #d5d0cc;
+}
+
+.signup-page {
+    height: 965px;
+    padding-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    background: #1D1D1D;
+}
+
+.float-btn{
+    transition-duration: 0.5s;
+}
+
+.float-btn:hover {
+    transform: translate3d(0px, -3px, 0px);
+    transition-property: transform;
+}
+
+.signup-heading{
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF;
+}
+
+.form-section{
+    display: flex;
+    justify-content: center;
+}
+
+.sign-up-btn {
+    height:74px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 22px 0px 22px 0px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    border-radius: 5px;
+    color: #000000;
+    background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.policy-text {
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 5px 0px;
+    font-style: normal;
+}
+
+.google-discord-btn{
+    height:60px;
+    width:50%;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+    cursor: pointer;
+}
+
+.space-between{
+    border-radius: 5px;   
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+.google-discord-btn-inner{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    height:58px;
+    width:99%;
+}
+
+.sign-up-text{
+    margin-left: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+}
+
+.tnbc-component {
+    height:631px;
+    padding: 90px;
+    color: #ffffff;
+}
+
+.tnbc-comp{
+    width: 100vw;
+    height:631px;
+    padding: 90px;
+    color: #ffffff;
+}
+
+.choose-games{
+    height:727px;
+    padding: 90px;
+    background:#111010;
+    border-bottom: 1px solid #343434;
+}
+
+.choose-tournament{
+    height:2500;
+    padding: 90px;
+    background:#111010;
+    border-bottom: 1px solid #343434;
+}
+
+.choose-games-header {
+    display: flex;
+    justify-content: space-between;
+    height: 70px;
+}
+
+.choose-games-title {
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF;
+}
+.games-filter {
+    height:60px;
+    width:259px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+}
+
+.games-filter-inner {
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    height:58px;
+    width:99%;
+}
+
+.games-filter-inner {
+    padding-left: 20px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #FFFFFF;
+}
+
+.choose-games-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.games-item {
+    flex: -1 0 32%;
+    height: 193px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #FFFFFF;
+}
+
+.games-name-box {
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    height: 57px;
+    position: relative;
+    bottom: 56px;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.upcoming-tornament-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    padding-top: 11px;
+    height: 30px;
+    position: relative;
+    top: 30px;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.tourn-more-info {
+    background: #1D1D1D;
+    height: 187px;
+    padding: 16px;
+}
+
+.tourn-item {
+    width: 30%;
+    height: 412px;
+    margin-bottom: 5%;
+}
+.tourn-name {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFFFFF;
+}
+.progress {
+    height: 5px !important;
+    border-radius: 10px !important;
+    background: rgba(255, 255, 255, 0.4)!important;
+}
+.progress-bar {
+    background: rgba(0, 133, 255, 0.4) !important;
+    border-radius: 10px !important;
+}
+.tourn-completed {
+    display: flex;
+    height: 20px;
+    justify-content: flex-end;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #FFFFFF;
+}
+
+.fee {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.justify-space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fee-amount {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 40px;
+    color: #FFFFFF;
+}
+.tnbc-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height:665px;
+    padding: 90px;
+    background:#111010;
+}
+
+.card-item {
+    margin-left:20px;
+    width: 450px;
+    height: 280px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.card-item-overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: 260px;
+    border-radius:0px 0px 15px 15px;
+    background-color: #1D1D1D;
+    opacity: 0.9;
+}
+.card-item-amount{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: #FFFFFF;
+}
+
+.card-item-title{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 36px;
+    color: #FFFFFF;
+}
+
+.achievement-page {
+    height: 818px !important;
+    background-image: url("../assets/achievementPage.png");
+    color: white;
+    height: 100%; 
+}
+
+.achievement-header {
+    height: 200px;
+    padding:90px;
+    z-index:2;
+}
+
+.achievement-title{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    color: white;
+    z-index:100
+}
+
+.achievement-subtitle {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+
+}
+
+.dark-overlay{
+    z-index:2;
+    height: 818px;
+    width: 100%;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0, 0.4); 
+    position: absolute;
+}
+
+.achievement-card{
+    height: 331px;
+    width:322px;   
+}
+
+.tournament-image{
+
+}
