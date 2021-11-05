@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import WebBody from "./components/HomePage/webBody";
 import SignUp from "./components/Authentication/SignUp";
 import SignIn from "./components/Authentication/SignIn";
+import GamesProfile from "./components/GamesManagement/GamesProfile";
 
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
         <Navbar/>
         <Switch>
           <Route exact path = "/" component = {WebBody} />
-          <Route exact path = "/signup" component = {SignUp}/>
+          <Route path = "/signup" component = {SignUp}/>
           <Route path = "/login" component = {SignIn}/>
+          <Route path = "/game-management" component ={GamesProfile}/>
         </Switch>
           
       </BrowserRouter>

@@ -13,12 +13,14 @@ function SignIn() {
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     function handleInputEmailChange(event) {
         setUserInfo({ ...userInfo, email: event.target.value });
-        console.log("====>",event.target.value)
     }
 
     function handleInputPasswordChange(event) {
         setUserInfo({ ...userInfo, password: event.target.value });
-        console.log("====>",event.target.value)
+    }
+
+    async function loginUser(){
+
     }
 
     return (
@@ -48,7 +50,7 @@ function SignIn() {
                             spellCheck="false"
                         />
 
-                        <div className ="form-section float-btn">
+                        <div className ="form-section float-btn" onClick={loginUser}>
                             <div className = "sign-up-btn mt-30">
                                 <p>Login</p>
                             </div>
