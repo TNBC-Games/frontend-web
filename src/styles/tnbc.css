@@ -341,7 +341,7 @@ input:focus {
 .choose-games-section {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .games-item {
@@ -391,7 +391,7 @@ input:focus {
 }
 
 .tourn-item {
-    width: 30%;
+    width: 26%;
     height: 412px;
     margin-bottom: 5%;
 }
