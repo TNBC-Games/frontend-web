@@ -1,10 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function AchievmentCard() {
+function AchievmentCard({position, name, image, earned, }) {
     return (
-        <div className = "achievement-card">
-            
+        <div>
+            <div className = {`${position === 1 ? "red-top adjust-first" : position === 2 ? "yellow-top": "grey-top"} achievement-card`}>
+                <div className ="width-100 height-70 justify-center">
+                    <div className = "user-image">
+                        <img src = {image} ></img>
+                        <div className ={`${position === 1 ? "red-background" : position === 2 ? "yellow-background": "grey-background"} user-position`}>{position}</div>
+                    </div>
+                </div>
+
+                <div class= "achievement-info">
+                
+                    <div className ="player-name justify-center pt-3">Anonymous</div>
+                    <div className =" earning-text justify-center pt-3"> 3000 TP earned 09/20 - 09/27 </div>
+                    <div className =" green-earnings justify-center">+5,000 TNBC earned </div>
+                    <div className ="justify-center mt-40">
+                    <div className = "join-free float-btn justify-center p-2">View Profile</div>
+                    </div>
+                    
+                    
+                </div>   
+            </div>
         </div>
     )
 }

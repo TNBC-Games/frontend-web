@@ -1,4 +1,8 @@
-import React from 'react'
+import React from 'react';
+import AchievmentCard from './AchievementCard';
+import firstPerson from "../../assets/firstPositionImg.png";
+import SecondPerson from "../../assets/secondPositionImg.png";
+import  ThirdPerson from "../../assets/thirdPositionImg.png";
 
 function AchievementPage() {
     return (
@@ -13,8 +17,10 @@ function AchievementPage() {
                     </div>
                 </div>
 
-                <div className ="achievement-cards">
-
+                <div className =" choose-games-section achievement-cards mr-30 ml-30 mt-30">
+                    <AchievmentCard position = {2} image = {SecondPerson}/>
+                    <AchievmentCard position = {1} image = {firstPerson}/>
+                    <AchievmentCard position = {3} image = {ThirdPerson}/>
                 </div>
 
 

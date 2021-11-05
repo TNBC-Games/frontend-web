@@ -74,7 +74,7 @@ function ChooseTournament() {
                             <p className ="pl-4">{item?.gameType}</p>
                         </div>
                         <div>
-                            <img src={item?.image}></img>
+                            <img src={item?.image} alt={item?.gameType}></img>
                         </div>
                         <div className ="tourn-more-info">
                             <div className ="tourn-name mb-3">{item?.gameType}</div>            
@@ -82,7 +82,7 @@ function ChooseTournament() {
                             <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
                             <div className = "fee"> Fee </div>
                             <div className = "justify-space " >
-                                <div className = "fee-amount">{item.fee} TNBC</div>
+                                <div className = "fee-amount">{item?.fee} TNBC</div>
                                 <div className = "join-free float-btn">
                                     View
                                 </div>

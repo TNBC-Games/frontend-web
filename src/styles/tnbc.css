@@ -528,11 +528,6 @@ input:focus {
     position: absolute;
 }
 
-.achievement-card{
-    height: 331px;
-    width:322px;   
-}
-
 .tnbc-description-overlay {
     align-items: center; 
     position: relative;
@@ -541,4 +536,104 @@ input:focus {
     height: 100%;
     background: #1f010147;
     z-index: 2;
+}
+
+
+
+.achievement-card{
+    width: 331px;
+    height: 322px;
+    background: #1D1D1D;
+}
+.achievement-cards{
+    padding: 90px;
+}
+
+.width-100 {
+    width: 100%;
+}
+.height-70 {
+    height: 70px;
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+
+.red-background {
+   background-color:  #DF241E;
+}
+
+.yellow-background {
+    background-color:  #F6B651;
+}
+.grey-background {
+    background-color: #ADA8A0;
+}
+
+.red-top {
+    border-top:10px solid  #DF241E;
+}
+
+.yellow-top {
+    border-top: 10px solid #F6B651;
+}
+
+.grey-top {
+    border-top: 10px solid #ADA8A0;
+}
+.user-image {
+    height: 131px;
+    width: 131px;
+    background-color: white;
+    border: 2px solid #FFFFFF;
+    border-radius: 100%;
+    position: relative;
+        /* justify-self: center; */
+    top: -71px;
+}
+
+.adjust-first {
+    position: relative;
+    top:-70px
+}
+
+.user-position{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 26px;
+    width: 26px;
+    position: relative;
+    bottom: 32px;
+    left: 94px;
+    border-radius: 100%;
+    border:2px solid #ffffff;
+}
+.green-earnings{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;  
+    color: #00CA14;
+}
+
+.player-name {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 36px;
+    color: #FFFAFA;
+}
+
+.earning-text{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(255, 250, 250, 0.7);
+}
+
+.view-profile-btn {
+    
 }

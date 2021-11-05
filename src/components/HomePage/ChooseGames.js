@@ -44,7 +44,7 @@ function ChooseGames() {
             {games &&
                 games.map((item, index) => (
                     <div className ="games-item">
-                        <img src={item.image}></img>
+                        <img src={item.image} alt ={item.gameType}></img>
                         <div className = "games-name-box">
                             <p className ="pl-4">{item.gameType}</p>
                         </div>
