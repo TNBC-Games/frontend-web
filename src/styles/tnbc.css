@@ -649,3 +649,12 @@ input:focus {
 .color-white{
     color: white;
 }
+
+.mr-15px{
+    margin-right: 10px !important;
+    padding-bottom:2px !important;
+}
+
+.py-90 {
+    padding: 0px 90px;
+}

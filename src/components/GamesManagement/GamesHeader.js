@@ -1,8 +1,62 @@
 import React from 'react';
 import gamesImage from "../../assets/chessGame.png";
 import styled from 'styled-components';
+import {ReactComponent as LeaderIcon} from "../../assets/LeaderboardIcon.svg";
+import {ReactComponent as GameRules} from "../../assets/GameRulesIcon.svg";
+import callOfDutyImage from "../../assets/callOfDutyPng.png";
+import { ProgressBar } from 'react-bootstrap';
 
 function GamesHeader() {
+    const games = [
+        {
+            gameType: "CHESS",
+            image: callOfDutyImage,
+            completedTournament:24,
+            totalTournament: 24,
+            completedPercent: 40,
+            fee: 20,
+        },
+        {
+            gameType: "COD",
+            image: callOfDutyImage,
+            completedTournament:2,
+            totalTournament: 34,
+            completedPercent: 40,
+            fee: 70,
+        },
+        {
+            gameType: "COD - BLACK OPS",
+            image: callOfDutyImage,
+            completedTournament:5,
+            totalTournament: 34,
+            completedPercent: 30,
+            fee: 55,
+        },
+        {
+            gameType: "FIFA",
+            image: callOfDutyImage,
+            completedTournament:7,
+            totalTournament: 14,
+            completedPercent: 20,
+            fee: 24,
+        },
+        {
+            gameType: "FORTNITE",
+            image: callOfDutyImage,
+            completedTournament:23,
+            totalTournament: 34,
+            completedPercent: 32,
+            fee: 55,
+        },
+        {
+            gameType: "MINECRAFT",
+            image: callOfDutyImage,
+            completedTournament:12,
+            totalTournament: 34,
+            completedPercent: 24,
+            fee: 86,
+        }
+    ]
     return (
         <div className ="games-profile">
             <ProfileHeader image ={gamesImage}>
@@ -26,6 +80,72 @@ function GamesHeader() {
                     </p>
                 </div>
             </GamesDescription>
+
+            <RulesLeaderboard>
+                <div className ="pr-4">
+                    <LeaderIcon className ="mr-15px"/>
+                    Leaderboard
+                </div>
+                <div>
+                    <GameRules className ="mr-15px"/>
+                    Game rules
+                </div>
+
+            </RulesLeaderboard>
+
+            <UpcomingTournamentHead>
+                <div className ="upcomingTournament">
+                    UPCOMING TOURNAMENTS
+                </div>
+                
+                <div className = "tournament-category">
+                    <div className = "tournament-type">
+                        <div className ="checkbox"></div>
+                        Blitz
+                    </div>
+
+                    <div className = "tournament-type">
+                        <div className ="checkbox"></div>
+                        Rapid
+                    </div>
+
+                    <div className = "tournament-type">
+                        <div className ="checkbox"></div>
+                        Bullet
+                    </div>
+                </div>
+            </UpcomingTournamentHead>
+
+            <div className = "choose-games-section py-90">
+            {games &&
+                games.map((item, index) => (
+                    <div key ={index} className ="tourn-item">
+                        <div className = "upcoming-tornament-name">
+                            <p className ="pl-4">{item?.gameType}</p>
+                        </div>
+                        <div>
+                            <img src={item?.image} alt={item?.gameType}></img>
+                        </div>
+                        <div className ="tourn-more-info">
+                            <div className ="tourn-name mb-3">{item?.gameType}</div>            
+                            <ProgressBar now={item?.completedPercent}/>
+                            <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                            <div className = "fee"> Fee </div>
+                            <div className = "justify-space " >
+                                <div className = "fee-amount">{item?.fee} TNBC</div>
+                                <div className = "join-free float-btn">
+                                    View
+                                </div>
+                            </div>
+                        
+                        </div>
+                        
+                    </div>
+                ))
+            }
+            </div>
+
+
             
             
         </div>
@@ -113,12 +233,67 @@ export const GamesDescription = styled.div`
 
     };
 
-    p {
+    p{
         font-style: normal;
         font-weight: 500;
         font-size: 20px;
         line-height: 30px;
         color: #FFFFFF;
         margin: 0;
+    }
+`;
+
+export const RulesLeaderboard = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    padding:20px 90px;
+    align-items: center;
+    height: 40px;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 36px;
+    color: #FFFEFE;
+`;
+
+export const UpcomingTournamentHead = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 40px;
+    padding: 70px 90px;
+
+    .upcomingTournament{
+        font-style: normal;
+        font-weight: 800;
+        font-size: 24px;
+        height:40px;
+        line-height: 36px;
+        color: #FFFEFE;
+    }
+    .tournament-category {
+        display: flex;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 30px;
+        color: #FFFEFE;
+        height: 24px;
+    }
+
+    .tournament-type {
+        display: flex;
+        margin-right: 30px;
+        height: 24px;
+        align-ites: center;
+        justify-content:center;
+
+    }
+    .checkbox {
+        width: 24.77px;
+        height: 24px;
+        border: 2px solid #FFFFFF;
+        box-sizing: border-box;
+        margin-right: 15px
     }
 `;
