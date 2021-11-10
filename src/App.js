@@ -11,6 +11,7 @@ import WebBody from "./components/HomePage/webBody";
 import SignUp from "./components/Authentication/SignUp";
 import SignIn from "./components/Authentication/SignIn";
 import GamesProfile from "./components/GamesManagement/GamesProfile";
+import LeaderBoardPage from "./components/GamesManagement/LeaderBoardPage";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path = "/signup" component = {SignUp}/>
           <Route path = "/login" component = {SignIn}/>
           <Route path = "/game-management" component ={GamesProfile}/>
+          <Route path = "/leaderboard" component = {LeaderBoardPage}/>
         </Switch>
           
       </BrowserRouter>
