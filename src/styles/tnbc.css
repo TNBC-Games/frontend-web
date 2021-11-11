@@ -644,8 +644,8 @@ input:focus {
     background-color: black;
 }
 
-.games-profile-header{
-  
+.leaderboard-page{
+    width: 100vw;
 }
 
 .color-white{

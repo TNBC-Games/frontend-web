@@ -43,7 +43,7 @@ function LeaderBoardPage() {
 
 export default LeaderBoardPage
 
-export const Header = styled.div`
+ export const Header = styled.div`
     width: 1469px;
     height: 223px;
     margin-top: 90px;
@@ -87,14 +87,14 @@ export const Header = styled.div`
     }
 `;
 
-export const LeaderboardTable = styled.div`
+ const LeaderboardTable = styled.div`
     width: 1262px;
     height: 1114px;
     background: #1D1D1D;
     margin-bottom: 100px;
 
 `
-export const DateFilter = styled.div`
+ const DateFilter = styled.div`
     width: 100%;
     height:
 
