@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { ProgressBar } from 'react-bootstrap';
 
@@ -69,14 +70,14 @@ function ChooseTournament() {
             <div className = "choose-games-section">
             {games &&
                 games.map((item, index) => (
-                    <div key ={index} className ="tourn-item">
+                    <TournamentView>
                         <div className = "upcoming-tornament-name">
                             <p className ="pl-4">{item?.gameType}</p>
                         </div>
                         <div>
                             <img src={item?.image} alt={item?.gameType}></img>
                         </div>
-                        <div className ="tourn-more-info">
+                        <TournamentInfo>
                             <div className ="tourn-name mb-3">{item?.gameType}</div>            
                             <ProgressBar now={item?.completedPercent}/>
                             <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
@@ -88,9 +89,8 @@ function ChooseTournament() {
                                 </div>
                             </div>
                         
-                        </div>
-                        
-                    </div>
+                        </TournamentInfo>
+                    </TournamentView>
                 ))
             }
             </div>
@@ -99,3 +99,90 @@ function ChooseTournament() {
 }
 
 export default ChooseTournament
+
+export const TournamentView = styled.div`
+    width: 29%;
+    height: 412px;
+    margin-bottom: 5%;
+
+    .upcoming-tornament-name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFFFFF;
+        padding-top: 11px;
+        height: 30px;
+        position: relative;
+        top: 30px;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.6);
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 15px;
+    }
+
+`;
+
+export const TournamentInfo = styled.div`
+    background: #1D1D1D;
+    height: 187px;
+    padding: 16px;
+
+    .tourn-name {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 30px;
+        color: #FFFFFF;
+    }
+
+    .tourn-completed {
+        display: flex;
+        height: 20px;
+        justify-content: flex-end;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 21px;
+        color: #FFFFFF;
+    }
+
+    .fee {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .fee-amount {
+        font-style: normal;
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 40px;
+        color: #FFFFFF;
+    }
+
+    .join-free {
+        height:40px;
+        width:122px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        box-sizing: border-box;
+        border-radius: 5px;
+        color: #000000;
+        background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+        cursor: pointer;
+        text-decoration: none;
+        z-index: 2;
+    }
+
+`;
+

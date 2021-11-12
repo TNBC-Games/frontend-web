@@ -24,7 +24,7 @@ function SignIn() {
     }
 
     return (
-        <div className = "signup-page fadeInUp animated">
+        <div className = "signup-page fadeInUp animated leaderboard-page">
             <div>
                 <div className = "tnbc-comp">
                     <div className ="signup-heading"><p>Login</p></div>

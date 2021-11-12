@@ -72,7 +72,7 @@ function ProfileManagement() {
 
     }
     return (
-        <div className = "leaderboard-page">
+        <div className = "leaderboard-page fadeInUp animated">
             <Header image = {ProfileBackdrop}>
                 <div className = "profile-info">
                     <ProfileImage image= {profileDetails.image}/>

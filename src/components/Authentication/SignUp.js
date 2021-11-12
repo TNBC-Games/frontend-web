@@ -5,7 +5,7 @@ import {ReactComponent as GoogleLogo} from "../../assets/googleLogo.svg";
 
 function SignUp() {
     return (
-        <div className = "signup-page fadeInUp animated">
+        <div className = "signup-page fadeInUp animated leaderboard-page">
             <div>
                 <div className = "tnbc-comp">
                     <div className ="signup-heading"><p>Sign Up</p></div>

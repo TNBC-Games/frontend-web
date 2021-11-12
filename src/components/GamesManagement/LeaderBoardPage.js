@@ -4,7 +4,7 @@ import LeaderBoardHeader from "../../assets/LeaderboardHeader.png";
 
 function LeaderBoardPage() {
     return (
-        <div className ="leaderboard-page">
+        <div className ="leaderboard-page fadeInUp animated">
             <Header image ={LeaderBoardHeader}>
                 <div className = "heading">
                     LEADERBOARDS

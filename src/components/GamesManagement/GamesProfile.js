@@ -3,7 +3,7 @@ import GamesHeader from './GamesHeader';
 
 function GamesProfile() {
     return (
-        <div className ="tnbc-description">
+        <div className ="leaderboard-page fadeInUp animated">
             <GamesHeader/> 
         </div>
     )

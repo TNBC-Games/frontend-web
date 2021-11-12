@@ -12,7 +12,8 @@ import SignUp from "./components/Authentication/SignUp";
 import SignIn from "./components/Authentication/SignIn";
 import GamesProfile from "./components/GamesManagement/GamesProfile";
 import LeaderBoardPage from "./components/GamesManagement/LeaderBoardPage";
-import ProfileManagement from "./components/ProfileManagwmwnt.js/ProfileManagement";
+import ProfileManagement from "./components/ProfileManagement.js/ProfileManagement";
+import MyTournament from "./components/GamesManagement/MyTournament";
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
           <Route path = "/login" component = {SignIn}/>
           <Route path = "/game-management" component ={GamesProfile}/>
           <Route path = "/leaderboard" component = {LeaderBoardPage}/>
-          <Route path = "/profile" component = {ProfileManagement}/>
+          <Route path = "/profile" component = {ProfileManagement}/>'
+          <Route path = "/my-tournament" component = {MyTournament}/>
         </Switch>
           
       </BrowserRouter>

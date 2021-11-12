@@ -276,8 +276,7 @@ input:focus {
 .tnbc-comp{
     width: 100vw;
     height:631px;
-    margin-top: 50px;
-    padding: 150px 90px 90px 90px;
+    padding: 100px 90px 90px 90px;
     color: #ffffff;
 }
 
@@ -646,6 +645,7 @@ input:focus {
 
 .leaderboard-page{
     width: 100vw;
+    margin-top: 90px;
 }
 
 .color-white{
