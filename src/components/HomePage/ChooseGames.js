@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 
 function ChooseGames() {
@@ -28,6 +29,10 @@ function ChooseGames() {
             image: callOfDutyImage
         }
     ]
+    const history = useHistory();
+    function setGamesPage(){
+        history.push("/game-management")
+    }
     return (
         <div className = "choose-games">
 
@@ -43,7 +48,7 @@ function ChooseGames() {
             <div className = "choose-games-section">
             {games &&
                 games.map((item, index) => (
-                    <div className ="games-item">
+                    <div className ="games-item" onClick={setGamesPage}>
                         <img src={item.image} alt ={item.gameType}></img>
                         <div className = "games-name-box">
                             <p className ="pl-4">{item.gameType}</p>

@@ -104,6 +104,7 @@ export const TournamentView = styled.div`
     width: 29%;
     height: 412px;
     margin-bottom: 5%;
+    filter: ${props => props.grey? "grayscale(100%)": ""};
 
     .upcoming-tornament-name {
         display: flex;
@@ -125,8 +126,7 @@ export const TournamentView = styled.div`
 `;
 
 export const TournamentInfo = styled.div`
-    background: #1D1D1D;
-    height: 187px;
+    background: #1D1D1D;\
     padding: 16px;
 
     .tourn-name {
