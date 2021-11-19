@@ -661,4 +661,10 @@ input:focus {
     padding: 0px 90px;
 }
 
+.grey-disabled {
+    filter: grayscale(1);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 

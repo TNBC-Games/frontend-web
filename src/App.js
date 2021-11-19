@@ -14,6 +14,9 @@ import GamesProfile from "./components/GamesManagement/GamesProfile";
 import LeaderBoardPage from "./components/GamesManagement/LeaderBoardPage";
 import ProfileManagement from "./components/ProfileManagement.js/ProfileManagement";
 import MyTournament from "./components/GamesManagement/MyTournament";
+import { Provider } from 'react-redux';
+
+
 
 
 function App() {
