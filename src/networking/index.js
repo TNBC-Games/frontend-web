@@ -28,7 +28,7 @@ export const postCall = async (url, data, params, headers) => {
     }).catch(function (error) {
         if (!error.response) {
             // network error
-            interceptor(100);
+           // interceptor(100);
         } else {
             const { status } = error.response;
             return status;

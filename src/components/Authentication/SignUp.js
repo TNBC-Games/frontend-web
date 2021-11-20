@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import Input from '../input';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import {ReactComponent as DiscordLogo} from "../../assets/DiscordLogo.svg";
 import {ReactComponent as GoogleLogo} from "../../assets/googleLogo.svg";
 import { signupUser } from '../../redux/actions/signup.actions';
+
 
 
 
@@ -14,15 +16,19 @@ function SignUp() {
         password: "",
     });
     const [buttonDisabled, setButtonDisabled] = useState(true);
-    const dispatch = useDispatch()
+    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch();
+    const history = useHistory();
     
 
     function handleEmailInput(event){
+
         setInputValues({
             ...inputValues,
             email: event.target.value,
         });
     }
+
     function handleUserNameInput(event){
         setInputValues({
             ...inputValues,
@@ -31,22 +37,31 @@ function SignUp() {
     }
 
     function handlePasswordInput(event){
-
         setInputValues({
             ...inputValues,
             password: event.target.value,
         });
     }
-    async function signupAccount(){
+
+
+    async function signupAccount(type){
+        setLoading(true)
         let payload = {
-            userName: inputValues.username,
+            username: inputValues.username,
             email: inputValues.email,
+            password: inputValues.password,
         }
-       let  response = await dispatch(
-            signupUser(payload)
-        )
-        console.log(response)
+
+       let response = await dispatch( signupUser(payload, type))
+       if (response.status === true){
+           history.push("/home")
+        }else {
+            alert("no data")
+        }
+       setLoading(false)
+       console.log(response)
     }
+
 
     useEffect(() => {
         if(!inputValues.email || !inputValues.username || !inputValues.password){
@@ -65,8 +80,8 @@ function SignUp() {
                     <div >
                         <Input
                             className= "formInput mt-30"
-                            placeholder="Enter your Email address "
-                            type= "email"
+                            placeholder="example@gmail.com"
+                            type="email"
                             onChange={handleEmailInput}
                             value = {inputValues.email}
                             min={2}
@@ -97,9 +112,9 @@ function SignUp() {
                             min={2}
                         /> */}
 
-                        <div className ={`${buttonDisabled? "grey-disabled ": ""} form-section float-btn`} onClick={signupAccount}>
-                            <div className = "sign-up-btn mt-30">
-                                <p>Sign Up</p>
+                        <div className ={`${buttonDisabled? "grey-disabled ": ""}form-section float-btn`} onClick={()=>{signupAccount(3)}}>
+                            <div className = {`${loading ?"form-loading ": "" } sign-up-btn mt-30`}>
+                                <span>Sign Up</span>
                             </div>
                         </div>
 
@@ -111,14 +126,14 @@ function SignUp() {
 
                         <div className = "form-section mt-4">
                             <div className = "space-between">
-                                <div className = "google-discord-btn float-btn mr-30">
+                                <div className = "google-discord-btn float-btn mr-3" onClick= {()=> {signupAccount(1)}}>
                                     <div className ="google-discord-btn-inner">
                                         <DiscordLogo/>
                                         <p className = "sign-up-text">Sign up using Discord</p>
                                     </div>
 
                                 </div>
-                                <div className = "google-discord-btn float-btn ml-30">
+                                <div className = "google-discord-btn float-btn ml-3">
                                     <div className ="google-discord-btn-inner">
                                         <GoogleLogo/>
                                         <p className = "sign-up-text">Sign up using Google</p>

@@ -2,6 +2,7 @@ import * as types from "../types/signup.types";
 
 const initialState = {
     userEmail : false,
+    userLoggedIn: false,
 }
 
 export const signupReducer = (state = initialState, action) => {
@@ -11,6 +12,11 @@ export const signupReducer = (state = initialState, action) => {
                 ...state,
                 userEmail: action.payload.email,
             };
+        case types.SIGNUP_SUCCEEDED:
+            return{
+                ...state,
+                userLoggedIn: true,
+            }
         default:
             return state;
     }
