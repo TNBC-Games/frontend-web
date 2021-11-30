@@ -5,6 +5,7 @@ import {ReactComponent as LeaderIcon} from "../../assets/LeaderboardIcon.svg";
 import {ReactComponent as GameRules} from "../../assets/GameRulesIcon.svg";
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { ProgressBar } from 'react-bootstrap';
+import { useHistory } from 'react-router';
 
 function GamesHeader() {
     const games = [
@@ -57,6 +58,7 @@ function GamesHeader() {
             fee: 86,
         }
     ]
+    const history = useHistory()
     return (
         <div className ="games-profile">
             <ProfileHeader image ={gamesImage}>
@@ -82,8 +84,8 @@ function GamesHeader() {
             </GamesDescription>
 
             <RulesLeaderboard>
-                <div className ="pr-4">
-                    <LeaderIcon className ="mr-15px"/>
+                <div className ="pr-4 cursor-pointer" onClick={()=> history.push("/leaderboard")}>
+                    <LeaderIcon className ="mr-15px cursor-pointer"/>
                     Leaderboard
                 </div>
                 <div>

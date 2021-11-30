@@ -10,6 +10,18 @@ function Navbar() {
     const loggedIn = useSelector(state=> state.signupState.userLoggedIn)
     const userId = sessionStorage.getItem("TnbcID");
 
+    var className = "black-bg";
+    var scrollTrigger = 60;
+
+    window.onscroll = function() {
+    // We add pageYOffset for compatibility with IE.
+    if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
+        document.getElementsByClassName("nav-bar")[0].classList.add(className);
+    } else {
+        document.getElementsByClassName("nav-bar")[0].classList.remove(className);
+    }
+    };
+
 
     return (
         <div >
@@ -25,7 +37,7 @@ function Navbar() {
                 <Link to = "/">
                     <div className = "menu-button mr-4"> Home </div>
                 </Link>
-                <Link to ="/tournament">
+                <Link to ="/my-tournament">
                 <   div className = "menu-button mr-4"> Tournament </div>
                 </Link>
                 <Link to ="/shop">

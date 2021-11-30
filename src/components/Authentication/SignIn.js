@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from '../input';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
+import { signinUser } from '../../redux/actions/signup.actions';
 
 function SignIn() {
+    const [loading, setLoading] = useState(false)
+    let dispatch = useDispatch();
+    let history = useHistory();
+    const [buttonDisabled, setButtonDisabled] = useState(false)
+    
 
     const [userInfo, setUserInfo] = useState({
         email: "",
@@ -19,14 +27,36 @@ function SignIn() {
         setUserInfo({ ...userInfo, password: event.target.value });
     }
 
-    async function loginUser(){
-
+    async function loginUser(type){
+        setLoading(true)
+        let payload = {
+            email: userInfo.email,
+            password: userInfo.password,
+        }
+       let response = await dispatch( signinUser(payload, type))
+       if (response === true){
+        
+            history.push("/")
+        }else {
+            
+        }
+       setLoading(false)
+      
     }
+
+    useEffect(() => {
+        if(!userInfo.email || !userInfo.password){
+            setButtonDisabled(true)
+        } else {
+            setButtonDisabled(false)
+        }
+        window.scrollTo(0, 0);
+    }, [userInfo])
 
     return (
         <div className = "signup-page fadeInUp animated leaderboard-page">
-            <div>
-                <div className = "tnbc-comp">
+            <div className ="tnbc-comppp">
+                <div className = "hght">
                     <div className ="signup-heading"><p>Login</p></div>
                     <div >
                         <Input
@@ -50,9 +80,9 @@ function SignIn() {
                             spellCheck="false"
                         />
 
-                        <div className ="form-section float-btn" onClick={loginUser}>
-                            <div className = "sign-up-btn mt-30">
-                                <p>Login</p>
+                        <div className ={`${buttonDisabled? "grey-disabled ": ""} form-section float-btn`} onClick={loginUser}>
+                            <div className = {`${loading ?"form-loading ": "" } sign-up-btn mt-30`}>
+                                <span>Login</span>
                             </div>
                         </div>
                     </div>

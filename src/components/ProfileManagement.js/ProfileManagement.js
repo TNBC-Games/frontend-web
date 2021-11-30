@@ -6,6 +6,7 @@ import Image from "../../assets/profileImage.png";
 import {ReactComponent as GoldCup} from "../../assets/GoldCup.svg";
 import {ReactComponent as SilverCup} from "../../assets/SilverCup.svg";
 import {ReactComponent as BronzeCup} from "../../assets/Bronze.svg";
+import { useHistory } from 'react-router';
 
 
 function ProfileManagement() {
@@ -28,6 +29,7 @@ function ProfileManagement() {
         silver: 5,
         bronze: 6,
     }
+    const history = useHistory()
 
     const achievements = [
         {
@@ -74,11 +76,11 @@ function ProfileManagement() {
     return (
         <div className = "leaderboard-page fadeInUp animated">
             <Header image = {ProfileBackdrop}>
-                <div className = "profile-info">
-                    <ProfileImage image= {profileDetails.image}/>
+                <div className = "profile-info CUR">
+                    <ProfileImage image= {profileDetails.image} onClick = {()=> history.push("/setting")}/>
                     <ProfileInfo>
                         <div className = "profile-name">{profileDetails.profileName}</div>
-                        <div className = "profile-details">Profile views : {profileDetails.profileViews}</div>
+                        <div className = "profile-details" >Profile views : {profileDetails.profileViews}</div>
                         <div className = "profile-details">Joined {profileDetails.joined}</div>
                         <div className = "profile-details">Game IDs: {profileDetails.gameId}</div>
                     </ProfileInfo>
@@ -201,6 +203,7 @@ const ProfileImage = styled.div`
     margin-right: 30px;
     background-image: url(${props => props.image? props.image : ""});
     background : ${props => props.image? "" : "#ffffff"};
+    cursor:pointer;
 `;
 
 const ProfileInfo = styled.div`

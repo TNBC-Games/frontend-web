@@ -17,7 +17,7 @@ function AchievementPage() {
                     </div>
                 </div>
 
-                <div className =" choose-games-section achievement-cards mr-30 ml-30 mt-30">
+                <div className =" player-position-section achievement-cards mr-30 ml-30 mt-30">
                     <AchievmentCard position = {2} image = {SecondPerson}/>
                     <AchievmentCard position = {1} image = {firstPerson}/>
                     <AchievmentCard position = {3} image = {ThirdPerson}/>

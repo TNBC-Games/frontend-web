@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Input from '../input';
+import toastr from 'toastr';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import {ReactComponent as DiscordLogo} from "../../assets/DiscordLogo.svg";
@@ -19,6 +20,23 @@ function SignUp() {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
     const history = useHistory();
+
+    toastr.options = {
+        "closeButton": true,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-bottom-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
     
 
     function handleEmailInput(event){
@@ -53,8 +71,9 @@ function SignUp() {
         }
 
        let response = await dispatch( signupUser(payload, type))
-       if (response.status === true){
-           history.push("/home")
+       if (response === true){
+        toastr.success("Message will come here");
+            history.push("/")
         }else {
             alert("no data")
         }
@@ -69,13 +88,13 @@ function SignUp() {
         } else {
             setButtonDisabled(false)
         }
+        window.scrollTo(0, 0);
     }, [inputValues])
 
 
     return (
-        <div className = "signup-page fadeInUp animated leaderboard-page">
-            <div>
-                <div className = "tnbc-comp">
+        <div className = "signup-page fadeInUp animated leaderboard-page fixed-content">
+                <div className = "tnbc-compp">
                     <div className ="signup-heading"><p>Sign Up</p></div>
                     <div >
                         <Input
@@ -143,6 +162,9 @@ function SignUp() {
                             </div>
                             
                         </div>
+                        <div className = "justify-center mt-4" onClick={()=> history.push("/login")}>
+                            <p className = "sign-up-text pt-4">Already have aan account? Login</p>
+                        </div>
 
                         <div>
                             <p>
@@ -156,7 +178,6 @@ function SignUp() {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

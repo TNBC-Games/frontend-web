@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { ProgressBar } from 'react-bootstrap';
+import { Dropdown } from './ChooseGames';
+import Slider from "react-slick"
 
 function ChooseTournament() {
+    const [showDropDown,setShowDropDown] = useState(false);
     const games = [
         {
             gameType: "CHESS",
@@ -55,6 +58,17 @@ function ChooseTournament() {
         }
     ]
 
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        speed: 500,
+        rows: 2,
+        slidesPerRow: 2
+    }
+    console.log(showDropDown,"ooooo")
     return (
         <div className = "choose-tournament">
 
@@ -62,9 +76,20 @@ function ChooseTournament() {
                 <div className ="choose-games-title"><p>Upcoming Tournament</p></div>
                 <div className ="games-filter">
                     <div className ="games-filter-inner">
-                        <div className ="games-filter-title"> All Games </div>
+                        <div className ="games-filter-title" onClick= {()=> setShowDropDown(!showDropDown)}> All Games </div>
                     </div>
                 </div>
+                { showDropDown && (
+                    <Dropdown>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
+                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+
+                    </Dropdown>
+                )}
             </div>
             
             <div className = "choose-games-section">

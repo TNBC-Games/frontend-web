@@ -15,6 +15,8 @@ import LeaderBoardPage from "./components/GamesManagement/LeaderBoardPage";
 import ProfileManagement from "./components/ProfileManagement.js/ProfileManagement";
 import MyTournament from "./components/GamesManagement/MyTournament";
 import { Provider } from 'react-redux';
+import FaqPage from "./components/HomePage/Faq";
+import SettingsPage from "./components/HomePage/Settings";
 
 
 
@@ -33,6 +35,8 @@ function App() {
           <Route path = "/leaderboard" component = {LeaderBoardPage}/>
           <Route path = "/profile" component = {ProfileManagement}/>'
           <Route path = "/my-tournament" component = {MyTournament}/>
+          <Route path = "/faq" component ={FaqPage}/>
+          <Route path = "/setting" component ={SettingsPage}/>
         </Switch>
           
       </BrowserRouter>
