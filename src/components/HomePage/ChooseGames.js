@@ -50,35 +50,43 @@ function ChooseGames() {
     }
     return (
         <div className = "choose-games">
+            
+            <ContentBody>
 
             <div className = "choose-games-header">
                 <div className ="choose-games-title"><p>Choose your Games</p></div>
-                <div className ="games-filter">
-                    <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
-                        <div className ="games-filter-title"> All Games </div>
-                        {/* <div className><DropdownIcon/></div> */}
+                <div>
+                    <div className ="games-filter">
+                        <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
+                            <div className ="games-filter-title"> All Games </div>
+                            {/* <div className><DropdownIcon/></div> */}
+                            
+                        </div>
                         
                     </div>
 
+                    { showDropDown && (
+                        <Dropdown>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
+                            <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+
+                        </Dropdown>
+                    )}
+                    
+
                     
                 </div>
-                { showDropDown && (
-                    <Dropdown>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
-
-                    </Dropdown>
-                )}
+                
             </div>
 
-            <div className = "choose-games-section">
+            <div className = "choose-games-section mb-5">
                     {games.map((item, index) => (
                         
-                            <div className ="games-item mt-4" onClick={setGamesPage} key={index}>
+                            <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
                                 <img src={item.image} alt ={item.gameType}></img>
                                 <div className = "games-name-box">
                                     <p className ="pl-4">{item.gameType}</p>
@@ -88,6 +96,7 @@ function ChooseGames() {
                         ))
                     }
             </div>
+            </ContentBody>
             
         </div>
     )
@@ -97,10 +106,9 @@ export default ChooseGames
 
 export const Dropdown = styled.div`
     height: 300px;
-    width: 270px;
-    right:17px;
+    width: 259px;
     position: relative;
-    top: 70px;
+    top: 20px;
     background-color: black;
     z-index: 10;
     display: flex;
@@ -123,4 +131,9 @@ export const Dropdown = styled.div`
         cursor: pointer;
     }
 
+`;
+
+export const ContentBody = styled.div`
+    width: 82vw;
+    margin: auto;
 `;

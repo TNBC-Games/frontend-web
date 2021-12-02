@@ -7,6 +7,7 @@ import {ReactComponent as GoldCup} from "../../assets/GoldCup.svg";
 import {ReactComponent as SilverCup} from "../../assets/SilverCup.svg";
 import {ReactComponent as BronzeCup} from "../../assets/Bronze.svg";
 import { useHistory } from 'react-router';
+import { ContentBody } from '../HomePage/ChooseGames';
 
 
 function ProfileManagement() {
@@ -76,39 +77,45 @@ function ProfileManagement() {
     return (
         <div className = "leaderboard-page fadeInUp animated">
             <Header image = {ProfileBackdrop}>
-                <div className = "profile-info CUR">
-                    <ProfileImage image= {profileDetails.image} onClick = {()=> history.push("/setting")}/>
-                    <ProfileInfo>
-                        <div className = "profile-name">{profileDetails.profileName}</div>
-                        <div className = "profile-details" >Profile views : {profileDetails.profileViews}</div>
-                        <div className = "profile-details">Joined {profileDetails.joined}</div>
-                        <div className = "profile-details">Game IDs: {profileDetails.gameId}</div>
-                    </ProfileInfo>
-                </div>
+                <ContentBody>
+                    <div className = "profile-info CUR">
+                        <ProfileImage image= {profileDetails.image} onClick = {()=> history.push("/setting")}/>
+                        <ProfileInfo>
+                            <div className = "profile-name">{profileDetails.profileName}</div>
+                            <div className = "profile-details" >Profile views : {profileDetails.profileViews}</div>
+                            <div className = "profile-details">Joined {profileDetails.joined}</div>
+                            <div className = "profile-details">Game IDs: {profileDetails.gameId}</div>
+                        </ProfileInfo>
+                    </div>
+                </ContentBody>
             </Header>
-            <GamesDescription>
-                <div className = "profile-record">
-                    <div className = "record-heading">POINTS</div>
-                    <div className = "record-details">{profileDetails.points} TP</div>
-                    <div className = "record-rank"> RANKED # {profileDetails.pointsRank}</div>
-                </div>
-                <div className = "profile-record">
-                    <div className = "record-heading">EARNINGS</div>
-                    <div className = "record-details">{profileDetails.earnings} TP</div>
-                    <div className = "record-rank"> RANKED # {profileDetails.earningsRank}</div>
-                </div>
-                <div className = "profile-record">
-                    <div className = "record-heading">RECORD</div>
-                    <div className = "record-details">{profileDetails.wins} - {profileDetails.loss}</div>
-                    <div className = "record-rank"> {profileDetails.winRate}% WIN RATE</div>
-                </div>
-                <div className = "profile-record">
-                    <div className = "record-heading">RECENT MATCHES</div>
-                    <div className = "record-details"> {profileDetails.recentMatches}</div>
-                    <div className = "record-rank invisible">"" </div>
-                </div>
-                        
-            </GamesDescription>
+            <ContentBody>
+                <GamesDescription>
+                
+                        <div className = "profile-record">
+                            <div className = "record-heading">POINTS</div>
+                            <div className = "record-details">{profileDetails.points} TP</div>
+                            <div className = "record-rank"> RANKED # {profileDetails.pointsRank}</div>
+                        </div>
+                        <div className = "profile-record">
+                            <div className = "record-heading">EARNINGS</div>
+                            <div className = "record-details">{profileDetails.earnings} TP</div>
+                            <div className = "record-rank"> RANKED # {profileDetails.earningsRank}</div>
+                        </div>
+                        <div className = "profile-record">
+                            <div className = "record-heading">RECORD</div>
+                            <div className = "record-details">{profileDetails.wins} - {profileDetails.loss}</div>
+                            <div className = "record-rank"> {profileDetails.winRate}% WIN RATE</div>
+                        </div>
+                        <div className = "profile-record">
+                            <div className = "record-heading">RECENT MATCHES</div>
+                            <div className = "record-details"> {profileDetails.recentMatches}</div>
+                            <div className = "record-rank invisible">"" </div>
+                        </div>
+                
+                            
+                </GamesDescription>
+            
             
             <Trophies>
                 <div className = "trophies-heading">TOURNAMENT TROPHIES</div>
@@ -162,6 +169,7 @@ function ProfileManagement() {
                 </AchievementCarbin>
                 
             </Trophies>
+            </ContentBody>
             {showModal && (
                 <Portal>
                     <div>
@@ -282,8 +290,6 @@ const GamesDescription = styled.div`
     }
 `
 const Trophies = styled.div`
-    height: 250px;
-    margin: 0px 98px;
 
     .trophies-heading {
         font-style: normal;

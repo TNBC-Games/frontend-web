@@ -5,10 +5,13 @@
     z-index: 10;
     align-items: center;
     justify-content: space-between;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 173px;
+    padding-right: 175px;
     position: fixed;
     top:0px;
+}
+.nav-sec{
+    height: 100px;
 }
 
 .black-bg{
@@ -68,7 +71,7 @@ img{
 
 .sign-in {
     height:40px;
-    width:102px;
+    width:122px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -290,7 +293,6 @@ input:focus {
 }
 
 .choose-games{
-    height:727px;
     padding: 90px;
     background:#111010;
     border-bottom: 1px solid #343434;
@@ -319,8 +321,6 @@ input:focus {
     color: #FFFFFF;
 }
 .games-filter {
-    position: absolute;
-    right: 100px;
     height:60px;
     width:259px;
     border-radius: 5px;
@@ -364,7 +364,7 @@ input:focus {
     height: 207px;
     width: 29%;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 5%;
     background-color: #FFFFFF;
 }
 
@@ -520,8 +520,7 @@ input:focus {
 }
 
 .achievement-header {
-    height: 200px;
-    padding:90px;
+    padding:90px 0px;
     z-index:2;
 }
 

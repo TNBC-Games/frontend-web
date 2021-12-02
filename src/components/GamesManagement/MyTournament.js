@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import myTournamentImage from "../../assets/myTournamentImage.png";
 import { TournamentView } from '../HomePage/ChooseTournament';
-import { ProfileHeader } from './GamesHeader'; 
+import { ProfileHeader } from './GamesHeader';
 import { ProgressBar } from 'react-bootstrap';
 import { TournamentInfo } from '../HomePage/ChooseTournament';
+import { ContentBody } from '../HomePage/ChooseGames';
 
 
 
@@ -17,7 +18,7 @@ function MyTournament() {
         {
             gameType: "CHESS",
             image: callOfDutyImage,
-            completedTournament:24,
+            completedTournament: 24,
             totalTournament: 24,
             completedPercent: 40,
             fee: "2h 30m 10s",
@@ -26,7 +27,7 @@ function MyTournament() {
         {
             gameType: "COD",
             image: callOfDutyImage,
-            completedTournament:2,
+            completedTournament: 2,
             totalTournament: 34,
             completedPercent: 40,
             fee: "5h 10m 20s",
@@ -35,7 +36,7 @@ function MyTournament() {
         {
             gameType: "COD - BLACK OPS",
             image: callOfDutyImage,
-            completedTournament:5,
+            completedTournament: 5,
             totalTournament: 34,
             completedPercent: 30,
             fee: "3h 30m 20s",
@@ -44,7 +45,7 @@ function MyTournament() {
         {
             gameType: "FIFA",
             image: callOfDutyImage,
-            completedTournament:7,
+            completedTournament: 7,
             totalTournament: 14,
             completedPercent: 20,
             fee: "8h 40m 5s",
@@ -53,7 +54,7 @@ function MyTournament() {
         {
             gameType: "FORTNITE",
             image: callOfDutyImage,
-            completedTournament:23,
+            completedTournament: 23,
             totalTournament: 34,
             completedPercent: 32,
             fee: "1h 30m 20s",
@@ -62,7 +63,7 @@ function MyTournament() {
         {
             gameType: "CHESS",
             image: callOfDutyImage,
-            completedTournament:24,
+            completedTournament: 24,
             totalTournament: 24,
             completedPercent: 40,
             fee: "9h 50m 20s",
@@ -71,7 +72,7 @@ function MyTournament() {
         {
             gameType: "COD",
             image: callOfDutyImage,
-            completedTournament:2,
+            completedTournament: 2,
             totalTournament: 34,
             completedPercent: 40,
             fee: "5h 30m 10s",
@@ -80,7 +81,7 @@ function MyTournament() {
         {
             gameType: "COD - BLACK OPS",
             image: callOfDutyImage,
-            completedTournament:5,
+            completedTournament: 5,
             totalTournament: 34,
             completedPercent: 30,
             fee: "2h 20m 20s",
@@ -89,7 +90,7 @@ function MyTournament() {
         {
             gameType: "FIFA",
             image: callOfDutyImage,
-            completedTournament:7,
+            completedTournament: 7,
             totalTournament: 14,
             completedPercent: 20,
             fee: "2h 40m 50s",
@@ -98,7 +99,7 @@ function MyTournament() {
         {
             gameType: "FORTNITE",
             image: callOfDutyImage,
-            completedTournament:23,
+            completedTournament: 23,
             totalTournament: 34,
             completedPercent: 32,
             fee: "1h 20m 20s",
@@ -107,7 +108,7 @@ function MyTournament() {
         {
             gameType: "FORTNITE",
             image: callOfDutyImage,
-            completedTournament:23,
+            completedTournament: 23,
             totalTournament: 34,
             completedPercent: 32,
             fee: "5h 30m 10s",
@@ -117,7 +118,7 @@ function MyTournament() {
         {
             gameType: "MINECRAFT",
             image: callOfDutyImage,
-            completedTournament:12,
+            completedTournament: 12,
             totalTournament: 34,
             completedPercent: 24,
             fee: "6h 10m 10s",
@@ -126,7 +127,7 @@ function MyTournament() {
         {
             gameType: "CHESS",
             image: callOfDutyImage,
-            completedTournament:24,
+            completedTournament: 24,
             totalTournament: 24,
             completedPercent: 40,
             fee: "1h 10m 10s",
@@ -135,7 +136,7 @@ function MyTournament() {
         {
             gameType: "COD",
             image: callOfDutyImage,
-            completedTournament:2,
+            completedTournament: 2,
             totalTournament: 34,
             completedPercent: 40,
             fee: "5h 30m 10s",
@@ -144,7 +145,7 @@ function MyTournament() {
         {
             gameType: "COD - BLACK OPS",
             image: callOfDutyImage,
-            completedTournament:5,
+            completedTournament: 5,
             totalTournament: 34,
             completedPercent: 30,
             fee: "5h 30m 10s",
@@ -153,7 +154,7 @@ function MyTournament() {
         {
             gameType: "FIFA",
             image: callOfDutyImage,
-            completedTournament:7,
+            completedTournament: 7,
             totalTournament: 14,
             completedPercent: 20,
             fee: "5h 30m 10s",
@@ -162,7 +163,7 @@ function MyTournament() {
         {
             gameType: "FORTNITE",
             image: callOfDutyImage,
-            completedTournament:23,
+            completedTournament: 23,
             totalTournament: 34,
             completedPercent: 32,
             fee: "5h 30m 10s",
@@ -172,7 +173,7 @@ function MyTournament() {
         {
             gameType: "FORTNITE",
             image: callOfDutyImage,
-            completedTournament:23,
+            completedTournament: 23,
             totalTournament: 34,
             completedPercent: 32,
             fee: "5h 30m 10s",
@@ -182,7 +183,7 @@ function MyTournament() {
 
     ]
 
-    useEffect(()=>{
+    useEffect(() => {
         const completedList = games.filter(
             (item) => item.completed === true
         );
@@ -194,106 +195,118 @@ function MyTournament() {
         setCompletedList(completedList);
         setOngoingList(ongoing)
 
-    },[active])
+    }, [active])
 
     return (
-        <div className = "leaderboard-page fadeInUp animated">
-            <MyTournamentHeader image ={myTournamentImage}>
-                <div className = "my-tournament">
-                    MY TOURNAMENTS
-                </div>
+        <div className="leaderboard-page fadeInUp animated">
+            <MyTournamentHeader image={myTournamentImage}>
+                <ContentBody>
+                    <div className="my-tournament">
+                        MY TOURNAMENTS
+                    </div>
+                </ContentBody>
             </MyTournamentHeader>
 
             <CompletedStatus>
-                <OngoingCompleted active={active} >
-                    <div className ="ongoing mr-4" onClick ={()=> setActive(1)}>
-                        Ongoing
-                    </div>
-                    <div className ="completed ml-4" onClick ={()=> setActive(2)}>
-                        Completed
-                    </div>
+                <ContentBody>
+                    <OngoingCompleted active={active} >
+                        <div className="ongoing mr-4" onClick={() => setActive(1)}>
+                            Ongoing
+                        </div>
+                        <div className="completed ml-4" onClick={() => setActive(2)}>
+                            Completed
+                        </div>
 
-                </OngoingCompleted>
+                    </OngoingCompleted>
+                </ContentBody>
 
             </CompletedStatus>
 
-            <div className = "choose-games-section p-5">
-                {active === 1 ? (
-                    <>
-                    {ongoingList &&
-                        ongoingList.map((item, index) => (
-                            <TournamentView key ={index}>
-                                <div className = "upcoming-tornament-name">
-                                    <p className ="pl-4">{item?.gameType}</p>
-                                </div>
-                                <div>
-                                    <img src={item?.image} alt={item?.gameType}></img>
-                                </div>
-                                <TournamentInfo>
-                                    <div className ="tourn-name mb-3 pb-3">{item?.gameType}</div>            
-                                    <ProgressBar now={item?.completedPercent}/>
-                                    <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                                    <div className = "fee"> Starts in </div>
-                                    <div className = "justify-space " >
-                                        <div className = "fee-amount">{item?.fee}</div>
-                                        <div className = "join-free float-btn">
-                                            View
+            <ContentBody>
+                <div className="choose-games-section py-5">
+                    {active === 1 ? (
+                        <>
+                            {ongoingList &&
+                                ongoingList.map((item, index) => (
+
+                                    <TournamentView key={index}>
+
+                                        <div className="upcoming-tornament-name">
+                                            <p className="pl-4">{item?.gameType}</p>
                                         </div>
-                                    </div>
-                                
-                                </TournamentInfo>
-                            </TournamentView>
-                        ))
-                    } 
-                    </>
-                ):(
-                    <>
-                        {completedList &&
-                            completedList.map((item, index) => (
-                                <TournamentView key ={index} grey={true}>
-                                    <div className = "upcoming-tornament-name">
-                                        <p className ="pl-4">{item?.gameType}</p>
-                                    </div>
-                                    <div>
-                                        <img src={item?.image} alt={item?.gameType}></img>
-                                    </div>
-                                    <TournamentInfo>
-                                        <div className="height-220">
-                                            <div className ="tourn-name pb-3 border-bottom">{item?.gameType}</div>
-                            
-                                            <div className = "justify-space mb-2" >
-                                                <div className = "fee justify-center align-items-center">Earnings</div>
-                                                <div className = "fee-amount">{item?.fee} TNBC</div>
-                                            </div>
-
-                                            <div className = "justify-space mb-2" >
-                                                <div className = "fee justify-center align-items-center">Trophy</div>
-                                                <div className = "fee-amount">Gold</div>
-                                            </div>
-
-                                            <div className = "justify-space mb-2" >
-                                                <div className = "fee justify-center align-items-center">Points</div>
-                                                <div className = "fee-amount">2000</div>
-                                            </div>
+                                        <div>
+                                            <img src={item?.image} alt={item?.gameType}></img>
                                         </div>
-                                    
-                                    </TournamentInfo>
-                                </TournamentView>
-                            ))
-                        } 
+                                        <TournamentInfo>
+                                            <div className="tourn-name mb-3 pb-3">{item?.gameType}</div>
+                                            <ProgressBar now={item?.completedPercent} />
+                                            <div className="tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                                            <div className="fee"> Starts in </div>
+                                            <div className="justify-space " >
+                                                <div className="fee-amount">{item?.fee}</div>
+                                                <div className="join-free float-btn">
+                                                    View
+                                                </div>
+                                            </div>
 
-                    </>
+                                        </TournamentInfo>
 
-                )}
-            </div>  
-            
+                                    </TournamentView>
+
+                                ))
+                            }
+                        </>
+
+                    ) : (
+                        <>
+                            {completedList &&
+                                completedList.map((item, index) => (
+                                    <TournamentView key={index} grey={true}>
+                                        <div className="upcoming-tornament-name">
+                                            <p className="pl-4">{item?.gameType}</p>
+                                        </div>
+                                        <div>
+                                            <img src={item?.image} alt={item?.gameType}></img>
+                                        </div>
+                                        <TournamentInfo>
+                                            <div className="height-220">
+                                                <div className="tourn-name pb-3 border-bottom">{item?.gameType}</div>
+
+                                                <div className="justify-space mb-2" >
+                                                    <div className="fee justify-center align-items-center">Earnings</div>
+                                                    <div className="fee-amount">{item?.fee} TNBC</div>
+                                                </div>
+
+                                                <div className="justify-space mb-2" >
+                                                    <div className="fee justify-center align-items-center">Trophy</div>
+                                                    <div className="fee-amount">Gold</div>
+                                                </div>
+
+                                                <div className="justify-space mb-2" >
+                                                    <div className="fee justify-center align-items-center">Points</div>
+                                                    <div className="fee-amount">2000</div>
+                                                </div>
+                                            </div>
+
+                                        </TournamentInfo>
+                                    </TournamentView>
+                                ))
+                            }
+
+                        </>
+
+                    )}
+
+                </div>
+            </ContentBody>
+
         </div>
     )
 }
 
 export default MyTournament;
 
- const MyTournamentHeader = styled.div`
+const MyTournamentHeader = styled.div`
     display:flex;
     justify-content: space-between;
     padding: 90px 100px;
@@ -334,11 +347,11 @@ const OngoingCompleted = styled.div`
     color: #ffffff;
 
     .ongoing {
-        opacity: ${props=> props?.active === 1 ? "": "0.6"};
+        opacity: ${props => props?.active === 1 ? "" : "0.6"};
     }
 
     .completed {
-        opacity: ${props=> props?.active === 2 ? "": "0.6"};
+        opacity: ${props => props?.active === 2 ? "" : "0.6"};
     }
 
 `;

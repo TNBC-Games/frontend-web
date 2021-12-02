@@ -6,6 +6,7 @@ import {ReactComponent as GameRules} from "../../assets/GameRulesIcon.svg";
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { ProgressBar } from 'react-bootstrap';
 import { useHistory } from 'react-router';
+import { ContentBody } from '../HomePage/ChooseGames';
 
 function GamesHeader() {
     const games = [
@@ -61,91 +62,101 @@ function GamesHeader() {
     const history = useHistory()
     return (
         <div className ="games-profile">
-            <ProfileHeader image ={gamesImage}>
-                <GameName>
-                    CHESS
-                </GameName>
-                <LiveMatch>
-                    <RoundDot/>
-                    LIVE MATCHES
+           
+                <ProfileHeader image ={gamesImage}>
+                    <GamesContentBody>
+                        <GameName>
+                            CHESS
+                        </GameName>
+                        <LiveMatch>
+                            <RoundDot/>
+                            LIVE MATCHES
 
-                    <LiveMatchCount>
-                        5
-                    </LiveMatchCount>
-                </LiveMatch>
-            </ProfileHeader>
+                            <LiveMatchCount>
+                                5
+                            </LiveMatchCount>
+                        </LiveMatch>
+                    </GamesContentBody>
+                </ProfileHeader>
+            
 
-            <GamesDescription>
-                <div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium aliquet id quisque
-                    </p>
-                </div>
-            </GamesDescription>
-
-            <RulesLeaderboard>
-                <div className ="pr-4 cursor-pointer" onClick={()=> history.push("/leaderboard")}>
-                    <LeaderIcon className ="mr-15px cursor-pointer"/>
-                    Leaderboard
-                </div>
-                <div>
-                    <GameRules className ="mr-15px"/>
-                    Game rules
-                </div>
-
-            </RulesLeaderboard>
-
-            <UpcomingTournamentHead>
-                <div className ="upcomingTournament">
-                    UPCOMING TOURNAMENTS
-                </div>
-                
-                <div className = "tournament-category">
-                    <div className = "tournament-type">
-                        <div className ="checkbox"></div>
-                        Blitz
+                <GamesDescription>
+                    <div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pretium aliquet id quisque
+                        </p>
                     </div>
+                </GamesDescription>
 
-                    <div className = "tournament-type">
-                        <div className ="checkbox"></div>
-                        Rapid
-                    </div>
-
-                    <div className = "tournament-type">
-                        <div className ="checkbox"></div>
-                        Bullet
-                    </div>
-                </div>
-            </UpcomingTournamentHead>
-
-            <div className = "choose-games-section py-90">
-            {games &&
-                games.map((item, index) => (
-                    <div key ={index} className ="tourn-item">
-                        <div className = "upcoming-tornament-name">
-                            <p className ="pl-4">{item?.gameType}</p>
+                <ContentBody>
+                    <RulesLeaderboard>
+                        <div className ="pr-4 cursor-pointer" onClick={()=> history.push("/leaderboard")}>
+                            <LeaderIcon className ="mr-15px cursor-pointer"/>
+                            Leaderboard
                         </div>
                         <div>
-                            <img src={item?.image} alt={item?.gameType}></img>
+                            <GameRules className ="mr-15px"/>
+                            Game rules
                         </div>
-                        <div className ="tourn-more-info">
-                            <div className ="tourn-name mb-3">{item?.gameType}</div>            
-                            <ProgressBar now={item?.completedPercent}/>
-                            <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                            <div className = "fee"> Fee </div>
-                            <div className = "justify-space " >
-                                <div className = "fee-amount">{item?.fee} TNBC</div>
-                                <div className = "join-free float-btn">
-                                    View
-                                </div>
+
+                    </RulesLeaderboard>
+                </ContentBody>
+
+                <ContentBody>
+
+                    <UpcomingTournamentHead>
+                        <div className ="upcomingTournament">
+                            UPCOMING TOURNAMENTS
+                        </div>
+                        
+                        <div className = "tournament-category">
+                            <div className = "tournament-type">
+                                <div className ="checkbox"></div>
+                                Blitz
                             </div>
-                        
+
+                            <div className = "tournament-type">
+                                <div className ="checkbox"></div>
+                                Rapid
+                            </div>
+
+                            <div className = "tournament-type">
+                                <div className ="checkbox"></div>
+                                Bullet
+                            </div>
                         </div>
-                        
+                    </UpcomingTournamentHead>
+
+                    <div className = "choose-games-section">
+                    {games &&
+                        games.map((item, index) => (
+                            <div key ={index} className ="tourn-item">
+                                <div className = "upcoming-tornament-name">
+                                    <p className ="pl-4">{item?.gameType}</p>
+                                </div>
+                                <div>
+                                    <img src={item?.image} alt={item?.gameType}></img>
+                                </div>
+                                <div className ="tourn-more-info">
+                                    <div className ="tourn-name mb-3">{item?.gameType}</div>            
+                                    <ProgressBar now={item?.completedPercent}/>
+                                    <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                                    <div className = "fee"> Fee </div>
+                                    <div className = "justify-space " >
+                                        <div className = "fee-amount">{item?.fee} TNBC</div>
+                                        <div className = "join-free float-btn">
+                                            View
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                
+                            </div>
+                        ))
+                    }
                     </div>
-                ))
-            }
-            </div>
+                </ContentBody>
+            
 
 
             
@@ -248,9 +259,8 @@ export const GamesDescription = styled.div`
 export const RulesLeaderboard = styled.div`
     display: flex;
     justify-content: flex-end;
-    padding:20px 90px;
+    padding:20px 0px;
     align-items: center;
-    height: 40px;
     font-style: normal;
     font-weight: 800;
     font-size: 24px;
@@ -262,8 +272,7 @@ export const UpcomingTournamentHead = styled.div`
     display: flex;
     justify-content: space-between;
     align-items:center;
-    height: 40px;
-    padding: 70px 90px;
+    padding: 70px 0px;
 
     .upcomingTournament{
         font-style: normal;
@@ -299,3 +308,8 @@ export const UpcomingTournamentHead = styled.div`
         margin-right: 15px
     }
 `;
+
+export const GamesContentBody = styled(ContentBody)`
+    display: flex;
+    justify-content:space-between;
+`

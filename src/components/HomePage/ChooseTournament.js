@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { ProgressBar } from 'react-bootstrap';
-import { Dropdown } from './ChooseGames';
+import { ContentBody, Dropdown } from './ChooseGames';
 import Slider from "react-slick"
 
 function ChooseTournament() {
@@ -71,54 +71,58 @@ function ChooseTournament() {
     console.log(showDropDown,"ooooo")
     return (
         <div className = "choose-tournament">
+            <ContentBody>
 
-            <div className = "choose-games-header">
-                <div className ="choose-games-title"><p>Upcoming Tournament</p></div>
-                <div className ="games-filter">
-                    <div className ="games-filter-inner">
-                        <div className ="games-filter-title" onClick= {()=> setShowDropDown(!showDropDown)}> All Games </div>
+                <div className = "choose-games-header">
+                    <div className ="choose-games-title"><p>Upcoming Tournament</p></div>
+                    <div>
+                        <div className ="games-filter">
+                            <div className ="games-filter-inner">
+                                <div className ="games-filter-title" onClick= {()=> setShowDropDown(!showDropDown)}> All Games </div>
+                            </div>
+                        </div>
+                        { showDropDown && (
+                            <Dropdown>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
+                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+
+                            </Dropdown>
+                        )}
                     </div>
                 </div>
-                { showDropDown && (
-                    <Dropdown>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
-                        <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
-
-                    </Dropdown>
-                )}
-            </div>
-            
-            <div className = "choose-games-section">
-            {games &&
-                games.map((item, index) => (
-                    <TournamentView>
-                        <div className = "upcoming-tornament-name">
-                            <p className ="pl-4">{item?.gameType}</p>
-                        </div>
-                        <div>
-                            <img src={item?.image} alt={item?.gameType}></img>
-                        </div>
-                        <TournamentInfo>
-                            <div className ="tourn-name mb-3">{item?.gameType}</div>            
-                            <ProgressBar now={item?.completedPercent}/>
-                            <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                            <div className = "fee"> Fee </div>
-                            <div className = "justify-space " >
-                                <div className = "fee-amount">{item?.fee} TNBC</div>
-                                <div className = "join-free float-btn">
-                                    View
-                                </div>
+                
+                <div className = "choose-games-section">
+                {games &&
+                    games.map((item, index) => (
+                        <TournamentView>
+                            <div className = "upcoming-tornament-name">
+                                <p className ="pl-4">{item?.gameType}</p>
                             </div>
-                        
-                        </TournamentInfo>
-                    </TournamentView>
-                ))
-            }
-            </div>
+                            <div>
+                                <img src={item?.image} alt={item?.gameType}></img>
+                            </div>
+                            <TournamentInfo>
+                                <div className ="tourn-name mb-3">{item?.gameType}</div>            
+                                <ProgressBar now={item?.completedPercent}/>
+                                <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                                <div className = "fee"> Fee </div>
+                                <div className = "justify-space " >
+                                    <div className = "fee-amount">{item?.fee} TNBC</div>
+                                    <div className = "join-free float-btn">
+                                        View
+                                    </div>
+                                </div>
+                            
+                            </TournamentInfo>
+                        </TournamentView>
+                    ))
+                }
+                </div>
+            </ContentBody>
         </div>
     )
 }

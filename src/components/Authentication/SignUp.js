@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 import {ReactComponent as DiscordLogo} from "../../assets/DiscordLogo.svg";
 import {ReactComponent as GoogleLogo} from "../../assets/googleLogo.svg";
 import { signupUser } from '../../redux/actions/signup.actions';
+import { toast } from 'react-toastify';
 
 
 
@@ -20,6 +21,7 @@ function SignUp() {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
     const history = useHistory();
+    toast.configure()
 
     toastr.options = {
         "closeButton": true,
@@ -70,15 +72,32 @@ function SignUp() {
             password: inputValues.password,
         }
 
-       let response = await dispatch( signupUser(payload, type))
-       if (response === true){
-        toastr.success("Message will come here");
-            history.push("/")
+       let {status, message} = await dispatch( signupUser(payload, type))
+       console.log(status, message)
+        if (status === true){
+            toast.success(message,{
+                className: 'dark-theme',
+                bodyClassName: "grow-font-size",
+                progressClassName: 'fancy-progress-bar',
+                autoClose:8000
+            });
+            
+            setTimeout(()=> {
+                history.push("/")
+            },[8000])
+            
         }else {
-            alert("no data")
+            toast.warn(message,{
+                className: 'dark-theme',
+                bodyClassName: "grow-font-size",
+                progressClassName: 'fancy-progress-bar',
+                autoClose:8000
+            });
         }
+            
+        
        setLoading(false)
-       console.log(response)
+      // console.log(response)
     }
 
 
@@ -163,7 +182,7 @@ function SignUp() {
                             
                         </div>
                         <div className = "justify-center mt-4" onClick={()=> history.push("/login")}>
-                            <p className = "sign-up-text pt-4">Already have aan account? Login</p>
+                            <p className = "sign-up-text pt-4">Already have an account? Login</p>
                         </div>
 
                         <div>

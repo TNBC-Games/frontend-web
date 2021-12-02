@@ -3,12 +3,14 @@ import Input from '../input';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 import { signinUser } from '../../redux/actions/signup.actions';
+import { toast } from 'react-toastify';
 
 function SignIn() {
     const [loading, setLoading] = useState(false)
     let dispatch = useDispatch();
     let history = useHistory();
-    const [buttonDisabled, setButtonDisabled] = useState(false)
+    const [buttonDisabled, setButtonDisabled] = useState(false);
+    toast.configure()
     
 
     const [userInfo, setUserInfo] = useState({
@@ -33,11 +35,27 @@ function SignIn() {
             email: userInfo.email,
             password: userInfo.password,
         }
-       let response = await dispatch( signinUser(payload, type))
-       if (response === true){
-        
-            history.push("/")
+       let {status, message} = await dispatch( signinUser(payload, type))
+       console.log(status, message)
+       if (status === true){        
+            toast.success(message,{
+                className: 'dark-theme',
+                bodyClassName: "grow-font-size",
+                progressClassName: 'fancy-progress-bar',
+                autoClose:8000,
+                onClose: history.push("/")
+            });
+            
+            setTimeout(()=> {
+                history.push("/")
+            },[8000])
         }else {
+            toast.warn(message,{
+                className: 'dark-theme',
+                bodyClassName: "grow-font-size",
+                progressClassName: 'fancy-progress-bar',
+                autoClose:8000
+            });
             
         }
        setLoading(false)

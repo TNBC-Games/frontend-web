@@ -1,14 +1,18 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ReactComponent as TnbcIcon } from "../../assets/tnbcLogo.svg";
 import { SIGNUP_STARTED } from '../../redux/types/signup.types';
+import { useLocation } from 'react-router';
 
 
 
 function Navbar() {
     const loggedIn = useSelector(state=> state.signupState.userLoggedIn)
     const userId = sessionStorage.getItem("TnbcID");
+    const location = useLocation();
+    const [signupActive, setSignUpActive] = useState(false)
+    const [loginActive, setLoginActive] = useState(false)
 
     var className = "black-bg";
     var scrollTrigger = 60;
@@ -21,6 +25,19 @@ function Navbar() {
         document.getElementsByClassName("nav-bar")[0].classList.remove(className);
     }
     };
+
+    useEffect(() => {
+        if(location.pathname === "/signup"){
+            setSignUpActive(true)
+            setLoginActive(false)
+        }else if(location.pathname === "/login") {
+            setLoginActive(true)
+            setSignUpActive(false)
+
+
+        }
+        console.log(location.pathname);
+    }, [location])
 
 
     return (
@@ -51,10 +68,10 @@ function Navbar() {
 
                 ):(<>
                     <Link to ="/login">
-                    <   div className = "sign-in ml-40 float-btn"> <span>Sign in </span></div>
+                    <   div className = {`${loginActive?"join-free ": "sign-in "} ml-40 float-btn `}> <span>Sign in </span></div>
                     </Link>
                     <Link to ="/signup">
-                        <div className = "join-free ml-40 float-btn"> Join Free </div>
+                        <div className = {`${signupActive?"join-free ": "sign-in "} ml-40 float-btn `}> Join Free </div>
                     </Link>
                     </>
                 )}

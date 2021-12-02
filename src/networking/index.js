@@ -11,8 +11,8 @@ export const postFormCall = async (url, data, headers) => {
         if (!error.response) {
             // network error
         } else {
-            const { status } = error.response;
-            return status;
+            const { data } = error.response;
+            return data;
         }
     });
 };
@@ -30,8 +30,8 @@ export const postCall = async (url, data, params, headers) => {
             // network error
            // interceptor(100);
         } else {
-            const { status } = error.response;
-            return status;
+            const { data } = error.response;
+            return data;
         }
     });
 };
@@ -46,8 +46,8 @@ export const getCall = async (url, params, headers) => {
         if (!error.response) {
             // network error
         } else {
-            const { status } = error.response;
-            return status;
+            const { data } = error.response;
+            return data;
         }
     });
 };
