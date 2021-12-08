@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+import { ContentBody } from './ChooseGames';
 
 function SettingsPage() {
     const[activeTab, setActiveTab] = useState("")
@@ -8,31 +9,32 @@ function SettingsPage() {
     }, [])
     return (
         <div className ="leaderboard-page fadeInUp animated">
-            <FaqForm>
-                <div className ="faq">Settings</div>
-                <div className ="faq-page">
-                    <div className ="side-panel">
-                        <div className ="profile-image"></div>
-                        <div className ="profile-name">Mr Stranger</div>
-                        <div className ={`${activeTab === 1 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(1)}>Profile</div>
-                        <div className ={`${activeTab === 2 && "active-tab "} profile-tab`}  onClick={()=> setActiveTab(2)}>Active</div>
-                        <div className ={`${activeTab === 3 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(3)}>Game</div>
-                        <div className ={`${activeTab === 4 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(4)}>Payment Method</div>
-                        <div className ={`${activeTab === 5 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(5)}>Privacy</div>
-                        <div className ={`${activeTab === 6 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(6)}> Notifications</div>
+            <ContentBody>
+                <FaqForm>
+                    <div className ="faq">Settings</div>
+                    <div className ="faq-page">
+                        <div className ="side-panel">
+                            <div className ="profile-image"></div>
+                            <div className ="profile-name">Mr Stranger</div>
+                            <div className ={`${activeTab === 1 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(1)}>Profile</div>
+                            <div className ={`${activeTab === 2 && "active-tab "} profile-tab`}  onClick={()=> setActiveTab(2)}>Active</div>
+                            <div className ={`${activeTab === 3 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(3)}>Game</div>
+                            <div className ={`${activeTab === 4 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(4)}>Payment Method</div>
+                            <div className ={`${activeTab === 5 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(5)}>Privacy</div>
+                            <div className ={`${activeTab === 6 && "active-tab "} profile-tab`} onClick={()=> setActiveTab(6)}> Notifications</div>
 
+                        </div>
+                        <div className ="panel-details">
+                            {activeTab === 1 &&(
+                                <ProfileView/>
+
+                            )}
+
+                        </div>
+                        
                     </div>
-                    <div className ="panel-details">
-                        {activeTab === 1 &&(
-                            <div>
-
-                            </div>
-                        )}
-
-                    </div>
-                    
-                </div>
-            </FaqForm>
+                </FaqForm>
+            </ContentBody>
         </div>
     )
 }
@@ -113,5 +115,9 @@ const FaqForm = styled.div`
         }
     }
    
+
+`;
+const ProfileView = styled.div`
+
 
 `;

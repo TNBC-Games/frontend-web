@@ -16,9 +16,11 @@ function SignUp() {
         email: "",
         username: "",
         password: "",
+        confirmPassword: "",
     });
     const [buttonDisabled, setButtonDisabled] = useState(true);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [showSamePasswordError, setShowSamePasswordError] = useState(false)
     const dispatch = useDispatch();
     const history = useHistory();
     toast.configure()
@@ -62,58 +64,92 @@ function SignUp() {
             password: event.target.value,
         });
     }
+    function handleConfirmPassword (event){
+        setInputValues({
+            ...inputValues,
+            confirmPassword: event.target.value,
+        })
+
+    }
 
 
     async function signupAccount(type){
-        setLoading(true)
-        let payload = {
-            username: inputValues.username,
-            email: inputValues.email,
-            password: inputValues.password,
-        }
+        setLoading(type)
+        if (type === 1){
+            window.location.replace("https://tnbc-games-api.herokuapp.com/v1/auth/google");
+            
+        } else if (type === 2){
+            window.location.replace("https://tnbc-games-api.herokuapp.com/v1/auth/discord")
+            
+        } else {
+            let payload = {
+                username: inputValues.username,
+                email: inputValues.email,
+                password: inputValues.password,
+            }
 
-       let {status, message} = await dispatch( signupUser(payload, type))
-       console.log(status, message)
-        if (status === true){
-            toast.success(message,{
-                className: 'dark-theme',
-                bodyClassName: "grow-font-size",
-                progressClassName: 'fancy-progress-bar',
-                autoClose:8000
-            });
-            
-            setTimeout(()=> {
-                history.push("/")
-            },[8000])
-            
-        }else {
-            toast.warn(message,{
-                className: 'dark-theme',
-                bodyClassName: "grow-font-size",
-                progressClassName: 'fancy-progress-bar',
-                autoClose:8000
-            });
+            let {status, response} = await dispatch( signupUser(payload, type))
+            console.log(status, response,"yoooooo")
+            if (status === true){
+                sessionStorage.setItem("userEmail", inputValues.email)
+                sessionStorage.setItem("accessstoken", response.data.accessToken)
+                toast.success(response.message,{
+                    className: 'dark-theme',
+                    bodyClassName: "grow-font-size",
+                    progressClassName: 'fancy-progress-bar',
+                    autoClose:8000
+                });
+                
+                setTimeout(()=> {
+                    history.push("/")
+                },[8000])
+                
+            }else {
+                toast.warn(response.message,{
+                    className: 'dark-theme',
+                    bodyClassName: "grow-font-size",
+                    progressClassName: 'fancy-progress-bar',
+                    autoClose:8000
+                });
+            }          
+            setLoading(0)
         }
-            
-        
-       setLoading(false)
       // console.log(response)
     }
 
 
     useEffect(() => {
-        if(!inputValues.email || !inputValues.username || !inputValues.password){
+        if(!inputValues.email || !inputValues.username || !inputValues.password || !inputValues.confirmPassword){
             setButtonDisabled(true)
         } else {
-            setButtonDisabled(false)
+            if(showSamePasswordError){
+                setButtonDisabled(true)
+            }else{
+                setButtonDisabled(false)
+            }
+
         }
+
+        if (inputValues.password !== "" && inputValues.confirmPassword !== ""){
+            if(inputValues.password !== inputValues.confirmPassword){
+                setShowSamePasswordError(true)
+                setButtonDisabled(true)
+            }else{
+                setShowSamePasswordError(false)
+                setButtonDisabled(false)
+            }
+        }else{
+            setShowSamePasswordError(false)
+        }
+
         window.scrollTo(0, 0);
     }, [inputValues])
 
 
+
     return (
         <div className = "signup-page fadeInUp animated leaderboard-page fixed-content">
-                <div className = "tnbc-compp">
+                <div className = "signup-comp">
                     <div className ="signup-heading"><p>Sign Up</p></div>
                     <div >
                         <Input
@@ -132,14 +168,33 @@ function SignUp() {
                             value = {inputValues.username}
                             min={2}
                         />
+
                         <Input
+                            id = "newPassword"
                             className= "formInput mt-30"
                             placeholder="Enter your Password"
-                            type= "text"
+                            type= "password"
                             onChange={handlePasswordInput}
                             value = {inputValues.password}
                             min={2}
                         />
+                        <Input
+                            id = "newPassword"
+                            className= "formInput mt-30"
+                            placeholder="Enter your Password"
+                            type= "password"
+                            onChange={handleConfirmPassword}
+                            value = {inputValues.confirmPassword}
+                            min={2}
+                        />
+                        {showSamePasswordError && (
+                            <div className ="form-section">
+                                <div className ="policy-text red-text">
+                                    Please input the same password.
+                                </div>
+                            </div>
+                        )}
+                        
 
                         {/* <Input
                             className= "formInput mt-30"
@@ -151,30 +206,30 @@ function SignUp() {
                         /> */}
 
                         <div className ={`${buttonDisabled? "grey-disabled ": ""}form-section float-btn`} onClick={()=>{signupAccount(3)}}>
-                            <div className = {`${loading ?"form-loading ": "" } sign-up-btn mt-30`}>
+                            <div className = {`${loading === 3 ?"form-loading ": "" } sign-up-btn mt-30`}>
                                 <span>Sign Up</span>
                             </div>
                         </div>
 
-                        <div className ="form-section">
+                        <div className ="form-section my-3">
                             <div className ="policy-text">
-                                <p>By registering you agree to tnbCrow’s terms of using the tnbc games platform and privacy policy.</p>
+                                By registering you agree to our terms  and privacy policy.
                             </div>
                         </div>
 
                         <div className = "form-section mt-4">
                             <div className = "space-between">
-                                <div className = "google-discord-btn float-btn mr-3" onClick= {()=> {signupAccount(1)}}>
-                                    <div className ="google-discord-btn-inner">
+                                <div className = "google-discord-btn float-btn mr-3" onClick= {()=> signupAccount(2)}>
+                                    <div className ={`${loading === 2 ?"form-loading ": "" } google-discord-btn-inner`}>
                                         <DiscordLogo/>
-                                        <p className = "sign-up-text">Sign up using Discord</p>
+                                        <span className = "sign-up-text">Sign up using Discord</span>
                                     </div>
 
                                 </div>
-                                <div className = "google-discord-btn float-btn ml-3">
-                                    <div className ="google-discord-btn-inner">
+                                <div className = "google-discord-btn float-btn ml-3" onClick= {()=> signupAccount(1)}>
+                                    <div className ={`${loading === 1 ?"form-loading ": "" } google-discord-btn-inner`}>
                                         <GoogleLogo/>
-                                        <p className = "sign-up-text">Sign up using Google</p>
+                                        <span className = "sign-up-text">Sign up using Google</span>
                                     </div>
 
                                 </div>

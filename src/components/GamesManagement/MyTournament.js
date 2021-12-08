@@ -347,10 +347,12 @@ const OngoingCompleted = styled.div`
     color: #ffffff;
 
     .ongoing {
+        cursor: pointer;
         opacity: ${props => props?.active === 1 ? "" : "0.6"};
     }
 
     .completed {
+        cursor: pointer;
         opacity: ${props => props?.active === 2 ? "" : "0.6"};
     }
 

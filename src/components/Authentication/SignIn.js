@@ -35,10 +35,12 @@ function SignIn() {
             email: userInfo.email,
             password: userInfo.password,
         }
-       let {status, message} = await dispatch( signinUser(payload, type))
-       console.log(status, message)
-       if (status === true){        
-            toast.success(message,{
+       let {status, response} = await dispatch( signinUser(payload, type))
+       console.log(status, response)
+       if (status === true){
+            sessionStorage.setItem("userEmail",userInfo.email)
+            sessionStorage.setItem("accessstoken", response.data.accessToken)        
+            toast.success(response.message,{
                 className: 'dark-theme',
                 bodyClassName: "grow-font-size",
                 progressClassName: 'fancy-progress-bar',
@@ -50,7 +52,7 @@ function SignIn() {
                 history.push("/")
             },[8000])
         }else {
-            toast.warn(message,{
+            toast.warn(response.message,{
                 className: 'dark-theme',
                 bodyClassName: "grow-font-size",
                 progressClassName: 'fancy-progress-bar',
@@ -73,8 +75,8 @@ function SignIn() {
 
     return (
         <div className = "signup-page fadeInUp animated leaderboard-page">
-            <div className ="tnbc-comppp">
-                <div className = "hght">
+            <div className ="login-comp">
+                <div className = "hght pt-4">
                     <div className ="signup-heading"><p>Login</p></div>
                     <div >
                         <Input
@@ -88,7 +90,7 @@ function SignIn() {
                         <Input
                             className= "formInput mt-30"
                             placeholder="Password"
-                            type= "text"
+                            type= "password"
                             onChange ={handleInputPasswordChange}
                             value = {userInfo.password}
                             min={2}

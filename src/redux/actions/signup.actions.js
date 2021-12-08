@@ -16,7 +16,7 @@ export const signupUser = (data, type) => async (dispatch) => {
             ? urls.googleSignup 
             : type === 2
             ? urls.discordSignup
-            : urls.signupUser, data, headers);
+            : urls.signupUser,  type === 3 ? data: null,  type === 3 ? headers: null);
         console.log(response,"=====", headers)
         if (response.status === 200) {
             dispatch({
@@ -25,7 +25,7 @@ export const signupUser = (data, type) => async (dispatch) => {
             });
             return {
                 status: true,
-                message: response.data.message
+                message: response.data
             };
         } else {
             dispatch({
@@ -66,7 +66,7 @@ export const signinUser = (data, type) => async (dispatch) => {
             });
             return {
                 status: true,
-                message: response.data.message
+                response: response.data
             };;
         } else {
             dispatch({
@@ -74,7 +74,7 @@ export const signinUser = (data, type) => async (dispatch) => {
             })
             return {
                 status: false,
-                message: response.message
+                response: response
             };
         }
     } catch (err) {

@@ -1,56 +1,59 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ContentBody } from './ChooseGames';
 
 function FaqPage() {
     return (
         <div className ="leaderboard-page fadeInUp animated">
-            <FaqForm>
-                <div className ="faq">FAQ</div>
-                <div className ="faq-page">
-                    <div className ="info-section">
-                        <div className="info-heading">Lorem ipsum dolor sit amet</div>
-                        <div className="info-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                        Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                        Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
-                         aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                         Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                         Arcu velit pharetra nulla id adipiscing enim, risus.</div>
-                    </div>
+            <ContentBody>
+                <FaqForm>
+                    <div className ="faq">FAQ</div>
+                    <div className ="faq-page">
+                        <div className ="info-section">
+                            <div className="info-heading">Lorem ipsum dolor sit amet</div>
+                            <div className="info-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
+                            aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus.</div>
+                        </div>
 
-                    <div className ="info-section">
-                        <div className="info-heading">Lorem ipsum dolor sit amet</div>
-                        <div className="info-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                        Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                        Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
-                         aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                         Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                         Arcu velit pharetra nulla id adipiscing enim, risus.</div>
-                    </div>
-                    <div className ="info-section">
-                        <div className="info-heading">Lorem ipsum dolor sit amet</div>
-                        <div className="info-body">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                        Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                        Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
-                         aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
-                         Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
-                         consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
-                         Arcu velit pharetra nulla id adipiscing enim, risus.</div>
-                    </div>
-                    
+                        <div className ="info-section">
+                            <div className="info-heading">Lorem ipsum dolor sit amet</div>
+                            <div className="info-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
+                            aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus.</div>
+                        </div>
+                        <div className ="info-section">
+                            <div className="info-heading">Lorem ipsum dolor sit amet</div>
+                            <div className="info-body">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis 
+                            aliquet. Arcu velit pharetra nulla id adipiscing enim, risus. Aliquam et, sit ut augue. 
+                            Tincidunt eget eget interdum tempor, egestas at viverra.Lorem ipsum dolor sit amet, 
+                            consectetur adipiscing elit. Ut senectus id faucibus augue bibendum sapien sagittis aliquet. 
+                            Arcu velit pharetra nulla id adipiscing enim, risus.</div>
+                        </div>
+                        
 
-                </div>
-            </FaqForm>
+                    </div>
+                </FaqForm>
+            </ContentBody>
         </div>
     )
 }
@@ -58,13 +61,11 @@ function FaqPage() {
 export default FaqPage;
 
 const FaqForm = styled.div`
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 122px;
-    margin-top: 50px;
+    padding-top: 100px;
     .faq{
         width: 100%;
         height: 98px;

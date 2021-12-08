@@ -29,11 +29,23 @@ function LeaderBoardPage() {
                             <div className ="games-filter mr-4">
                                 <div className ="games-filter-inner">
                                     <div className ="games-filter-title"> All Games </div>
+                                    <div className ="mr-4">
+                                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                            <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                             <div className ="games-filter ml-4">
                                 <div className ="games-filter-inner">
                                     <div className ="games-filter-title"> All Games </div>
+                                    <div className ="mr-4">
+                                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                            <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -79,6 +79,12 @@ function ChooseTournament() {
                         <div className ="games-filter">
                             <div className ="games-filter-inner">
                                 <div className ="games-filter-title" onClick= {()=> setShowDropDown(!showDropDown)}> All Games </div>
+                                <div className ="mr-4">
+                                    <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                        <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                         { showDropDown && (
@@ -98,7 +104,7 @@ function ChooseTournament() {
                 <div className = "choose-games-section">
                 {games &&
                     games.map((item, index) => (
-                        <TournamentView>
+                        <TournamentView key-={index}>
                             <div className = "upcoming-tornament-name">
                                 <p className ="pl-4">{item?.gameType}</p>
                             </div>
