@@ -11,6 +11,7 @@ import {Navbar, Container, Nav, Form, FormControl, NavDropdown, Button} from 're
 function Navbarr() {
     const loggedIn = useSelector(state=> state.signupState.userLoggedIn)
     const userEmail = sessionStorage.getItem("userEmail");
+    const accessToken = sessionStorage.getItem("accesstoken");
     const location = useLocation();
     const [signupActive, setSignUpActive] = useState(false);
     const [loginActive, setLoginActive] = useState(false);
@@ -122,7 +123,7 @@ function Navbarr() {
                     </Link>
                     </>
                 )} 
-                {userEmail&& (
+                {userEmail || accessToken &&(
                     <div className={`${isMobile ? "": "mr-4 "} loggedIn  mt-4`}>
                         <div className="mx-1">
                             <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">

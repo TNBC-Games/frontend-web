@@ -30,7 +30,8 @@ function TnbcDetails() {
                     tnbcDetails.map((item, index) => (
                         <div className = "card-item">
                             <div className = "card-item-overlay">
-                                <item.icon/>
+                                <div className="icon-item" ><item.icon/></div>
+                                
                                 <div className = "card-item-amount"> {item.amount}</div>
                                 <div className = "card-item-title"> {item.title}</div> 
                             </div>    
@@ -46,7 +47,12 @@ export default TnbcDetails
 
 export const TnbcDetailContentBody = styled(ContentBody)`
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    .icon-item{
+        width:75px;
+        display:flex;
+    }
+
     @media only screen and (max-width: 1000px) {
         flex-direction: column;
         align-items:center;
