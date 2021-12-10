@@ -9,6 +9,7 @@ import Fifa4 from "../../assets/Fifa4.png";
 import Fifa5 from "../../assets/Fifa5.png";
 import Slider from "react-slick";
 import { Carousel } from 'react-bootstrap';
+import { DummySlider } from './ChooseTournament';
 
 function ChooseGames() {
     const [showDropDown,setShowDropDown] = useState(false);
@@ -62,7 +63,7 @@ function ChooseGames() {
             <div className = "choose-games-header">
                 <div className ="choose-games-title">Choose your Games</div>
                 <div className = "align-center flex-column">
-                    <div className ="games-filter">
+                    <div className ="games-filter cursor-pointer">
                         <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
                             <div className ="games-filter-title"> All Games </div>
                             <div className ="mr-2">
@@ -97,7 +98,7 @@ function ChooseGames() {
                 
             </div>
 
-            <div className = "choose-games-section mb-5">
+            <div className = "choose-games-section">
                     {games.map((item, index) => (
                         
                             <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
@@ -110,6 +111,14 @@ function ChooseGames() {
                         ))
                     }
             </div>
+
+            <div className="flex justify-center hght100"> 
+                    <DummySlider>
+                            <div className="box-sm blue-bg"></div>
+                            <div className="box-sm"></div>
+                            <div className="box-sm"></div>
+                    </DummySlider>
+                </div>
             </ContentBody>
             
         </div>
@@ -153,8 +162,8 @@ export const Dropdown = styled.div`
     .dropdown-item{
         padding: 10px 0px;
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: flex-start;
         height:50px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         color: #ffffff;
@@ -162,6 +171,11 @@ export const Dropdown = styled.div`
         font-weight: 500;
         line-height: 27px;
         cursor: pointer;
+        padding-left:25px;
+
+        :hover{
+            background-color:#FACF5A
+        }
 
     }
 

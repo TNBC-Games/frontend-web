@@ -321,6 +321,9 @@ input:focus {
 .hght{
     height: 100%;
 }
+.hght100{
+    height:100px
+}
 
 .choose-games{
     padding: 90px;
@@ -329,10 +332,8 @@ input:focus {
 }
 
 .choose-tournament{
-    height:2500;
     padding: 90px;
     background:#111010;
-    border-bottom: 1px solid #343434;
 }
 
 .choose-games-header {
@@ -397,7 +398,6 @@ input:focus {
     height: 207px;
     width: 31.5%;
     margin-top: 20px;
-    margin-bottom: 5%;
     background-color: #FFFFFF;
 }
 

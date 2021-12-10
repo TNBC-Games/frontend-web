@@ -80,8 +80,8 @@ function ChooseTournament() {
 
                 <div className = "choose-games-header">
                     <div className ="choose-games-title"><p>Upcoming Tournament</p></div>
-                    <div className="align-center">
-                        <div className ="games-filter">
+                    <div className="align-center flex-column">
+                        <div className ="games-filter cursor-pointer">
                             <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
                                 <div className ="games-filter-title"> All Games </div>
                                 <div className ="mr-2">
@@ -135,8 +135,17 @@ function ChooseTournament() {
                         </TournamentView>
                     ))
                 }
+                
+                </div>
+                <div className="flex justify-center hght100"> 
+                    <DummySlider>
+                            <div className="box-sm blue-bg"></div>
+                            <div className="box-sm"></div>
+                            <div className="box-sm"></div>
+                    </DummySlider>
                 </div>
             </ContentBody>
+           
         </div>
     )
 }
@@ -145,8 +154,6 @@ export default ChooseTournament
 
 export const TournamentView = styled.div`
     width: 31.5%;
-    height: 412px;
-    margin-bottom: 3%;
     filter: ${props => props.grey? "grayscale(100%)": ""};
 
     .upcoming-tornament-name {
@@ -176,6 +183,22 @@ export const TournamentView = styled.div`
         width:48%;
         height:auto;
         
+    }
+
+`;
+export const DummySlider = styled.div`
+    display: flex;
+    justify-content: space-between;
+    min-width: 150px;
+    min-height:100px;
+    margin-top:40px;
+    .box-sm{
+        width: 40px;
+        height: 10px;   
+        background: rgba(255, 255, 255, 0.7);
+    }
+    .blue-bg{
+        background: #477CAD !important;
     }
 
 `;
