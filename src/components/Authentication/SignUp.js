@@ -92,7 +92,7 @@ function SignUp() {
             console.log(status, response)
             if (status === true){
                 sessionStorage.setItem("userEmail", inputValues.email)
-                sessionStorage.setItem("accessstoken", response.data.accessToken)
+                sessionStorage.setItem("accesstoken", response.data.accessToken)
                 toast.success(response.message,{
                     className: 'dark-theme',
                     bodyClassName: "grow-font-size",

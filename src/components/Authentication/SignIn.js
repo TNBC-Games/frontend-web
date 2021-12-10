@@ -38,7 +38,7 @@ function SignIn() {
        let {status, response} = await dispatch( signinUser(payload, type))
        if (status === true){
             sessionStorage.setItem("userEmail",userInfo.email)
-            sessionStorage.setItem("accessstoken", response.data.accessToken)        
+            sessionStorage.setItem("accesstoken", response.data.accessToken)        
             toast.success(response.message,{
                 className: 'dark-theme',
                 bodyClassName: "grow-font-size",

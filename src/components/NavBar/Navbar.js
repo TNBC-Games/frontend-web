@@ -114,7 +114,7 @@ function Navbarr() {
                     <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
                 </Link>
                 
-                {!userEmail &&(<>
+                {!accessToken &&(<>
                      <Link to ="/login"> 
                         <li className = {`${isMobile ? " ": " mr-1 ml-4 mt-2"} sign-in  `}> <span>Sign in </span></li>
                      </Link>
@@ -123,7 +123,7 @@ function Navbarr() {
                     </Link>
                     </>
                 )} 
-                {userEmail || accessToken &&(
+                {accessToken &&(
                     <div className={`${isMobile ? "": "mr-4 "} loggedIn  mt-4`}>
                         <div className="mx-1">
                             <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">

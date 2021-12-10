@@ -4,17 +4,21 @@ import ChooseGames from './ChooseGames';
 import ChooseTournament from './ChooseTournament';
 import TnbcDetails from './TnbcDetails';
 import AchievementPage from './AchievementPage';
+import { useHistory } from 'react-router';
 
 function WebBody() {
-    
+const history = useHistory()
 const queryParams = new URLSearchParams(window.location.search);
-const id = queryParams.get('oauth');
-console.log(id,"yooooo");
+const accessToken = queryParams.get('accessToken');
 
 useEffect(() => {
-    
-
-}, [])
+ 
+    if(accessToken) {
+        sessionStorage.setItem("accesstoken", accessToken);
+        history.push("/")
+    }
+   
+}, [accessToken])
 
     return (
         <div className = "tnbc-body fadeInUp animated">
