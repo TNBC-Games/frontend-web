@@ -101,16 +101,16 @@ function Navbarr() {
              
             <ul className={isMobile ? "nav-links-mobile " : " nav-links"}>
                 <Link to = "/">
-                    <li className = {`${isMobile ? " ": " mr-4 mt-2"} menu-button `}> Home </li>
+                    <li className = {`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Home </li>
                 </Link>
                 <Link to ="/my-tournament">
-                    <li className ={`${isMobile ? " ": " mr-4 mt-2"} menu-button `}> Tournament </li>
+                    <li className ={`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Tournament </li>
                 </Link>
                 <Link to ="/shop">
-                    <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `}> Shop </li>
+                    <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
                 </Link>
                 <Link  to = "/">
-                    <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `}> More </div>
+                    <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
                 </Link>
                 
                 {!userEmail &&(<>

@@ -24,7 +24,7 @@ export const signupUser = (data, type) => async (dispatch) => {
             });
             return {
                 status: true,
-                message: response.data
+                response: response.data
             };
         } else {
             dispatch({
@@ -32,7 +32,7 @@ export const signupUser = (data, type) => async (dispatch) => {
             })
             return {
                 status: false,
-                message: response.message
+                response: response.message
             }
         }
     } catch (err) {

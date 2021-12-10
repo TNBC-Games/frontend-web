@@ -208,6 +208,7 @@ export const LiveMatch = styled.div`
     font-size: 20px;
     line-height: 23px;
     color: #ffffff;
+    white-space:nowrap;
     @media only screen and (max-width: 800px) {
         width:160px;
         font-size:12px;

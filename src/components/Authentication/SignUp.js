@@ -89,6 +89,7 @@ function SignUp() {
             }
 
             let {status, response} = await dispatch( signupUser(payload, type))
+            console.log(status, response)
             if (status === true){
                 sessionStorage.setItem("userEmail", inputValues.email)
                 sessionStorage.setItem("accessstoken", response.data.accessToken)
@@ -101,10 +102,10 @@ function SignUp() {
                 
                 setTimeout(()=> {
                     history.push("/")
-                },[8000])
+                },[2000])
                 
             }else {
-                toast.warn(response.message,{
+                toast.warn(response.message || response,{
                     className: 'dark-theme',
                     bodyClassName: "grow-font-size",
                     progressClassName: 'fancy-progress-bar',
@@ -219,14 +220,14 @@ function SignUp() {
                         <div className = "form-section mt-4">
                             <div className = "space-between">
                                 <div className = "google-discord-btn float-btn mr-3" onClick= {()=> signupAccount(2)}>
-                                    <div className ={`${loading === 2 ?"form-loading ": "" } google-discord-btn-inner`}>
+                                    <div className ={`${loading === 2 ?"form-loading ": "" } google-discord-btn-inner pt-10`}>
                                         <DiscordLogo/>
                                         <span className = "sign-up-text">Sign up using Discord</span>
                                     </div>
 
                                 </div>
                                 <div className = "google-discord-btn float-btn ml-3" onClick= {()=> signupAccount(1)}>
-                                    <div className ={`${loading === 1 ?"form-loading ": "" } google-discord-btn-inner`}>
+                                    <div className ={`${loading === 1 ?"form-loading ": "" } google-discord-btn-inner pt-10`}>
                                         <GoogleLogo/>
                                         <span className = "sign-up-text">Sign up using Google</span>
                                     </div>

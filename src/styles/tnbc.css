@@ -296,6 +296,7 @@ input:focus {
     font-size: 18px;
     line-height: 27px;
     color: #FFFFFF;
+    white-space:nowrap;
 }
 
 .tnbc-component {
@@ -944,7 +945,7 @@ input:focus{
         font-size:11px;
     }
     .signup-comp {
-        padding-top: 87px;
+        padding-top: 40px;
         padding-bottom: 50px;
     }
     .login-comp{
@@ -999,6 +1000,9 @@ input:focus{
         flex-direction: column!important;
         margin-top: 20px;
         align-items: flex-end !important;
+    }
+    .pt-10{
+        padding: 10px;
     }
 }
 @media only screen and (max-width: 800px) {
