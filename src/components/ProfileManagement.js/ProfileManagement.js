@@ -70,7 +70,6 @@ function ProfileManagement() {
     const [modalData, setModalData] = useState("");
 
     function showTrophyModal(e){
-        console.log("yes")
         setShowModal(true)
 
     }

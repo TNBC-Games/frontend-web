@@ -36,7 +36,6 @@ function SignIn() {
             password: userInfo.password,
         }
        let {status, response} = await dispatch( signinUser(payload, type))
-       console.log(status, response)
        if (status === true){
             sessionStorage.setItem("userEmail",userInfo.email)
             sessionStorage.setItem("accessstoken", response.data.accessToken)        

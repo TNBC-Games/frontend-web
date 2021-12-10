@@ -17,7 +17,6 @@ export const signupUser = (data, type) => async (dispatch) => {
             : type === 2
             ? urls.discordSignup
             : urls.signupUser,  type === 3 ? data: null,  type === 3 ? headers: null);
-        console.log(response,"=====", headers)
         if (response.status === 200) {
             dispatch({
                 type: types.SIGNUP_SUCCEEDED,
@@ -58,7 +57,6 @@ export const signinUser = (data, type) => async (dispatch) => {
     try {
         let headers = { "Content-Type": "application/json" };
         const response = await postCall(urls.loginUser, data, headers);
-        console.log(response,"=====", headers)
         if (response.data.code === 200) {
             dispatch({
                 type: types.SIGNIN_SUCCEEDED,

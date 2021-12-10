@@ -73,7 +73,7 @@ function ChooseTournament() {
         rows: 2,
         slidesPerRow: 2
     }
-    console.log(showDropDown,"ooooo")
+
     return (
         <div className = "choose-tournament">
             <ContentBody>

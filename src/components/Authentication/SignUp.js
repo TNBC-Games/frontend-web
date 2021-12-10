@@ -89,7 +89,6 @@ function SignUp() {
             }
 
             let {status, response} = await dispatch( signupUser(payload, type))
-            console.log(status, response,"yoooooo")
             if (status === true){
                 sessionStorage.setItem("userEmail", inputValues.email)
                 sessionStorage.setItem("accessstoken", response.data.accessToken)
