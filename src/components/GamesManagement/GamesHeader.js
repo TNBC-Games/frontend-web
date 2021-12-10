@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import {ReactComponent as LeaderIcon} from "../../assets/LeaderboardIcon.svg";
 import {ReactComponent as GameRules} from "../../assets/GameRulesIcon.svg";
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
+import Fifa2 from "../../assets/Fifa2.png";
+import Fifa3 from "../../assets/Fifa3.png";
+import Fifa4 from "../../assets/Fifa4.png";
+import Fifa5 from "../../assets/Fifa5.png";
+import Culture from "../../assets/Culture.png";
 import { ProgressBar } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
@@ -20,7 +25,7 @@ function GamesHeader() {
         },
         {
             gameType: "COD",
-            image: callOfDutyImage,
+            image: Fifa2,
             completedTournament:2,
             totalTournament: 34,
             completedPercent: 40,
@@ -28,7 +33,7 @@ function GamesHeader() {
         },
         {
             gameType: "COD - BLACK OPS",
-            image: callOfDutyImage,
+            image: Fifa3,
             completedTournament:5,
             totalTournament: 34,
             completedPercent: 30,
@@ -36,7 +41,7 @@ function GamesHeader() {
         },
         {
             gameType: "FIFA",
-            image: callOfDutyImage,
+            image: Fifa4,
             completedTournament:7,
             totalTournament: 14,
             completedPercent: 20,
@@ -44,7 +49,7 @@ function GamesHeader() {
         },
         {
             gameType: "FORTNITE",
-            image: callOfDutyImage,
+            image: Fifa5,
             completedTournament:23,
             totalTournament: 34,
             completedPercent: 32,
@@ -52,7 +57,7 @@ function GamesHeader() {
         },
         {
             gameType: "MINECRAFT",
-            image: callOfDutyImage,
+            image: Culture,
             completedTournament:12,
             totalTournament: 34,
             completedPercent: 24,

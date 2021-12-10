@@ -110,7 +110,7 @@ function Navbarr() {
                 <Link to ="/shop">
                     <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
                 </Link>
-                <Link  to = "/">
+                <Link  to = "/more">
                     <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
                 </Link>
                 
