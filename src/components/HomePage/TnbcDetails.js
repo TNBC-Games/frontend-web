@@ -47,4 +47,8 @@ export default TnbcDetails
 export const TnbcDetailContentBody = styled(ContentBody)`
     display: flex;
     justify-content: center;
+    @media only screen and (max-width: 1000px) {
+        flex-direction: column;
+        align-items:center;
+    }
 `;

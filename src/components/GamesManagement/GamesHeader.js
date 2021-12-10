@@ -127,18 +127,17 @@ function GamesHeader() {
                         </div>
                     </UpcomingTournamentHead>
 
-                    <div className = "choose-games-section">
+                    <div className = "choose-games-section choose-games-padding">
                     {games &&
                         games.map((item, index) => (
                             <div key ={index} className ="tourn-item">
-                                <div className = "upcoming-tornament-name">
-                                    <p className ="pl-4">{item?.gameType}</p>
+                                <div className = "upcoming-tornament-name">{item?.gameType}
                                 </div>
                                 <div>
                                     <img src={item?.image} alt={item?.gameType}></img>
                                 </div>
                                 <div className ="tourn-more-info">
-                                    <div className ="tourn-name mb-3">{item?.gameType}</div>            
+                                    <div className ="tourn-name">{item?.gameType}</div>            
                                     <ProgressBar now={item?.completedPercent}/>
                                     <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
                                     <div className = "fee"> Fee </div>
@@ -173,7 +172,18 @@ export const ProfileHeader = styled.div`
     padding: 90px 100px;
     width:100vw;
     height: 354px;
-    background-image: url(${props => props.image})
+    background-image: url(${props => props.image});
+    
+    @media only screen and (max-width: 1000px) {
+        padding: 90px 30px;
+        background-size: 700px 460px;
+        
+    }
+    @media only screen and (max-width: 800px) {
+        height:auto;
+        padding: 50px 30px;
+        
+    }
 `;
 
 export const GameName = styled.div`
@@ -182,6 +192,9 @@ export const GameName = styled.div`
     font-size: 64px;
     line-height: 95px;
     color: #FFFFFF;
+    @media only screen and (max-width: 800px) {
+        font-size: 32px;
+    }
 `
 
 export const LiveMatch = styled.div`
@@ -194,7 +207,13 @@ export const LiveMatch = styled.div`
     font-weight: 800px;
     font-size: 20px;
     line-height: 23px;
-    color: #ffffff
+    color: #ffffff;
+    @media only screen and (max-width: 800px) {
+        width:160px;
+        font-size:12px;
+        padding:0
+        justify-content:center;
+    }
 `;
 export const RoundDot = styled.div`
     height:25px;
@@ -202,6 +221,11 @@ export const RoundDot = styled.div`
     margin-right: 10px;
     border-radius: 100%;
     background: #EB0831;
+    @media only screen and (max-width: 800px) {
+        width:20px;
+        height:20px;
+    }
+
 
 `;
 export const LiveMatchCount = styled.div`
@@ -232,6 +256,14 @@ export const GamesDescription = styled.div`
     top: -55px;
     background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
     border-radius: 5px;
+    @media only screen and (max-width: 1000px) {
+        width: 90%;
+        height: 70px;
+    }
+    @media only screen and (max-width: 800px) {
+        height: 50px;
+        top: -29px;
+    }
 
     div{
         display: flex;
@@ -243,6 +275,14 @@ export const GamesDescription = styled.div`
         position: relative;
         background: #000000;
         border-radius: 5px;
+        @media only screen and (max-width: 1000px) {
+            width: 99.4%;
+            height: 99.4%;
+            padding: 15px;
+        }
+        @media only screen and (max-width: 800px) {
+            height: 48px;
+        }
 
     };
 
@@ -253,6 +293,13 @@ export const GamesDescription = styled.div`
         line-height: 30px;
         color: #FFFFFF;
         margin: 0;
+        @media only screen and (max-width: 1000px) {
+            font-size: 15px;
+        }
+        @media only screen and (max-width: 800px) {
+            font-size: 10px;
+            line-height: 16px;
+        }
     }
 `;
 
@@ -266,6 +313,13 @@ export const RulesLeaderboard = styled.div`
     font-size: 24px;
     line-height: 36px;
     color: #FFFEFE;
+    @media only screen and (max-width: 1000px) {
+        padding: 10px 30px;
+    }
+    @media only screen and (max-width: 800px) {
+        font-size: 13px;
+        line-height: 16px;
+    }
 `;
 
 export const UpcomingTournamentHead = styled.div`
@@ -274,6 +328,11 @@ export const UpcomingTournamentHead = styled.div`
     align-items:center;
     padding: 70px 0px;
 
+    @media only screen and (max-width: 1000px) {
+        padding: 30px 30px 10px;
+    }
+    
+
     .upcomingTournament{
         font-style: normal;
         font-weight: 800;
@@ -281,6 +340,19 @@ export const UpcomingTournamentHead = styled.div`
         height:40px;
         line-height: 36px;
         color: #FFFEFE;
+        display:flex;
+        align-items: center;
+
+        @media only screen and (max-width: 1000px) {
+            font-size: 20px;
+            font-weight:500;
+            flex-wrap: nowrap;
+        }
+        @media only screen and (max-width: 800px) {
+            font-size: 11px;
+            line-height: 16px;
+        
+        }
     }
     .tournament-category {
         display: flex;
@@ -290,6 +362,12 @@ export const UpcomingTournamentHead = styled.div`
         line-height: 30px;
         color: #FFFEFE;
         height: 24px;
+        @media only screen and (max-width: 1000px) {
+            font-size: 17px;
+        }
+        @media only screen and (max-width: 800px) {
+            font-size: 11px;
+        }
     }
 
     .tournament-type {
@@ -297,7 +375,12 @@ export const UpcomingTournamentHead = styled.div`
         margin-right: 30px;
         height: 24px;
         align-ites: center;
-        justify-content:center;
+        justify-content: center;
+        align-items: center;
+
+        @media only screen and (max-width: 1000px) {
+            margin-right: 10px;
+        }
 
     }
     .checkbox {
@@ -305,11 +388,19 @@ export const UpcomingTournamentHead = styled.div`
         height: 24px;
         border: 2px solid #FFFFFF;
         box-sizing: border-box;
-        margin-right: 15px
+        margin-right: 15px;
+
+        @media only screen and (max-width: 1000px) {
+            width:13px;
+            height: 13px;
+            margin-right: 5px;
+
+        }
     }
 `;
 
 export const GamesContentBody = styled(ContentBody)`
     display: flex;
     justify-content:space-between;
+    align-items: center;
 `

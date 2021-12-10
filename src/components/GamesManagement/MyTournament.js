@@ -223,7 +223,7 @@ function MyTournament() {
             </CompletedStatus>
 
             <ContentBody>
-                <div className="choose-games-section py-5">
+                <div className="choose-games-section my-tournaments py-5">
                     {active === 1 ? (
                         <>
                             {ongoingList &&
@@ -231,14 +231,13 @@ function MyTournament() {
 
                                     <TournamentView key={index}>
 
-                                        <div className="upcoming-tornament-name">
-                                            <p className="pl-4">{item?.gameType}</p>
+                                        <div className="upcoming-tornament-name">{item?.gameType}
                                         </div>
                                         <div>
                                             <img src={item?.image} alt={item?.gameType}></img>
                                         </div>
                                         <TournamentInfo>
-                                            <div className="tourn-name mb-3 pb-3">{item?.gameType}</div>
+                                            <div className="tourn-name">{item?.gameType}</div>
                                             <ProgressBar now={item?.completedPercent} />
                                             <div className="tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
                                             <div className="fee"> Starts in </div>
@@ -262,15 +261,14 @@ function MyTournament() {
                             {completedList &&
                                 completedList.map((item, index) => (
                                     <TournamentView key={index} grey={true}>
-                                        <div className="upcoming-tornament-name">
-                                            <p className="pl-4">{item?.gameType}</p>
+                                        <div className="upcoming-tornament-name">{item?.gameType}
                                         </div>
                                         <div>
                                             <img src={item?.image} alt={item?.gameType}></img>
                                         </div>
                                         <TournamentInfo>
                                             <div className="height-220">
-                                                <div className="tourn-name pb-3 border-bottom">{item?.gameType}</div>
+                                                <div className="tourn-name mb-0 pb-3 border-bottom">{item?.gameType}</div>
 
                                                 <div className="justify-space mb-2" >
                                                     <div className="fee justify-center align-items-center">Earnings</div>
@@ -329,13 +327,19 @@ const MyTournamentHeader = styled.div`
     .border-bottom {
         border-bottom: 1px solid #4A4A4A;
     }
+    @media only screen and (max-width: 1000px) {
+        padding: 30px 10px 0px 30px;
+    }
 `;
 
 const CompletedStatus = styled.div`
-    height: 100px;
     display: flex;
     justify-content: space-between;
     padding: 50px 90px;
+
+    @media only screen and (max-width: 1000px) {
+        padding: 30px 10px 0px 30px;
+    }
 `;
 
 const OngoingCompleted = styled.div`

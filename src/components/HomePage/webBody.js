@@ -8,7 +8,7 @@ import AchievementPage from './AchievementPage';
 function WebBody() {
     return (
         <div className = "tnbc-body fadeInUp animated">
-            <div>
+            <div className="width-100">
                 <Intro/>
                 <ChooseGames/>
                 <ChooseTournament/>

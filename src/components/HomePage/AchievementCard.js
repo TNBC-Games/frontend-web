@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 function AchievmentCard({position, name, image, earned, }) {
     return (
-        <div>
+        <div className = {`${position === 1 ? "red" : position === 2? "yellow": position ===3 ? "grey": ""} justify-center`}>
             <div className = {`${position === 1 ? "red-top adjust-first" : position === 2 ? "yellow-top": "grey-top"} achievement-card`}>
                 <div className ="width-100 height-70 justify-center">
                     <div className = "user-image">
@@ -18,7 +18,7 @@ function AchievmentCard({position, name, image, earned, }) {
                     <div className =" earning-text justify-center pt-3"> 3000 TP earned 09/20 - 09/27 </div>
                     <div className =" green-earnings justify-center">+5,000 TNBC earned </div>
                     <div className ="justify-center mt-40">
-                    <div className = "join-free float-btn justify-center p-2">View Profile</div>
+                    <div className = "join-freer float-btn justify-center p-2">View Profile</div>
                     </div>
                     
                     

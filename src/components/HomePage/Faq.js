@@ -74,6 +74,9 @@ const FaqForm = styled.div`
         font-size: 32px;
         color: #FFFFFF;
         margin-bottom: 20px;
+        @media only screen and (max-width: 800px) {
+            height:auto;
+        }
     }
     .faq-page{
         width: 100%;
@@ -81,6 +84,9 @@ const FaqForm = styled.div`
         background: #1D1D1D;
         border-radius: 5px;
         padding: 15px;
+        @media only screen and (max-width: 800px) {
+            height:auto;
+        }
     }
     .info-section{
         padding:25px;
@@ -92,6 +98,9 @@ const FaqForm = styled.div`
             display: flex;
             color: #FFFFFF;
             margin-bottom: 20px;
+            @media only screen and (max-width: 800px) {
+                font-size: 20px;
+            }
         }
         .info-body{
             font-style: normal;
@@ -102,7 +111,15 @@ const FaqForm = styled.div`
             flex-wrap: wrap;
             align-items: center;
             color: grey;
+            @media only screen and (max-width: 800px) {
+                font-size: 15px;
+            }
         }
+        
+    }
+    @media only screen and (max-width: 800px) {
+        padding:100px 30px;
+        height:auto;
     }
 
 `;

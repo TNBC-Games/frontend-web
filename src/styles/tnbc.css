@@ -1,10 +1,10 @@
-.nav-bar {
-    height: 100px;
+.navv {
+    height: 80px;
     width: 100vw;
     display: flex;
     z-index: 10;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding-left: 160px;
     padding-right: 160px;
     position: fixed;
@@ -33,10 +33,11 @@ img{
 }
 .navbar-heading{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar-name{
-    padding-top: 10px;
     color: #ffffff;
     font-weight: 800;
     font-style: "normal";
@@ -53,7 +54,7 @@ img{
 }
 
 .menu-button {
-    padding:10px 30px 10px 30px;
+    padding:10px 15px 10px 15px;
     color: #ffffff;
     font-style: normal;
     font-weight: 500;
@@ -91,7 +92,7 @@ img{
     
 }
 
-.join-free {
+.join-freer {
     height:40px;
     width:122px;
     display: flex;
@@ -118,7 +119,6 @@ img{
 .tnbc-description {
     align-items: center;
     background-image: url("../assets/spaceImage.png");
-    height:610px;
     color: #ffffff;
 }
 
@@ -128,14 +128,13 @@ img{
     font-size: 48px;
     line-height: 72px;
     color: #FFFFFF;
-    width: 534px;
-    height: 144px;
+    max-width: 534px;
     z-index: 2;
 }
 
 .earn-tnbc-description {
-    width: 534px;
-    height: 70px;
+    max-width: 534px;
+    min-height: 70px;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -201,6 +200,25 @@ input:focus {
     display: flex;
     justify-content: center;
 }
+.join-free {
+    height:40px;
+    width:122px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    color: #000000;
+    background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 2;
+}
 
 .sign-up-btn {
     height:60px;
@@ -218,6 +236,9 @@ input:focus {
     background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
     cursor: pointer;
     text-decoration: none;
+}
+.loggedIn{
+    display: flex;
 }
 
 .policy-text {
@@ -365,12 +386,15 @@ input:focus {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-around;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 30px;
 }
 
 .games-item {
     flex: -1 0 32%;
     height: 207px;
-    width: 29%;
+    width: 31.5%;
     margin-top: 20px;
     margin-bottom: 5%;
     background-color: #FFFFFF;
@@ -399,7 +423,6 @@ input:focus {
     align-items: center;
     justify-content: center;
     color: #FFFFFF;
-    padding-top: 11px;
     height: 30px;
     position: relative;
     top: 30px;
@@ -413,7 +436,6 @@ input:focus {
 
 .tourn-more-info {
     background: #1D1D1D;
-    height: 187px;
     padding: 16px;
 }
 
@@ -428,6 +450,7 @@ input:focus {
     font-size: 20px;
     line-height: 30px;
     color: #FFFFFF;
+    margin-bottom: 1rem!important;
 }
 .progress {
     height: 5px !important;
@@ -460,6 +483,7 @@ input:focus {
 .justify-space {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .flex {
@@ -477,8 +501,6 @@ input:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100vw;
-    height:665px;
     padding: 90px;
     background:#111010;
 }
@@ -779,5 +801,333 @@ input:focus{
     border-radius: 100%;
     border:1px solid rgb(228, 222, 222);
     background-color: grey;
+}
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 75px;
+    color: white;
+    width:72vw;
+    margin:auto;
+    position: fixed;
+}
+.logo{
+    font-size: 30px;
+}
+.nav-links{
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    width:75%;
+}
+
+.mobile-menu-icon{
+    display: none;
+
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .loggedIn{
+        justify-content: center;
+
+    }
+    .mobile-menu-icon{
+        display: flex;
+    }
+    .navv{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .navbar{
+        width: 100vw
+    }
+    .log{
+        display: flex;
+        position: absolute;
+        top:15px;
+        left: 35px;
+    }
+    .nav-links{
+        display: none;
+    }
+    .nav-links-mobile{
+        position: absolute;
+        display: block;
+        list-style: none;
+        padding-left: 0px;
+        background-color: black;
+        right: 0px;
+        top: 75px;
+        transition: all 0,5s ease-out;
+        width: 50%;
+    }
+    .menu-button, .sign-in, .join-freeee{
+        color:white;
+        text-align: center;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        transition: all 0.5 ease;
+    }
+    .join-freee{
+        color:black;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        transition: all 0.5 ease;
+        background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+        border: 1px solid #FFFFFF;
+        font-weight: 500;
+        font-size: 18px;
+        border-radius: 5px;
+        height:40px;
+
+    }
+    .mobile-menu-icon{
+        display: block;
+        position: absolute;
+        font-size: 30px;
+        color: white;
+        background-color: black;
+        border: grey;
+        outline: none;
+        top:15px;
+        right: 25px;
+    }
+    .games-item {
+        width: 48%;
+    }
+    .card-item{
+        margin-bottom: 50px;
+    }
+    .choose-games{
+        padding:10px 30px;
+    }
+    .choose-tournament{
+        padding: 10px 30px;
+    }
+    .dark-overlay{
+        height: auto !important;
+    }
+    .my-tournaments{
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .tourn-item{
+        width: 48%;
+    }
+    .choose-games-padding {
+        padding: 0px 30px;
+    }
+    .formInput {
+        width: 80%;
+    }
+    .sign-up-btn {
+        width:80%;
+    }
+    .policy-text{
+        width: 80%;
+        font-size:11px;
+    }
+    .space-between{
+        width: 80%;
+    }
+    .sign-up-text{
+        font-size:11px;
+    }
+    .signup-comp {
+        padding-top: 87px;
+        padding-bottom: 50px;
+    }
+    .login-comp{
+        height:90vh;
+    }
+    .google-discord-btn {
+        height:41px;
+    }
+    .google-discord-btn-inner {
+        height: 39px;
+    }
+    .earn-tnbc-heading {
+        font-weight:500;
+        font-size: 24px;
+        line-height: 28px;
+    }
+    .tnbc-description-overlay{
+        padding: 140px 30px 30px 30px;
+    }
+    .player-position-section{
+        padding: 30px;
+        flex-direction: column;
+
+    }
+    .achievement-header{
+        padding: 30px;
+    }
+    .player-position-section{
+        width: 100%;
+        margin:0px;
+        padding:0px;
+    }
+    .adjust-first{
+        top:0;
+    }
+    .achievement-card{
+        margin:50px 0px;
+    }
+    .achievement-page{
+        height: 1400px !important;
+    }
+    .yellow{
+        order:2
+    }
+    .red{
+        order: 1;
+    }
+    .grey{
+        order:3
+    }
+    .flex-column{
+        flex-direction: column!important;
+        margin-top: 20px;
+        align-items: flex-end !important;
+    }
+}
+@media only screen and (max-width: 800px) {
+    
+    .games-filter {
+        width:102px;
+        height:37px
+    }
+    .games-filter-inner{
+        height:35px;
+        padding-left: 10px;
+    }
+    .games-item{
+        width:48%;
+        height: 130px;
+    }
+    .games-name-box{
+        height: 30px;
+        bottom: 30px;
+        font-size:15px;
+        font-weight: 200;  
+    }
+    .pnl-4{
+        padding-left:5px !important ;
+    }
+    .choose-games-title {
+        font-size:13px;
+        line-height: 10px;
+
+
+    }
+    .tnbc-details {
+        padding:90px 30px;
+    }
+    .card-item {
+        width:100%;
+        margin-left:auto;
+    }
+    .tourn-item {
+        width:48%;
+        height:auto;
+    }
+    .align-center{
+        display: flex;
+        align-items: center;
+    }
+    .games-filter-title{
+        font-size:12px;
+    }
+    .upcoming-tornament-name{
+        font-weight: 300;
+        font-size: 13px;
+        line-height: 10px;
+        height: 20px;
+        top: 20px;
+    }
+    .tourn-more-info .tourn-name{
+        font-weight: 500;
+        font-size: 15px;
+        margin-bottom: 5px !important;
+        line-height: 18px;
+    }
+    .tourn-more-info{
+        padding: 11px;
+    }
+    .tourn-completed {
+        font-size: 12px;
+        font-weight: 300;
+        line-height: 15px;
+    }
+    .fee{
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .fee-amount{
+        font-size: 13px;
+        font-weight:400;
+        line-height: 10px;
+    }
+    .join-free{
+        height:20px;
+        width: 50px;
+        font-size: 12px;
+        font-weight:500;
+    }
+    .progress{
+        height:3.5px !important;
+    }
+    .upcoming-tornament-name{
+        font-size:15px;
+        padding-top: 0px;
+    }
+    .player-position-section{
+        padding: 30px;
+        flex-direction: column;
+
+    }
+    .achievement-header{
+        padding: 30px;
+    }
+    .player-position-section{
+        width: 100%;
+        margin:0px;
+        padding:0px;
+    }
+    .adjust-first{
+        top:0;
+    }
+    .achievement-card{
+        margin:50px 0px;
+    }
+    .achievement-page{
+        height: 1400px !important;
+    }
+    .yellow{
+        order:2
+    }
+
+    .red{
+        order: 1;
+    }
+    .grey{
+        order:3
+    }
+    .child{
+        width: 82vw;
+        overflow-x: scroll;
+        margin: auto;
+    }
+
 }
 

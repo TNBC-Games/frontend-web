@@ -201,7 +201,14 @@ const Header = styled.div`
         justify-content: left;
         align-items: center;
     }
-`
+    @media only screen and (max-width: 1000px) {
+        padding: 30px;
+        height: 276px;
+    }
+`;
+
+
+
 
 const ProfileImage = styled.div`
     width: 150px;
@@ -212,10 +219,14 @@ const ProfileImage = styled.div`
     background-image: url(${props => props.image? props.image : ""});
     background : ${props => props.image? "" : "#ffffff"};
     cursor:pointer;
+    @media only screen and (max-width: 1000px) {
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
+    }
 `;
 
 const ProfileInfo = styled.div`
-    height: 150px;
     color: white;
 
     .profile-name {
@@ -224,6 +235,11 @@ const ProfileInfo = styled.div`
         font-size: 36px;
         line-height: 53px;
         color: #FFFFFF;
+        @media only screen and (max-width: 1000px) {
+            font-size: 20px;
+            line-height: 19px;
+            margin-bottom: 10px;
+        }
     }
 
     .profile-details{
@@ -232,6 +248,11 @@ const ProfileInfo = styled.div`
         font-size: 24px;
         line-height: 36px;
         color: #FFFFFF;
+        @media only screen and (max-width: 1000px) {
+            font-size: 14px;
+            line-height: 20px;
+            font-weight: 300;
+        }
     }
 
 `
@@ -240,12 +261,16 @@ const GamesDescription = styled.div`
     justify-content: center;
     align-items: center;
     margin:auto;
-    width: 1140px;
+    max-width: 1140px;
     height: 163px;
     position: relative;
     top: -55px;
     background: #1D1D1D;
     border-radius: 5px;
+    @media only screen and (max-width: 1000px) {
+        height: auto;
+        width: 82vw;
+    }
 
     .profile-record {
         width: 285px;
@@ -255,6 +280,9 @@ const GamesDescription = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
+        @media only screen and (max-width: 1000px) {
+            height: auto;
+        }
 
         .record-heading {
             display: flex;
@@ -264,6 +292,12 @@ const GamesDescription = styled.div`
             font-size: 22px;
             line-height: 33px;
             color: #FACF5A;
+            @media only screen and (max-width: 1000px) {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 9px;
+                line-height: 10px;
+            }
         }
         .record-details {
             display: flex;
@@ -273,6 +307,12 @@ const GamesDescription = styled.div`
             font-size: 30px;
             line-height: 45px;
             color: #FFFFFF;
+            @media only screen and (max-width: 1000px) {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 9px;
+                line-height: 10px;
+            }
         }
 
         .record-rank {
@@ -283,6 +323,12 @@ const GamesDescription = styled.div`
             font-size: 20px;
             line-height: 30px;
             color: rgba(255, 255, 255, 0.6);
+            @media only screen and (max-width: 1000px) {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 9px;
+                line-height: 10px;
+            }
         }
         .invisible {
             opacity: 0
@@ -290,6 +336,8 @@ const GamesDescription = styled.div`
     }
 `
 const Trophies = styled.div`
+    width: 82vw;
+    margin:auto;
 
     .trophies-heading {
         font-style: normal;
@@ -297,6 +345,11 @@ const Trophies = styled.div`
         font-size: 28px;
         line-height: 42px;
         color: #FFFFFF;
+        @media only screen and (max-width: 1000px) {
+            font-size: 15px;
+            line-height: 19px;
+            margin-bottom: 10px;
+        }
     }
 
 `;
@@ -305,6 +358,9 @@ const TrophyCarbin =styled.div`
     display: flex;
     padding: 30px 55px;
     justify-content: space-around;
+    @media only screen and (max-width: 1000px) {
+        padding: 10px 55px;
+    }
 
 `;
 
@@ -312,6 +368,9 @@ const  CupType = styled.div`
     display: flex;
     height: 115px;
     width: 330px;
+    @media only screen and (max-width: 1000px) {
+        height: auto;
+    }
 
     .trophy-icon {
         display: flex;
@@ -323,6 +382,11 @@ const  CupType = styled.div`
         top: 0px;
         background: #1D1D1D;
         border-radius: 4px;
+        @media only screen and (max-width: 1000px) {
+            width: 40px;
+            height: 50px;
+            padding:10px;
+        }
     }
 
     .trophy-record {
@@ -334,7 +398,12 @@ const  CupType = styled.div`
         height: 115px;
         background: rgba(49, 48, 48, 0.4);
         border-radius: 5px;
-        padding-left: 20px
+        padding-left: 20px;
+        @media only screen and (max-width: 1000px) {
+            width: 90px;
+            height: 50px;
+            padding-left: 5px;
+        }
     }
 
     .trophy-type {
@@ -345,6 +414,13 @@ const  CupType = styled.div`
         letter-spacing: -0.04em;
         text-transform: uppercase;
         color: ${props=> props.type === 1? "#FACF5A" :  props.type === 2 ? "#CCCDCF" : props.type === 3 ? "#9B6E43" : "" };
+        @media only screen and (max-width: 1000px) {
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 10px;
+            margin-bottom: 10px;
+            white-space:nowrap
+        }
     }
     .trophy-amount {
         font-style: normal;
@@ -352,6 +428,11 @@ const  CupType = styled.div`
         font-size: 40px;
         line-height: 59px;
         color: #FFFFFF;
+        @media only screen and (max-width: 1000px) {
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 10px;
+        }
     }
 `;
 
@@ -371,12 +452,21 @@ const AchievementCarbin = styled.div`
         height: 272px;
         left: 654px;
         background: #1D1D1D;
+        @media only screen and (max-width: 1000px) {
+            width: 100px;
+            height: 100px;
+            margin:10px;
+        }
     }
     .achievement-image {
         width: 139px;
         height: 139px;
         border-radius: 100%;
         background: #C4C4C4;
+        @media only screen and (max-width: 1000px) {
+            width: 50px;
+            height: 50px;
+        }
     }
 
 `;

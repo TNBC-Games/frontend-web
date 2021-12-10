@@ -13,7 +13,7 @@ function intro() {
                         Lorem ipsum dolor sit amet, consec tetur adipiscing elit. Iaculis nam imperdiet adipiscing sed sed euismod amet. Suscipit fusce semper.
                     </div>
 
-                    <div className = "join-free mt-40 float-btn">
+                    <div className = "join-freer mt-40 float-btn">
                         Discord
                     </div>
                 </ContentBody>

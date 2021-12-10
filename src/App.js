@@ -1,4 +1,4 @@
-import Navbar from "./components/NavBar/Navbar";
+import Navbarr from "./components/NavBar/Navbar";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { GlobalStyles } from "./styles/Global";
 import "./styles/tnbc.css";
@@ -27,7 +27,7 @@ function App() {
     <>   
       <GlobalStyles/>
       <BrowserRouter>
-        <Navbar/>
+        <Navbarr/>
         <Switch>
           <Route exact path = "/" component = {WebBody} />
           <Route path = "/signup" component = {SignUp}/>
