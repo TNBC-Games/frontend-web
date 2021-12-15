@@ -180,7 +180,7 @@ export const TournamentView = styled.div`
         width: 48%;
     }
     @media only screen and (max-width: 800px) {
-        width:48%;
+        width:100%;
         height:auto;
         
     }

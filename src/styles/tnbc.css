@@ -1018,7 +1018,7 @@ input:focus{
         padding-left: 10px;
     }
     .games-item{
-        width:48%;
+        width:100%;
         height: 130px;
     }
     .games-name-box{
@@ -1044,7 +1044,7 @@ input:focus{
         margin:auto;
     }
     .tourn-item {
-        width:48%;
+        width:100%;
         height:auto;
     }
     .align-center{
