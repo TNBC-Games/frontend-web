@@ -275,17 +275,17 @@ function MyTournament() {
                                             <div className="height-220">
                                                 <div className="tourn-name mb-0 pb-3 border-bottom">{item?.gameType}</div>
 
-                                                <div className="justify-space mb-3 mt-3" >
+                                                <div className="justify-space mb-10 mt-3" >
                                                     <div className="fee justify-center align-items-center">Earnings</div>
                                                     <div className="fee-amount">{item?.fee} TNBC</div>
                                                 </div>
 
-                                                <div className="justify-space mb-3" >
+                                                <div className="justify-space mb-10" >
                                                     <div className="fee justify-center align-items-center">Trophy</div>
                                                     <div className="fee-amount">Gold</div>
                                                 </div>
 
-                                                <div className="justify-space mb-3" >
+                                                <div className="justify-space mb-10" >
                                                     <div className="fee justify-center align-items-center">Points</div>
                                                     <div className="fee-amount">2000</div>
                                                 </div>

@@ -123,7 +123,7 @@ function ChooseTournament() {
                                 <div className ="tourn-name">{item?.gameType}</div>            
                                 <ProgressBar now={item?.completedPercent}/>
                                 <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                                <div className = "fee"> Fee </div>
+                                <div className = "fee mb-10"> Fee </div>
                                 <div className = "justify-space " >
                                     <div className = "fee-amount">{item?.fee} TNBC</div>
                                     <div className = "join-free float-btn">
@@ -176,10 +176,10 @@ export const TournamentView = styled.div`
             padding-top: 0px;
         }
     }
-    @media only screen and (max-width: 1000px) {
+    @media only screen and (max-width: 1350px) {
         width: 48%;
     }
-    @media only screen and (max-width: 800px) {
+    @media only screen and (max-width: 600px) {
         width:100%;
         height:auto;
         
