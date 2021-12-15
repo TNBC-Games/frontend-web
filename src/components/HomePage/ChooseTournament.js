@@ -236,7 +236,7 @@ export const TournamentInfo = styled.div`
         line-height: 21px;
         color: #FFFFFF;
         @media only screen and (max-width: 800px) {
-            font-size: 12px;
+            font-size: 15px;
             font-weight: 300;
             line-height: 15px;
         }
@@ -249,8 +249,8 @@ export const TournamentInfo = styled.div`
         line-height: 27px;
         color: rgba(255, 255, 255, 0.7);
         @media only screen and (max-width: 800px) {
-            font-size: 12px;
-            line-height: 15px;
+            font-size: 17px;
+            line-height: 18px;
         }
     }
 
@@ -261,7 +261,7 @@ export const TournamentInfo = styled.div`
         line-height: 40px;
         color: #FFFFFF;
         @media only screen and (max-width: 800px) {
-            font-size: 13px;
+            font-size: 15px;
             font-weight:400;
             line-height: 10px;
         }
@@ -287,10 +287,11 @@ export const TournamentInfo = styled.div`
         z-index: 2;
 
         @media only screen and (max-width: 800px) {
-            height:20px;
-            width: 50px;
-            font-size: 12px;
+            height:30px;
+            width: 80px;
+            font-size: 18px;
             font-weight:500;
+           
         }
     }
 
