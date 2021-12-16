@@ -79,7 +79,7 @@ function ChooseTournament() {
             <ContentBody>
 
                 <div className = "choose-games-header">
-                    <div className ="choose-games-title"><p>Upcoming Tournament</p></div>
+                    <div className ="choose-games-title">Upcoming Tournament</div>
                     <div className="align-center flex-column">
                         <div className ="games-filter cursor-pointer">
                             <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>

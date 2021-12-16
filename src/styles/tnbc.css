@@ -354,6 +354,7 @@ input:focus {
     font-size: 32px;
     line-height: 48px;
     color: #FFFFFF;
+    white-space: nowrap;
 }
 .games-filter {
     height:60px;
@@ -822,14 +823,97 @@ input:focus{
 }
 .nav-links{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     list-style: none;
-    width:75%;
+    width:70%;
 }
 
 .mobile-menu-icon{
     display: none;
 
+}
+.hide{
+    display: none;
+}
+
+.justify-space{
+    display: flex;
+    justify-content: space-between;
+}
+.flexible-flex{
+    display:flex
+}
+.width-100vw{
+    width:100vw;
+}
+
+@media only screen and (max-width: 1350px){
+    .navv{
+        padding: 0px !important
+    }
+    .nav-links-mobile{
+        position: absolute;
+        display: block;
+        list-style: none;
+        padding-left: 0px;
+        background-color: black;
+        right: 0px;
+        top: 75px;
+        transition: all 0,5s ease-out;
+        width: 100vw;
+        height: 100vh
+    }
+    .nav-links{
+        display: none;
+    }
+
+    .hide-icons{
+        display: none;
+    }
+    .flexible-flex{
+        display:block
+    }
+
+    .menu-button, .sign-in, .join-freeee{
+        color:white;
+        text-align: center;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        transition: all 0.5 ease;
+    }
+    .join-freee{
+        color:black;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        transition: all 0.5 ease;
+        background: linear-gradient(263.86deg, #FACF5A 0%, #DC0D16 100%);
+        border: 1px solid #FFFFFF;
+        font-weight: 500;
+        font-size: 18px;
+        border-radius: 5px;
+        height:40px;
+
+    }
+    .mobile-menu-icon{
+        display: block;
+        position: absolute;
+        font-size: 30px;
+        color: white;
+        background-color: transparent;
+        border: grey;
+        outline: none;
+        top:15px;
+        right: 25px;
+    }
+    
 }
 
 
@@ -842,8 +926,7 @@ input:focus{
         display: flex;
     }
     .navv{
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 0px !important;
         transition:0.4 ease;
     }
     .navbar{
@@ -867,7 +950,7 @@ input:focus{
         right: 0px;
         top: 75px;
         transition: all 0,5s ease-out;
-        width: 50%;
+        width: 100vw;
     }
     .menu-button, .sign-in, .join-freeee{
         color:white;
@@ -902,7 +985,7 @@ input:focus{
         position: absolute;
         font-size: 30px;
         color: white;
-        background-color: black;
+        background-color: transparent;
         border: grey;
         outline: none;
         top:15px;

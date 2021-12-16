@@ -28,7 +28,7 @@ function Navbarr() {
 
     window.onscroll = function() {
     // We add pageYOffset for compatibility with IE.
-    if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
+    if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger || isMobile) {
         document.getElementsByClassName("navv")[0].classList.add(className);
     } else {
         document.getElementsByClassName("navv")[0].classList.remove(className);
@@ -47,9 +47,14 @@ function Navbarr() {
         }
     }, [location])
 
-    useEffect(()=>{
+    const handleResize = ()=>{
+        const windowWidth = window.innerWidth
+       if (windowWidth >= 1350){
+           setIsMobile(false)
+       }
+    }
 
-    })
+    window.addEventListener('resize', handleResize);
 
 
     return (
@@ -91,8 +96,8 @@ function Navbarr() {
                 </Container>
             </Navbar> */
         
-        <div className="navv">
-        <nav className ="navbar">
+        <div className={isMobile ? "navv black-bg" : "navv"}>
+        <nav className ={isMobile ? "navbar width-100vw" : "navbar"}>
             <div className = "navbar-heading">
                 <div className = "navbar-icon">
                      <TnbcIcon/>
@@ -101,27 +106,29 @@ function Navbarr() {
              </div>
              
             <ul className={isMobile ? "nav-links-mobile " : " nav-links"}>
-                <Link to = "/">
-                    <li className = {`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Home </li>
-                </Link>
-                <Link to ="/my-tournament">
-                    <li className ={`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Tournament </li>
-                </Link>
-                <Link to ="/shop">
-                    <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
-                </Link>
-                <Link  to = "/more">
-                    <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
-                </Link>
+                <div className="flexible-flex">
+                    <Link to = "/">
+                        <li className = {`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Home </li>
+                    </Link>
+                    <Link to ="/my-tournament">
+                        <li className ={`${isMobile ? " ": " mr-4 mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Tournament </li>
+                    </Link>
+                    <Link to ="/shop">
+                        <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
+                    </Link>
+                    <Link  to = "/more">
+                        <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
+                    </Link>
+                </div>
                 
-                {!accessToken &&(<>
+                {!accessToken &&(<div className="flexible-flex">
                      <Link to ="/login"> 
                         <li className = {`${isMobile ? " ": " mr-1 ml-4 mt-2"} sign-in  `}> <span>Sign in </span></li>
                      </Link>
                      <Link to ="/signup">
                         <li className =  {`${isMobile ? "join-freee ": "join-free ml-2 mt-2 "} float-btn `}> Join Free </li>
                     </Link>
-                    </>
+                    </div>
                 )} 
                 {accessToken &&(
                     <div className={`${isMobile ? "": "mr-4 "} loggedIn  mt-4`}>
