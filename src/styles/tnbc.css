@@ -832,6 +832,10 @@ input:focus{
     display: none;
 
 }
+.sm-text{
+    font-size: 10px;
+    line-height: 20px;
+}
 .hide{
     display: none;
 }
@@ -846,6 +850,7 @@ input:focus{
 .width-100vw{
     width:100vw;
 }
+
 
 @media only screen and (max-width: 1350px){
     .navv{

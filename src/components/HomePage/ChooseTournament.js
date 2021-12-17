@@ -96,16 +96,16 @@ function ChooseTournament() {
                         </div>
                         { showDropDown && (
                             <Dropdown>
-                            <div className= "dropdown-inner">
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
-                            </div>
+                                <div className= "dropdown-inner">
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
+                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+                                </div>
 
-                        </Dropdown>
+                            </Dropdown>
                         )}
                     </div>
                 </div>

@@ -1,10 +1,13 @@
 import React, { useEffect, useState }  from 'react';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ReactComponent as TnbcIcon } from "../../assets/tnbcLogo.svg";
 import { SIGNUP_STARTED } from '../../redux/types/signup.types';
 import { useLocation } from 'react-router';
-import {Navbar, Container, Nav, Form, FormControl, NavDropdown, Button} from 'react-bootstrap'
+import {Navbar, Container, Nav, Form, FormControl, NavDropdown, Button} from 'react-bootstrap';
+import { Dropdown } from '../HomePage/ChooseGames';
+import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg"
 
 
 
@@ -16,6 +19,8 @@ function Navbarr() {
     const [signupActive, setSignUpActive] = useState(false);
     const [loginActive, setLoginActive] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [showDesktopDropDown, setShowDesktopDropDown] = useState(false);
+    const [showMobileDropDown, setShowMobileDropDown] = useState(false);
 
     var className = "black-bg";
     var scrollTrigger = 60;
@@ -47,6 +52,7 @@ function Navbarr() {
         }
     }, [location])
 
+   
     const handleResize = ()=>{
         const windowWidth = window.innerWidth
        if (windowWidth >= 1350){
@@ -54,7 +60,18 @@ function Navbarr() {
        }
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize)
+
+    function showDropDown(){
+        const windowWidth = window.innerWidth;
+        if(windowWidth >= 1350){
+            setShowDesktopDropDown(true)
+        } else{
+            setShowMobileDropDown(true)
+        }
+        
+    }
+;
 
 
     return (
@@ -150,11 +167,43 @@ function Navbarr() {
                             </svg>
                         </div>
 
-                        <div className ="mx-1">
-                            <div className="profile-img">
+                        <div className="align-center flex-column">
+                            <div className ="mx-1" onClick={()=> setShowDesktopDropDown(true)}>
+                                <div className="profile-img">
 
+                                </div>
                             </div>
+                            { showDesktopDropDown && (
+                                <ProfileDropdown>
+                                    <div className= "dropdown-inner">
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
+                                            <div className = "inner-item"> Profile</div>
+                                            <div className = "inner-item"> My Cart</div>
+                                            <div className = "inner-item"> My Tournaments</div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
+                                            <div className = "inner-item"> Wallet</div>
+                                            <div className = "inner-item"> Account Settings</div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
+                                            <div className = "inner-item justify-space"> 
+                                                <div>Language</div> 
+                                                <div className="mr-2 sm-text flex">English 
+                                                    <div className="ml-2"><GlobeIcon/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
+                                            <div className = "inner-item"> Refer & earn</div>
+                                            <div className = "inner-item"> Help</div>
+                                            <div className = "inner-item"> Log out</div>
+                                        </div>
+                                    </div>
+
+                                </ProfileDropdown>
+                            )}
                         </div>
+                        
 
 
                     </div>
@@ -234,4 +283,33 @@ function Navbarr() {
     )
 }
 
-export default Navbarr
+export default Navbarr;
+const ProfileDropdown = styled(Dropdown)`
+    position:absolute;
+    width:191px;
+    height:394px;
+    top:80px;
+    right:20px;
+
+    .dropdown-inner{
+        width:189px;
+        height:392px;
+        justify-content: flex-start;
+    }
+    .dropdown-item{
+        display: block;
+        height:auto;
+    }
+    .inner-item{
+        display:flex;
+        align-items:center;
+        height:34px;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 20px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+
+`;
