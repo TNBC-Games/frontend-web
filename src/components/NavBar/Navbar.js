@@ -260,35 +260,35 @@ function Navbarr() {
 
                     </div>
                     {showMobileDropDown &&(
-                        <MobileMore>
-                            <div className="single-item flex mb-2 mt-4">
+                        <MobileMore onClick= {()=> setIsMobile(false)}>
+                            <div className="single-item flex mb-2 mt-4" onClick={()=> history.push("/profile")}>
                                 •     Profile
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2"  onClick= {()=> setShowMobileDropDown(false)}>
                                 •      My Cart
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick={()=> history.push("/my-tournament")}>
                                 •      My Tournaments
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Wallet
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Account Settings
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Language
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Help
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Refer & earn
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Forgot Password
                             </div>
-                            <div className="single-item flex mb-2">
+                            <div className="single-item flex mb-2" onClick ={logout}>
                                 •    Log out
                             </div>
                         </MobileMore>
