@@ -21,6 +21,8 @@ function Navbarr() {
     const [isMobile, setIsMobile] = useState(false);
     const [showDesktopDropDown, setShowDesktopDropDown] = useState(false);
     const [showMobileDropDown, setShowMobileDropDown] = useState(false);
+    const [showDesktopMore, setShowDesktopMore] = useState(false);
+    const [showMobileMore, setShowMobileMore] = useState(false);
 
     var className = "black-bg";
     var scrollTrigger = 60;
@@ -60,16 +62,29 @@ function Navbarr() {
        }
     }
 
+    
+
     window.addEventListener('resize', handleResize)
 
     function showDropDown(){
         const windowWidth = window.innerWidth;
         if(windowWidth >= 1350){
+            setShowDesktopMore(false)
             setShowDesktopDropDown(true)
         } else{
             setShowMobileDropDown(true)
-        }
-        
+        }  
+    }
+
+    function showMore(){
+        const windowWidth = window.innerWidth;
+        if(windowWidth >= 1350){
+            setShowDesktopDropDown(false)
+            setShowDesktopMore(true)
+        } else{
+            setShowMobileMore(true)
+        }  
+
     }
 ;
 
@@ -133,9 +148,38 @@ function Navbarr() {
                     <Link to ="/shop">
                         <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
                     </Link>
-                    <Link  to = "/more">
+                    <div className ="flex-column mt-0" onClick ={showMore}>
                         <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
-                    </Link>
+                        {/* { showDesktopMore && (
+                                <MoreDropdown>
+                                    <div className= "dropdown-inner">
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
+                                            <div className = "inner-item"> Profile</div>
+                                            <div className = "inner-item"> My Cart</div>
+                                            <div className = "inner-item"> My Tournaments</div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
+                                            <div className = "inner-item"> Wallet</div>
+                                            <div className = "inner-item"> Account Settings</div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
+                                            <div className = "inner-item justify-space"> 
+                                                <div>Language</div> 
+                                                <div className="mr-2 sm-text flex">English 
+                                                    <div className="ml-2"><GlobeIcon/></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
+                                            <div className = "inner-item"> Refer & earn</div>
+                                            <div className = "inner-item"> Help</div>
+                                            <div className = "inner-item"> Log out</div>
+                                        </div>
+                                    </div>
+
+                                </MoreDropdown>
+                            )} */}
+                    </div>
                 </div>
                 
                 {!accessToken &&(<div className="flexible-flex">
@@ -167,8 +211,8 @@ function Navbarr() {
                             </svg>
                         </div>
 
-                        <div className="align-center flex-column">
-                            <div className ="mx-1" onClick={()=> setShowDesktopDropDown(true)}>
+                        <div className="align-center flex-column mt-0">
+                            <div className ="mx-1" onClick={showDropDown}>
                                 <div className="profile-img">
 
                                 </div>
@@ -299,6 +343,10 @@ const ProfileDropdown = styled(Dropdown)`
     .dropdown-item{
         display: block;
         height:auto;
+        padding-left: 0px !important;
+        :hover{
+            background-color: transparent !important;
+        }
     }
     .inner-item{
         display:flex;
@@ -309,7 +357,17 @@ const ProfileDropdown = styled(Dropdown)`
         font-size: 12px;
         line-height: 20px;
         color: rgba(255, 255, 255, 0.8);
+        padding-left: 25px !important;
+        :hover{
+            background-color:#FACF5A;
+        }
     }
-
-
 `;
+
+const MoreDropdown = styled(ProfileDropdown)`
+    position:relative;
+    top:17px;
+    right:0px;
+
+
+`
