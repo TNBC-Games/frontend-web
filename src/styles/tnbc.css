@@ -857,6 +857,11 @@ input:focus{
     .navv{
         padding: 0px !important
     }
+    .loggedIn{
+        padding-left: 30px;
+        display: flex;
+        justify-content: flex-start !important;
+    }
     .nav-links-mobile{
         position: absolute;
         display: block;
@@ -882,9 +887,9 @@ input:focus{
 
     .menu-button, .sign-in, .join-freeee{
         color:white;
-        text-align: center;
+        text-align: start;
         padding: 15px;
-        width: 60%;
+        width: 90%;
         margin: auto;
         transition: all 0.5 ease;
     }
@@ -925,8 +930,9 @@ input:focus{
 
 @media only screen and (max-width: 1000px) {
     .loggedIn{
-        justify-content: center;
-
+        padding-left: 30px;
+        display: flex;
+        justify-content: flex-start !important;
     }
     .mobile-menu-icon{
         display: flex;
@@ -960,9 +966,9 @@ input:focus{
     }
     .menu-button, .sign-in, .join-freeee{
         color:white;
-        text-align: center;
+        text-align: start;
         padding: 15px;
-        width: 60%;
+        width: 90%;
         margin: auto;
         transition: all 0.5 ease;
     }

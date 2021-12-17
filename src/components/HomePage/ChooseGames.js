@@ -174,7 +174,7 @@ export const Dropdown = styled.div`
         padding-left:25px;
 
         :hover{
-            background-color:#FACF5A
+            background-color:#FACF5A;
         }
 
     }

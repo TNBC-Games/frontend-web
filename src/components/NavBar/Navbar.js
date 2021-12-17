@@ -1,13 +1,14 @@
 import React, { useEffect, useState }  from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ReactComponent as TnbcIcon } from "../../assets/tnbcLogo.svg";
 import { SIGNUP_STARTED } from '../../redux/types/signup.types';
 import { useLocation } from 'react-router';
-import {Navbar, Container, Nav, Form, FormControl, NavDropdown, Button} from 'react-bootstrap';
 import { Dropdown } from '../HomePage/ChooseGames';
-import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg"
+import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg";
+
 
 
 
@@ -23,6 +24,7 @@ function Navbarr() {
     const [showMobileDropDown, setShowMobileDropDown] = useState(false);
     const [showDesktopMore, setShowDesktopMore] = useState(false);
     const [showMobileMore, setShowMobileMore] = useState(false);
+    const history = useHistory();
 
     var className = "black-bg";
     var scrollTrigger = 60;
@@ -72,7 +74,10 @@ function Navbarr() {
             setShowDesktopMore(false)
             setShowDesktopDropDown(true)
         } else{
+            setShowDesktopMore(false)
+            setShowDesktopDropDown(false)
             setShowMobileDropDown(true)
+            setShowMobileMore(false)
         }  
     }
 
@@ -80,14 +85,26 @@ function Navbarr() {
         const windowWidth = window.innerWidth;
         if(windowWidth >= 1350){
             setShowDesktopDropDown(false)
-            setShowDesktopMore(true)
+            setShowDesktopMore(!showDesktopMore)
         } else{
-            setShowMobileMore(true)
+            setShowDesktopDropDown(false)
+            setShowDesktopMore(false)
+            setShowMobileMore(!showMobileMore)
+            setShowMobileDropDown(false)
         }  
 
     }
-;
 
+    function logout(){
+        sessionStorage.removeItem("accesstoken")
+        sessionStorage.removeItem("userEmail")
+        history.push("/")
+    }
+
+    function gotoFaq(){
+        setShowDesktopMore("")
+        history.push("/faq")
+    }
 
     return (
         // <div>
@@ -148,37 +165,26 @@ function Navbarr() {
                     <Link to ="/shop">
                         <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
                     </Link>
-                    <div className ="flex-column mt-0" onClick ={showMore}>
-                        <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick={()=> setIsMobile(false)}> More </div>
-                        {/* { showDesktopMore && (
+                    <div className ="flex-column mt-0" >
+                        <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick ={showMore}> More </div>
+                        {showDesktopMore && (
+                            <div className="flex justify-center">
                                 <MoreDropdown>
                                     <div className= "dropdown-inner">
-                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
-                                            <div className = "inner-item"> Profile</div>
-                                            <div className = "inner-item"> My Cart</div>
-                                            <div className = "inner-item"> My Tournaments</div>
-                                        </div>
-                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
-                                            <div className = "inner-item"> Wallet</div>
-                                            <div className = "inner-item"> Account Settings</div>
-                                        </div>
-                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
-                                            <div className = "inner-item justify-space"> 
-                                                <div>Language</div> 
-                                                <div className="mr-2 sm-text flex">English 
-                                                    <div className="ml-2"><GlobeIcon/></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
-                                            <div className = "inner-item"> Refer & earn</div>
-                                            <div className = "inner-item"> Help</div>
-                                            <div className = "inner-item"> Log out</div>
+                                        <div className = "dropdown-item" onClick= {gotoFaq}>
+                                            <div className = "inner-item"> Faq</div>
                                         </div>
                                     </div>
-
                                 </MoreDropdown>
-                            )} */}
+                            </div>
+                        )}
+                        {showMobileMore &&(
+                            <MobileMore>
+                                <div className="single-item mb-2">
+                                •     Faq
+                                </div>
+                            </MobileMore>
+                        )}
                     </div>
                 </div>
                 
@@ -191,9 +197,9 @@ function Navbarr() {
                     </Link>
                     </div>
                 )} 
-                {accessToken &&(
-                    <div className={`${isMobile ? "": "mr-4 "} loggedIn  mt-4`}>
-                        <div className="mx-1">
+                {accessToken &&(<>
+                    <div className={`${isMobile ? "": "mr-0 "} loggedIn justify-center mt-4`}>
+                        <div className="mx-1 cursor-pointer">
                             <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 28C11.1046 28 12 27.1046 12 26C12 24.8954 11.1046 24 10 24C8.89543 24 8 24.8954 8 26C8 27.1046 8.89543 28 10 28Z" fill="white"/>
                                 <path d="M24 28C25.1046 28 26 27.1046 26 26C26 24.8954 25.1046 24 24 24C22.8954 24 22 24.8954 22 26C22 27.1046 22.8954 28 24 28Z" fill="white"/>
@@ -201,7 +207,7 @@ function Navbarr() {
                             </svg>
                         </div>
 
-                        <div className="mx-2">
+                        <div className="mx-2 cursor-pointer">
                             <svg width="30" height="28" viewBox="0 0 22 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M20.64 11.391C20.2379 11.391 19.9115 11.0533 19.9115 10.6371C19.9115 7.75035 18.8258 5.03749 16.854 2.99603C16.5695 2.70155 16.5695 2.22413 16.854 1.92966C17.1386 1.63518 17.5999 1.63518 17.8846 1.92966C20.1312 4.25547 21.3684 7.34839 21.3684 10.6371C21.3684 11.0533 21.0421 11.391 20.64 11.391V11.391Z" fill="white"/>
                                 <path d="M0.728451 11.3911C0.326344 11.3911 0 11.0534 0 10.6373C0 7.34851 1.23744 4.25559 3.48486 1.9307C3.76941 1.63622 4.23092 1.63622 4.51547 1.9307C4.80002 2.22517 4.80002 2.70278 4.51547 2.99725C2.54282 5.0376 1.4569 7.75047 1.4569 10.6373C1.4569 11.0534 1.13056 11.3911 0.728451 11.3911Z" fill="white"/>
@@ -211,19 +217,19 @@ function Navbarr() {
                             </svg>
                         </div>
 
-                        <div className="align-center flex-column mt-0">
+                        <div className="align-center flex-column mt-0 cursor-pointer">
                             <div className ="mx-1" onClick={showDropDown}>
                                 <div className="profile-img">
 
                                 </div>
                             </div>
-                            { showDesktopDropDown && (
+                            {showDesktopDropDown && (
                                 <ProfileDropdown>
                                     <div className= "dropdown-inner">
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
-                                            <div className = "inner-item"> Profile</div>
+                                            <div className = "inner-item" onClick={()=> history.push("/profile")}> Profile</div>
                                             <div className = "inner-item"> My Cart</div>
-                                            <div className = "inner-item"> My Tournaments</div>
+                                            <div className = "inner-item" onClick={()=> history.push("/my-tournament")}> My Tournaments</div>
                                         </div>
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
                                             <div className = "inner-item"> Wallet</div>
@@ -240,17 +246,54 @@ function Navbarr() {
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
                                             <div className = "inner-item"> Refer & earn</div>
                                             <div className = "inner-item"> Help</div>
-                                            <div className = "inner-item"> Log out</div>
+                                            <div className = "inner-item"> Forgot Password</div>
+                                            <div className = "inner-item" onClick ={logout}> Log out</div>
                                         </div>
                                     </div>
 
                                 </ProfileDropdown>
                             )}
+                            
                         </div>
                         
 
 
                     </div>
+                    {showMobileDropDown &&(
+                        <MobileMore>
+                            <div className="single-item flex mb-2 mt-4">
+                                •     Profile
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •      My Cart
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •      My Tournaments
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Wallet
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Account Settings
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Language
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Help
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Refer & earn
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •     Forgot Password
+                            </div>
+                            <div className="single-item flex mb-2">
+                                •    Log out
+                            </div>
+                        </MobileMore>
+                    )}
+                    </>
                 )}       
             </ul>
             <button className ="mobile-menu-icon">
@@ -331,13 +374,14 @@ export default Navbarr;
 const ProfileDropdown = styled(Dropdown)`
     position:absolute;
     width:191px;
-    height:394px;
+    height:424px;
     top:80px;
-    right:20px;
+    right:0px;
+    
 
     .dropdown-inner{
         width:189px;
-        height:392px;
+        height:422px;
         justify-content: flex-start;
     }
     .dropdown-item{
@@ -362,12 +406,44 @@ const ProfileDropdown = styled(Dropdown)`
             background-color:#FACF5A;
         }
     }
+    @media only screen and (max-width: 1350px){
+        display:none;
+    }
 `;
 
 const MoreDropdown = styled(ProfileDropdown)`
     position:relative;
     top:17px;
     right:0px;
+    height: 58px;
+    .dropdown-inner{
+        height:56px;
+    }
+`;
+const MobileMore = styled.div`
+    max-height: 500px;
+    overflow-y: scroll;
+    display: flex;
+    width: 70%;
+    margin:auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .single-item{
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: center;
+        height: 30px;
+        font-size: 18px;
+        color: grey;
+        @media only screen and (max-width: 1350px){
+            font-size:15px;
+            height: 20px;
+        }
+    }
+    @media only screen and (min-width: 1350px){
+        display:none;
+    }
 
-
-`
+`;
