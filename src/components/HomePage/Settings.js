@@ -201,6 +201,7 @@ const FaqForm = styled.div`
     .child{
         width: 100%;
         overflow-x: scroll;
+        overflow-y: hidden;
         
     }
 
