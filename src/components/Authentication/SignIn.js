@@ -105,6 +105,9 @@ function SignIn() {
                             </div>
                         </div>
                     </div>
+                    <div className = "justify-center mt-1">
+                            <p className = "sign-up-text pt-4">Forgot Password?</p>
+                        </div>
                 </div>
             </div>
         </div>

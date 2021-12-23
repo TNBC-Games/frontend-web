@@ -216,7 +216,6 @@ function Navbarr() {
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
                                             <div className = "inner-item"> Refer & earn</div>
                                             <div className = "inner-item"> Help</div>
-                                            <div className = "inner-item"> Forgot Password</div>
                                             <div className = "inner-item" onClick ={logout}> Log out</div>
                                         </div>
                                     </div>
@@ -344,14 +343,14 @@ export default Navbarr;
 const ProfileDropdown = styled(Dropdown)`
     position:absolute;
     width:191px;
-    height:424px;
+    height:392px;
     top:80px;
     right:0px;
     
 
     .dropdown-inner{
         width:189px;
-        height:422px;
+        height:390px;
         justify-content: flex-start;
     }
     .dropdown-item{
