@@ -13,6 +13,7 @@ function SettingsPage() {
             <ContentBody>
                 <FaqForm>
                     <div className ="faq">Settings</div>
+                    <div className="child">
                     <div className ="faq-page">
                         <div className ="side-panel">
                             <div className ="profile-image"></div>
@@ -94,6 +95,7 @@ function SettingsPage() {
                         </div>
                         
                     </div>
+                    </div>
                 </FaqForm>
             </ContentBody>
         </div>
@@ -110,6 +112,14 @@ const FaqForm = styled.div`
     justify-content: center;
     align-items: center;
     margin: 122px;
+    @media only screen and (max-width:1350px){
+        width: 95%;
+        margin: auto;
+
+    }
+
+
+
     .faq{
         width: 100%;
         height: 98px;
@@ -128,6 +138,10 @@ const FaqForm = styled.div`
         min-height: 800px;
         height: auto;
         display: flex;
+        @media only screen and (max-width:1350px){
+            width: 1000px;
+    
+        }
 
         .panel-details{
             height: 100%;
@@ -184,6 +198,12 @@ const FaqForm = styled.div`
             }
         }
     }
+    .child{
+        width: 100%;
+        overflow-x: scroll;
+        
+    }
+
    
 
 `;

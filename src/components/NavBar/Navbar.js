@@ -142,16 +142,19 @@ function Navbarr() {
                                             <div className = "inner-item"> Faq</div>
                                         </div>
                                         <div className = "dropdown-item" onClick= {gotoLeaderboard}>
-                                            <div className = "inner-item"> leaderboard</div>
+                                            <div className = "inner-item"> Leaderboard</div>
                                         </div>
                                     </div>
                                 </MoreDropdown>
                             </div>
                         )}
                         {showMobileMore &&(
-                            <MobileMore>
-                                <div className="single-item mb-2">
+                            <MobileMore onClick= {()=> setIsMobile(false)}>
+                                <div className="single-item mb-2"  onClick= {gotoFaq}>
                                 •     Faq
+                                </div>
+                                <div className="single-item mb-2" onClick= {gotoLeaderboard}>
+                                •     Leaderboard
                                 </div>
                             </MobileMore>
                         )}
@@ -242,7 +245,7 @@ function Navbarr() {
                             <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Wallet
                             </div>
-                            <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
+                            <div className="single-item flex mb-2"  onClick={()=> history.push("/setting")}>
                                 •     Account Settings
                             </div>
                             <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
@@ -366,10 +369,10 @@ const ProfileDropdown = styled(Dropdown)`
         align-items:center;
         height:34px;
         font-style: normal;
-        font-weight: normal;
-        font-size: 12px;
-        line-height: 20px;
-        color: rgba(255, 255, 255, 0.8);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 27px;
+        color: white;
         padding-left: 25px !important;
         :hover{
             background-color:#FACF5A;

@@ -112,7 +112,7 @@ function LeaderBoardPage() {
                     <LeaderboardTable >
                         <div className = "table-head filter-heading">
                             <div className="flex">
-                                <div className= "filter-item"> All TIME</div>
+                                <div className= "filter-item white"> All TIME</div>
                                 <div className= "filter-item"> LAST 30 DAYS</div>
                                 <div className= "filter-item"> LAST 7 DAYS</div>
                             </div>
@@ -525,7 +525,9 @@ const LeaderboardTable = styled.div`
         width: 900px;
         
     }
-
+    .white{
+        color: #ffffff !important;
+    }
 
     .table {
         width: 100%;
