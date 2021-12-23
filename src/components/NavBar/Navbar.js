@@ -191,7 +191,7 @@ function Navbarr() {
                         </div>
 
                         <div className="align-center flex-column mt-0 cursor-pointer">
-                            <div className ="mx-1" onClick={showDropDown}>
+                            <div className ="mx-1" onClick={showDropDown} onMouseEnter={showDropDown}>
                                 <div className="profile-img">
 
                                 </div>
