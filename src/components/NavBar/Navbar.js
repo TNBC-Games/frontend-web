@@ -106,45 +106,12 @@ function Navbarr() {
         history.push("/faq")
     }
 
-    return (
-        // <div>
-            /* <Navbar bg="black" expand="lg">
-                <Container fluid>
-                    <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="navbarScroll" />
-                    <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link href="#action2">Link</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
-                        <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action5">
-                            Something else here
-                        </NavDropdown.Item>
-                        </NavDropdown>
-                        <Nav.Link href="#" disabled>
-                        Link
-                        </Nav.Link>
-                    </Nav>
-                    <Form className="d-flex">
-                        <FormControl
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar> */
-        
+    function gotoLeaderboard(){
+        setShowDesktopMore("")
+        history.push("/leaderboard")
+    }
+
+    return (        
         <div className={isMobile ? "navv black-bg" : "navv"}>
         <nav className ={isMobile ? "navbar width-100vw" : "navbar"}>
             <div className = "navbar-heading">
@@ -174,6 +141,9 @@ function Navbarr() {
                                         <div className = "dropdown-item" onClick= {gotoFaq}>
                                             <div className = "inner-item"> Faq</div>
                                         </div>
+                                        <div className = "dropdown-item" onClick= {gotoLeaderboard}>
+                                            <div className = "inner-item"> leaderboard</div>
+                                        </div>
                                     </div>
                                 </MoreDropdown>
                             </div>
@@ -188,7 +158,7 @@ function Navbarr() {
                     </div>
                 </div>
                 
-                {!accessToken &&(<div className="flexible-flex">
+                {!accessToken &&(<div className="flexible-flex"  onClick= {()=> setIsMobile(false)}> 
                      <Link to ="/login"> 
                         <li className = {`${isMobile ? " ": " mr-1 ml-4 mt-2"} sign-in  `}> <span>Sign in </span></li>
                      </Link>
@@ -233,7 +203,7 @@ function Navbarr() {
                                         </div>
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
                                             <div className = "inner-item"> Wallet</div>
-                                            <div className = "inner-item"> Account Settings</div>
+                                            <div className = "inner-item"  onClick={()=> history.push("/setting")}> Account Settings</div>
                                         </div>
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}> 
                                             <div className = "inner-item justify-space"> 
@@ -415,9 +385,9 @@ const MoreDropdown = styled(ProfileDropdown)`
     position:relative;
     top:17px;
     right:0px;
-    height: 58px;
+    height: 114px;
     .dropdown-inner{
-        height:56px;
+        height:112px;
     }
 `;
 const MobileMore = styled.div`

@@ -5,12 +5,63 @@ import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
 
 function LeaderBoardPage() {
+    const LeaderboardItems = [
+        {
+            rank: 1,
+            name: "WeirdGuy1542",
+            points: "3500",
+            earnings:"30000",
+            gold: "10",
+            silver: "5",
+            bronze: "4"
+        },
+        {
+            rank: 2,
+            name: "WeirdGuy1542",
+            points: "3500",
+            earnings:"30000",
+            gold: "10",
+            silver: "5",
+            bronze: "4"
+        },
+        {
+            rank: 3,
+            name: "WeirdGuy1542",
+            points: "3500",
+            earnings:"30000",
+            gold: "10",
+            silver: "5",
+            bronze: "4"
+        },
+        {
+            rank: 4,
+            name: "WeirdGuy1542",
+            points: "3500",
+            earnings:"30000",
+            gold: "10",
+            silver: "5",
+            bronze: "4"
+        },
+        {
+            rank: 5,
+            name: "WeirdGuy1542",
+            points: "3500",
+            earnings:"30000",
+            gold: "10",
+            silver: "5",
+            bronze: "4"
+        },
+        
+    ]
     const history = useHistory();
     function gotoProfile() {
         history.push("/")
     }
+    
     useEffect(() => {
         window.scrollTo(0, 0);
+        const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)  
+        console.log(date.getTime())
     }, [])
     return (
         <div className="leaderboard-page fadeInUp animated">
@@ -58,7 +109,17 @@ function LeaderBoardPage() {
             <div className="justify-center">
                 <ContentBody>
                     <div className ="child">
-                    <LeaderboardTable onClick={() => history.push("/profile")} >
+                    <LeaderboardTable >
+                        <div className = "table-head filter-heading">
+                            <div className="flex">
+                                <div className= "filter-item"> All TIME</div>
+                                <div className= "filter-item"> LAST 30 DAYS</div>
+                                <div className= "filter-item"> LAST 7 DAYS</div>
+                            </div>
+                            <div className="top-10">
+                                showing top 10
+                            </div>
+                        </div>
                       
 
                         <div className="table-head head-bg">
@@ -216,6 +277,150 @@ function LeaderBoardPage() {
                                 <div className=" align-center"> 3</div>
                             </div>
                         </div>
+                        <div className="table-head ">
+                            <div className="rank pl-4">
+                                <div className="align-center">
+                                    <span className="RankNo pr-4">6</span>
+                                    <span className="img mb-2 mr-4 ml-4">
+
+                                    </span>
+                                    <span className="username pl-4"> WeirdGuy1542 </span>
+
+                                </div>
+                            </div>
+                            <div className="points">
+                                <div className="align-center"> 3500 </div>
+                            </div>
+                            <div className="points earning">
+                                <div className=" align-end align-center">30,000 TNBC</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center">7</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 10</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 3</div>
+                            </div>
+                        </div>
+                        <div className="table-head ">
+                            <div className="rank pl-4">
+                                <div className="align-center">
+                                    <span className="RankNo pr-4">7</span>
+                                    <span className="img mb-2 mr-4 ml-4">
+
+                                    </span>
+                                    <span className="username pl-4"> WeirdGuy1542 </span>
+
+                                </div>
+                            </div>
+                            <div className="points">
+                                <div className="align-center"> 3500 </div>
+                            </div>
+                            <div className="points earning">
+                                <div className=" align-end align-center">30,000 TNBC</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center">7</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 10</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 3</div>
+                            </div>
+                        </div>
+                        <div className="table-head ">
+                            <div className="rank pl-4">
+                                <div className="align-center">
+                                    <span className="RankNo pr-4">8</span>
+                                    <span className="img mb-2 mr-4 ml-4">
+
+                                    </span>
+                                    <span className="username pl-4"> WeirdGuy1542 </span>
+
+                                </div>
+                            </div>
+                            <div className="points">
+                                <div className="align-center"> 3500 </div>
+                            </div>
+                            <div className="points earning">
+                                <div className=" align-end align-center">30,000 TNBC</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center">7</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 10</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 3</div>
+                            </div>
+                        </div>
+                        <div className="table-head ">
+                            <div className="rank pl-4">
+                                <div className="align-center">
+                                    <span className="RankNo pr-4">9</span>
+                                    <span className="img mb-2 mr-4 ml-4">
+
+                                    </span>
+                                    <span className="username pl-4"> WeirdGuy1542 </span>
+
+                                </div>
+                            </div>
+                            <div className="points">
+                                <div className="align-center"> 3500 </div>
+                            </div>
+                            <div className="points earning">
+                                <div className=" align-end align-center">30,000 TNBC</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center">7</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 10</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 3</div>
+                            </div>
+                        </div>
+                        <div className="table-head ">
+                            <div className="rank pl-4">
+                                <div className="align-center">
+                                    <span className="RankNo pr-3">10</span>
+                                    <span className="img mb-2 mr-4 ml-4">
+
+                                    </span>
+                                    <span className="username pl-4"> WeirdGuy1542 </span>
+
+                                </div>
+                            </div>
+                            <div className="points">
+                                <div className="align-center"> 3500 </div>
+                            </div>
+                            <div className="points earning">
+                                <div className=" align-end align-center">30,000 TNBC</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center">7</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 10</div>
+                            </div>
+                            <div className="points">
+                                <div className=" align-center"> 3</div>
+                            </div>
+                        </div>
+                        <div className="table-head bottom-tab">
+                            <div className="load-more">
+                                Load More
+                            </div>
+
+                        </div>
+                        
+
+
 
                         
   
@@ -314,7 +519,6 @@ export const Header = styled.div`
 
 const LeaderboardTable = styled.div`
     width: 100%;
-    height: 365px;
     background: #1D1D1D;
     margin-bottom: 100px;
     @media only screen and (max-width: 800px) {
@@ -338,7 +542,7 @@ const LeaderboardTable = styled.div`
         border:none;
         box-sizing: border-box;
         color: rgba(255, 255, 255, 0.7);
-        border-bottom: 1px solid white;
+        border-bottom: 0.5px solid #777777;
     }
     .head-bg{
         background: rgba(255, 255, 255, 0.2) !important;
@@ -380,6 +584,42 @@ const LeaderboardTable = styled.div`
     .align-center{
         display: flex;
         align-items: center;
+    }
+    .filter-heading{
+        height:78px;
+        display: flex;
+        align-items:center;
+        padding: 0px 31px;
+        justify-content: space-between;
+    }
+    .top-10{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+        color: rgba(255, 255, 255, 0.7);
+    }
+    .filter-item{
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 30px;
+        color: rgba(255, 255, 255, 0.6);
+        margin-right: 39px;
+    }
+    .load-more{
+        font-style: normal;
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 30px;
+        color: #F4A54C;
+    }
+    .bottom-tab{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 78px;
+        border-bottom: none !important
     }
 `
 const DateFilter = styled.div`
