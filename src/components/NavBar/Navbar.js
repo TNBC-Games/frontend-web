@@ -133,7 +133,7 @@ function Navbarr() {
                         <li className = {`${isMobile ? " ": " mr-4  mt-2"} menu-button `} onClick={()=> setIsMobile(false)}> Shop </li>
                     </Link>
                     <div className ="flex-column mt-0" >
-                        <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick ={showMore}> More </div>
+                        <div className = {`${isMobile ? " ": " mr-4  mt-2 "} menu-button `} onClick ={showMore} onMouseEnter={showMore} onMouseLeave={()=> setShowDesktopDropDown(false)}> More </div>
                         {showDesktopMore && (
                             <div className="flex justify-center">
                                 <MoreDropdown>
