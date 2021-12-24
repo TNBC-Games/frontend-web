@@ -125,7 +125,7 @@ const FaqForm = styled.div`
         height: 98px;
         font-style: normal;
         font-weight: 800;
-        font-size: 32px;
+        font-size: 28px;
         color: #FFFFFF;
         margin-bottom: 47px;
        
@@ -134,7 +134,6 @@ const FaqForm = styled.div`
         width: 100%;
         background: #1D1D1D;
         border-radius: 5px;
-        padding: 15px 10px;
         min-height: 800px;
         height: auto;
         display: flex;
@@ -154,9 +153,10 @@ const FaqForm = styled.div`
             align-items: center;
             flex-direction: column;
             height: auto;
-            width: 22%;
-            border-right: 1px solid grey;
-            padding-right: 10px;
+            width: 30%;
+            background:rgba(74, 74, 74, 0.4);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 42px 18px 10px 18px;
             .profile-image {
     
                 height: 152px;
@@ -170,14 +170,15 @@ const FaqForm = styled.div`
                 align-items: center;
                 font-style: normal;
                 font-weight: 800;
-                font-size: 20px;
+                font-size: 16px;
                 line-height: 30px;
                 display: flex;
                 align-items: center;
                 padding:20px;
                 margin-bottom: 50px;
                 color: #FFFFFF;
-                border-bottom: 0.5px solid #777777
+                border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+                min-width: 150px;
             }
             .profile-tab {
                 display: flex;
@@ -189,7 +190,7 @@ const FaqForm = styled.div`
                 font-style: normal;
                 padding: 10px 20px 10px 20px;
                 font-weight: 500;
-                font-size: 18px;
+                font-size: 16px;
                 line-height: 27px;
                 white-space: nowrap;
             }
@@ -213,7 +214,7 @@ const ProfileView = styled.div`
     .profile-heading{
         font-style: normal;
         font-weight: 800;
-        font-size: 28px;
+        font-size: 24px;
         line-height: 42px;
         display: flex;
         align-items: center;
@@ -229,27 +230,30 @@ const ProfileView = styled.div`
         display: flex;
         justify-content: flex-end;
         .join-free{
-            min-width: 214px;
-            min-height: 60px;
-            padding: 20px;
+            min-width: 154px;
+            min-height: 50px;
+            padding: 10px;
+            white-space: nowrap;
         }
     }
     .input-session{
         display: flex;
+        justify-content: space-between;
         padding-top:31px
         width: 100%;
         .input-field{
-            width: 48%;
+            width: 40%;
             padding:31px 10px 31px 5px;
             .formInput{
                 width: 100%;
                 background-color:transparent;
+                padding: 6px 0px 6px 13px;
             }
         }
         .input-label{
             font-style: normal;
             font-weight: 500;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 27px;
             display: flex;
             align-items: center;
