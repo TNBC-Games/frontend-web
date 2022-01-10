@@ -1234,4 +1234,63 @@ input:focus{
     }
 
 }
+.wallet-title {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 0.035em;
+    color: #000000;
+}
+.wallet-input{
+    min-height: 68px;
+    background: #C4C4C4;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.wallet-acn{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #828282;
+    width: 90%;
+}
+.wallet-input-tnbc{
+    min-height: 68px;
+    background: #C4C4C4;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.wallet-tnbc{
+    border-left: 1px solid #000000;
+    padding: 23px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+}
+.wallet-acn-tnbc{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: #828282;
+    padding: 10px 20px;
+}
 

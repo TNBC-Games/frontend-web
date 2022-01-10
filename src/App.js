@@ -18,6 +18,8 @@ import MyTournament from "./components/GamesManagement/MyTournament";
 import { Provider } from 'react-redux';
 import FaqPage from "./components/HomePage/Faq";
 import SettingsPage from "./components/HomePage/Settings";
+import PrivateRoute from "./auth/RouteComponents/privateRoute";
+import Wallet from "./components/Wallets/wallets";
 
 
 
@@ -30,14 +32,15 @@ function App() {
         <Navbarr/>
         <Switch>
           <Route exact path = "/" component = {WebBody} />
-          <Route path = "/signup" component = {SignUp}/>
-          <Route path = "/login" component = {SignIn}/>
-          <Route path = "/game-management" component ={GamesProfile}/>
-          <Route path = "/leaderboard" component = {LeaderBoardPage}/>
-          <Route path = "/profile" component = {ProfileManagement}/>'
-          <Route path = "/my-tournament" component = {MyTournament}/>
-          <Route path = "/faq" component ={FaqPage}/>
-          <Route path = "/setting" component ={SettingsPage}/>
+          <Route exact path = "/signup" component = {SignUp}/>
+          <Route exact path = "/login" component = {SignIn}/>
+          <PrivateRoute exact path = "/game-management" component ={GamesProfile}/>
+          <Route exact path = "/leaderboard" component = {LeaderBoardPage}/>
+          <PrivateRoute exact path = "/profile" component = {ProfileManagement}/>'
+          <PrivateRoute exact path = "/my-tournament" component = {MyTournament}/>
+          <Route exact path = "/faq" component ={FaqPage}/>
+          <PrivateRoute exact path = "/setting" component ={SettingsPage}/>
+          <Route exact path ="/my-wallet" component = {Wallet}/>
         </Switch>
           
       </BrowserRouter>
