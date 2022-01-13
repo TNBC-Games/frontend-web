@@ -27,7 +27,7 @@ function Navbarr() {
     const history = useHistory();
 
     var className = "black-bg";
-    var scrollTrigger = 60;
+    var scrollTrigger = 10;
 
     const Shopper = <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M10 28C11.1046 28 12 27.1046 12 26C12 24.8954 11.1046 24 10 24C8.89543 24 8 24.8954 8 26C8 27.1046 8.89543 28 10 28Z" fill="white"/>

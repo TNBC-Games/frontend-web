@@ -1293,4 +1293,8 @@ input:focus{
     color: #828282;
     padding: 10px 20px;
 }
+.align-center{
+    display: flex;
+    align-items: center;
+}
 

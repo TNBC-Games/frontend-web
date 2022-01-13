@@ -28,7 +28,10 @@ function Wallet() {
     const [userInfo, setUserInfo] = useState({
         amount: "",
         memo: "",
+        accountNo: "",
     });
+    const [sameAccountNumber, setSameAccountNumber] = useState(false);
+    const [accountNo, setAccountNo] = useState("1100327415")
     const transactionList =[
         {
             debit: false,
@@ -73,9 +76,11 @@ function Wallet() {
         }
     ]
     function handleAmountInput(event) {
+        event.preventDefault()
         setUserInfo({ ...userInfo, amount: event.target.value });
     }
     function handleMemoInput(event) {
+        event.preventDefault()
         setUserInfo({ ...userInfo, memo: event.target.value });
                     
     }
@@ -227,8 +232,11 @@ function Wallet() {
                                 <div className="account-deposit mt-5">
                                     <div className="red-text"><p>Kindly Send the amount you wish to deposit into the account below using the memo as description</p></div>
                                     <WalletInput Title={"Amount"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" amount={true} onChange={handleAmountInput} value ={userInfo.amount}/>
-                                    <WalletInput Title={"Memo"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onChange={handleMemoInput} value ={userInfo.memo}/>
-                                    <p className="mt-3 small-text">Note: As soon as the deposit is made, it will reflect on your wallet</p>
+                                    <WalletInput Title={"Memo"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onChange={handleMemoInput} value ={sameAccountNumber? accountNo: userInfo.accountNo}/>
+                                    <div className="mt-3 flex align-center" onClick= {()=> setSameAccountNumber(!sameAccountNumber)}>
+                                        <div className=" circle mr-2 mt-1">{sameAccountNumber && <div className="inner-circle"></div>}</div>
+                                        <div> Use existing account number</div>
+                                    </div>
                                 </div>
                                
                             </div>
@@ -386,9 +394,7 @@ const WalletView = styled.div`
         font-size: 10px;
         line-height: 15px;
         text-align: center;
-
         color: #000000;
-
     }
     .formInput{
         width: 100% !important;
@@ -400,6 +406,21 @@ const WalletView = styled.div`
         line-height: 30px;
         color: #828282;
 
+    }
+    .circle{
+        height: 19px;
+        width: 19px;
+        border-radius: 100%;
+        border: 1px solid #000000 ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .inner-circle{
+        height: 8px;
+        width: 8px;
+        border-radius: 100%;
+        background: #000000;
     }
 
 `;

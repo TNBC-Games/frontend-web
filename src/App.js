@@ -20,6 +20,8 @@ import FaqPage from "./components/HomePage/Faq";
 import SettingsPage from "./components/HomePage/Settings";
 import PrivateRoute from "./auth/RouteComponents/privateRoute";
 import Wallet from "./components/Wallets/wallets";
+import TransactionView from "./components/Wallets/transactionView";
+import TournamentManagement from "./components/TournamentManagement/TournamentManagement";
 
 
 
@@ -41,6 +43,8 @@ function App() {
           <Route exact path = "/faq" component ={FaqPage}/>
           <PrivateRoute exact path = "/setting" component ={SettingsPage}/>
           <Route exact path ="/my-wallet" component = {Wallet}/>
+          <Route exact path ="/wallet-transactions" component = {TransactionView}/>
+          <Route exact path ="/tournaments" component = {TournamentManagement}/>
         </Switch>
           
       </BrowserRouter>
