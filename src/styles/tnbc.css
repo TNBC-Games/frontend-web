@@ -203,6 +203,8 @@ input:focus {
 .form-section{
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .join-free {
     height:40px;
@@ -396,6 +398,10 @@ input:focus {
     margin-left: 50px;
     margin-right: 50px;
     margin-top: 30px;
+}
+
+.white{
+    color: white;
 }
 
 .games-item {

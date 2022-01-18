@@ -1,8 +1,10 @@
 import React from 'react'
 
-function Input({type, placeholder, className, onChange, min, value, max}) {
+function Input({type, placeholder, className, onChange, min, value, max, label, bodyClass, name}) {
     return (
-        <div className = "form-section">
+        
+        <div className = {`form-section ${bodyClass}`}>
+            {label && (<div className=" white mt-4"> {label}</div>)}
             <input
                 id = "Bullets"
                 className= {`${className}`}
@@ -11,6 +13,7 @@ function Input({type, placeholder, className, onChange, min, value, max}) {
                 onChange={onChange}
                 value={value}
                 min={min}
+                name={name}
             />
         </div>
     )

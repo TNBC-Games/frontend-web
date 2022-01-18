@@ -254,7 +254,7 @@ function Wallet() {
 
 export default Wallet;
 
-const WalletView = styled.div`
+export const WalletView = styled.div`
     max-width: 95vw;
     display: flex;
 
@@ -334,7 +334,6 @@ const WalletView = styled.div`
     }
     .info-section{
         width: 100%;
-        height: 1785px;
         background: #1D1D1D;
         border: 1px solid rgba(196, 196, 196, 0.21);
         box-sizing: border-box;

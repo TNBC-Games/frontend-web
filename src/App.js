@@ -22,6 +22,7 @@ import PrivateRoute from "./auth/RouteComponents/privateRoute";
 import Wallet from "./components/Wallets/wallets";
 import TransactionView from "./components/Wallets/transactionView";
 import TournamentManagement from "./components/TournamentManagement/TournamentManagement";
+import AdminView from "./components/Admin/AdminView";
 
 
 
@@ -45,6 +46,7 @@ function App() {
           <Route exact path ="/my-wallet" component = {Wallet}/>
           <Route exact path ="/wallet-transactions" component = {TransactionView}/>
           <Route exact path ="/tournaments" component = {TournamentManagement}/>
+          <Route exact path ="/admin" component = {AdminView}/>
         </Switch>
           
       </BrowserRouter>
