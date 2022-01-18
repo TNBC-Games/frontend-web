@@ -7,7 +7,7 @@ import Input from '../input';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Modal from '../ReusableComponents/modals';
-import { getTournament, updateTournament, getGames } from '../../redux/actions/tournment.actions';
+import { getTournament, updateTournament, getGames, createGame } from '../../redux/actions/tournment.actions';
 import { getHumanDate } from '../../utils/utils';
 
 
@@ -33,6 +33,7 @@ function AdminView() {
     const [tournList, setTournList] = useState("")
     const [showEditModal, setShowEditModal] = useState(false);
     const [createTournamentCheck, setCreateTournamentCheck] = useState(false);
+    const [createGamesCheck, setCreateGamesCheck] = useState(false);
     const [editItem, setEditItem]=useState({
         name: "",
         prize: "",
@@ -141,6 +142,14 @@ function AdminView() {
         let {status, response} = await dispatch(updateTournament(payload))
     }
 
+    const createAGame = async ()=>{
+        const payload={
+            name: tournamentValues.gamesName,
+            mainCategory: tournamentValues.mainCategory
+        }
+        let {status, response} = await dispatch(createGame(payload))
+    }
+
     useEffect(() => {
         const {rules, info, howToApply } = editItem
         if(!rules || !info || !howToApply) {
@@ -165,10 +174,18 @@ function AdminView() {
     useEffect(() => {
         const {name, prize, fee, limit, date, type, info, rules, apply} = tournamentValues
         if(!name|| !prize || !fee || !limit || !date || !type || !info || !rules || !apply){
-            console.log({name, prize, fee, limit, date, type, info, rules, apply},"==================")
             setCreateTournamentCheck(true)
         }else{
             setCreateTournamentCheck(false)
+        }
+    }, [tournamentValues])
+
+    useEffect(() => {
+        const {gamesName, mainCategory} = tournamentValues
+        if(!gamesName, !mainCategory){
+            setCreateGamesCheck(true)
+        }else{
+            setCreateGamesCheck(false)
         }
     }, [tournamentValues])
     return (
@@ -330,12 +347,14 @@ function AdminView() {
                                     placeholder="Main Category"
                                     type="text"
                                     onChange={handleChange}
-                                    value = {tournamentValues.rules}
+                                    value = {tournamentValues.mainCategory}
                                     min={1}
                                     label= {" Main Category "}
                                     bodyClass={"align-start "}
                                     name={"mainCategory"}
                                 />
+
+                                <button className= {`${createGamesCheck ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={createAGame}><span>Save</span></button>
                             </div>
                         )}
                         {view === "tournamentList" && (

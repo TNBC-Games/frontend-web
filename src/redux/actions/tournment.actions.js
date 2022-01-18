@@ -117,3 +117,41 @@ export const updateTournament = (payload,id) => async (dispatch) => {
         }
     }
 }
+
+export const createGame = (payload) => async (dispatch) => {
+    dispatch({
+        type: types.CREATE_GAME_STARTED,
+    })
+    
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data} = await getCall(urls.createGame, payload, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.CREATE_GAME_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.CREATE_GAME_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.CREATE_GAME_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
