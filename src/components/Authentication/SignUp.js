@@ -113,7 +113,6 @@ function SignUp() {
             }          
             setLoading(0)
         }
-      // console.log(response)
     }
 
 

@@ -1,14 +1,19 @@
 import React, {useState, useEffect} from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import Skeleton from 'react-loading-skeleton';
 import { WalletView } from '../Wallets/wallets';
 import Input from '../input';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Modal from '../ReusableComponents/modals';
+import { getTournament, updateTournament, getGames } from '../../redux/actions/tournment.actions';
+import { getHumanDate } from '../../utils/utils';
 
 
 
 function AdminView() {
+    const dispatch = useDispatch()
     const [view, setView] = useState("games");
     const [tournamentValues, setTournamentValues] = useState({
         name: "",
@@ -24,51 +29,10 @@ function AdminView() {
         mainCategory: "",
     });
     const [editSaveButtonDisabled, setEditSaveButtonDisabled] = useState(false)
-    const gamesList = [
-        {
-            id: 1,
-            name: "Dayo",
-            prize: 100,
-            fee: 50,
-            date: "13/2/2022",
-            info: "yes",
-            rules: "hi",
-            howToApply: "no"
-        },
-        {
-            id: 2,
-            name: "Tayo",
-            prize: 100,
-            fee: 50,
-            date: "13/2/2022",
-            info: "yes",
-            rules: "hi",
-            howToApply: "no"
-        },
-        {
-            id: 3,
-            name: "Ore",
-            prize: 100,
-            fee: 50,
-            date: "13/2/2022",
-            info: "yes",
-            rules: "hi",
-            howToApply: "no",
-        },
-        {
-            id: 4,
-            name: "Femi",
-            prize: 100,
-            fee: 50,
-            date: "13/2/2022",
-            info: "yes",
-            rules: "hi",
-            howToApply: "no"
-        },
-
-    ]
-    const [gameList, setGameList] = useState(gamesList);
+    const [gameList, setGameList] = useState("");
+    const [tournList, setTournList] = useState("")
     const [showEditModal, setShowEditModal] = useState(false);
+    const [createTournamentCheck, setCreateTournamentCheck] = useState(false);
     const [editItem, setEditItem]=useState({
         name: "",
         prize: "",
@@ -91,9 +55,7 @@ function AdminView() {
     }
 
     const editChange = (event) => {
-        console.log(event,"---------")
         const {name, value} = event.target
-        console.log(name, value,"iiiiiiiiiiiiiiiiiiiiiiiii")
         setEditItem({
             ...editItem,
             [name]: value
@@ -102,6 +64,18 @@ function AdminView() {
 
     
 
+    const DeleteTournament = (tourn)=>{
+        const filteredList = tournList.filter(
+            (item) => item.id !== tourn.id
+        );
+        setTournList(filteredList)
+    }
+
+    const EditTournament =(item)=>{
+        setEditItem(item)
+        setShowEditModal(true)  
+    }
+
     const DeleteGame = (game)=>{
         const filteredList = gameList.filter(
             (item) => item.id !== game.id
@@ -109,28 +83,62 @@ function AdminView() {
         setGameList(filteredList)
     }
 
-    const EditGmae =(item)=>{
+    const EditGame =(item)=>{
         setEditItem(item)
         setShowEditModal(true)
         
         
     }
-    console.log(editItem,"[[[[[[[[[[[[[[[[[")
 
     const List = ({Index, Name, Prize, Fee, Date, onEdit, onDelete}) => {
         return( 
             <div className="list">
                 <div className="col">{`${Index + 1}.`}</div>
                 <div className="coll">{Name}</div>
-                <div className="coll">{Prize}</div>
-                <div className="coll">{Fee}</div>
-                <div className="coll">{Date}</div>
+                {Prize && (<div className="coll">{Prize}</div>)}
+                {Fee &&(<div className="coll">{Fee}</div>)}
+                {Date && (<div className="coll">{getHumanDate(Date)}</div>)}
                 <div className="list-flex">
                     <div className="icons mr-3" onClick={onEdit}><FiEdit2/></div> 
                     <div className="icons ml-3" onClick={onDelete}><AiOutlineDelete/></div>
                 </div>
             </div>
         )
+    }
+
+    const getListOfTournaments = async () => {
+        let {status, response} = await dispatch(getTournament())
+        setTournList(response)
+    }
+
+    const getListOfGames = async () => {
+        let {status, response} = await dispatch(getGames())
+        setGameList(response)
+    }
+
+    const updateSelectedTournament =  async () =>{
+        const data = editItem._id
+        const payload ={
+            info: editItem.info,
+            rules: editItem.rules,
+            howToApply: editItem.howToApply
+        }
+        let {status, response} = await dispatch(updateTournament(payload, data))
+    }
+
+    const createTournament = async ()=>{
+        const payload ={
+            name: tournamentValues.name,
+            prize: tournamentValues.prize,
+            fee: tournamentValues.fee,
+            limit: tournamentValues.limit,
+            startDate: tournamentValues.startDate,
+            info: tournamentValues.info,
+            type: tournamentValues.type,
+            rules: tournamentValues.rules,
+            howToApply: tournamentValues.apply
+        }
+        let {status, response} = await dispatch(updateTournament(payload))
     }
 
     useEffect(() => {
@@ -142,6 +150,27 @@ function AdminView() {
         }
         
     }, [editItem])
+    console.log(tournamentValues,"okkkk")
+    useEffect(()=>{
+        if(view === "tournamentList" || "gameList"){
+            if (view === "tournamentList"){
+                getListOfTournaments()
+            }
+            if (view === "gameList"){
+                getListOfGames()
+            }
+        }
+    },[view])
+
+    useEffect(() => {
+        const {name, prize, fee, limit, date, type, info, rules, apply} = tournamentValues
+        if(!name|| !prize || !fee || !limit || !date || !type || !info || !rules || !apply){
+            console.log({name, prize, fee, limit, date, type, info, rules, apply},"==================")
+            setCreateTournamentCheck(true)
+        }else{
+            setCreateTournamentCheck(false)
+        }
+    }, [tournamentValues])
     return (
         <>
         <div className ="leaderboard-page fadeInUp animated">
@@ -276,8 +305,9 @@ function AdminView() {
                                     bodyClass={"align-start "}
                                     name={"apply"}
                                 />
-
+                                <button className= {`${createTournamentCheck ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={createTournament}><span>Save</span></button>
                             </div>
+                            
                         )}
                         {view === "games" && (
                             <div>
@@ -315,18 +345,39 @@ function AdminView() {
                                 <div className="coll">Name</div>
                                 <div className="coll">Prize</div>
                                 <div className="coll">Fee</div>
-                                <div className="coll">Date</div>
+                                <div className="coll">Start Date</div>
                                 <div className="list-flex hidee">
                                     <div className="icons mr-3"><FiEdit2/></div> 
                                     <div className="icons ml-3"><AiOutlineDelete/></div>
                                 </div>
                             </div>
-                            {gameList && gameList.map((item, index)=>(
-                                <List Index= {index} Name={item.name} Prize={item.prize} Fee={item.fee} Date={item.date} onDelete={()=> DeleteGame(item)} onEdit = {()=> EditGmae(item)}/>
+                            {tournList ? tournList.map((item, index)=>(
+                                <List Index= {index} Name={item.name} Prize={item.prize} Fee={item.fee} Date={item.startDate} onDelete={()=>  DeleteTournament(item)} onEdit = {()=> EditTournament(item)}/>
 
-                            ))}
+                            )):(
+                                <Skeleton height={50} count={10} baseColor= "#262626" highlightColor="#404040" borderRadius={5} containerClassName="mb-10"/>
+                            )}
                             </>
                         )}
+                        {view === "gameList" && (
+                            <>
+                            <div className="list black">
+                                <div className="col hidee">1</div>
+                                <div className="coll">Name</div>
+                                <div className="list-flex hidee">
+                                    <div className="icons mr-3"><FiEdit2/></div> 
+                                    <div className="icons ml-3"><AiOutlineDelete/></div>
+                                </div>
+                            </div>
+                            {gameList ? gameList.map((item, index)=>(
+                                <List Index= {index} Name={item.name} Prize={item.prize} Fee={item.fee} Date={item.date} onDelete={()=> DeleteGame(item)} onEdit = {()=> EditGame(item)}/>
+
+                            )):(
+                                <Skeleton height={50} count={10} baseColor= "#262626" highlightColor="#404040" borderRadius={5} containerClassName="mb-10"/>
+                            )}
+                            </>
+                        )}
+
                     </div>
                 </div>
                 
@@ -373,7 +424,7 @@ function AdminView() {
                     name={"howToApply"}
                 />
 
-                <button className= {`${editSaveButtonDisabled ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`}><span>Save</span></button>
+                <button className= {`${editSaveButtonDisabled ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={updateSelectedTournament}><span>Save</span></button>
             </ModalContent>
         </Modal>
         
@@ -433,7 +484,7 @@ const AdminVieww = styled(WalletView)`
         .coll{
             display: flex;
             align-items: flex-start;
-            width: 103px;
+            min-width: 137px;
         }
     }
     .black{
@@ -441,6 +492,25 @@ const AdminVieww = styled(WalletView)`
     }
     .hidee{
         opacity: 0;
+    }
+
+    .save-btn{
+        height: 50px;
+        width: 168px;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        //background: grey;
+        border-radius: 5px;
+        margin-top: 40px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
     }
 `;
 

@@ -63,15 +63,6 @@ function TransactionView() {
             const secondFour = accountNo.slice(4, 8)
             const lastFour = accountNo.slice(-4)
             const preLastFour = accountNo.slice(-8, -4)
-            console.log(
-                {
-                    firstFour: firstFour,
-                    secondFour: secondFour,
-                    lastFour: lastFour,
-                    preLastFour: preLastFour,
-                    no: accountNo,
-                }
-            )
 
             return `${firstFour} ${secondFour} ... ${preLastFour} ${lastFour}`
 

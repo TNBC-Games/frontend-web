@@ -8,6 +8,7 @@ import "./styles/index.css";
 import "./styles/animation.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 import WebBody from "./components/HomePage/webBody";
 import SignUp from "./components/Authentication/SignUp";
 import SignIn from "./components/Authentication/SignIn";

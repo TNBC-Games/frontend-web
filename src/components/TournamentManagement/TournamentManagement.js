@@ -7,7 +7,6 @@ import callOfDutyImage from "../../assets/callOfDutyPng.png";
 
 function TournamentManagement() {
     const [view, setView] = useState("info");
-    console.log(view === "info","========================")
     return (
         <div className ="games-profile">
             <ProfileHeader image ={gamesImage}>

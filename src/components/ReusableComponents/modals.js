@@ -59,7 +59,6 @@ export const Modal = ({ showModal, setShowModal, children }) => {
     e => {
       if (e.key === 'Escape' && showModal) {
         setShowModal(false);
-        console.log('I pressed');
       }
     },
     [setShowModal, showModal]

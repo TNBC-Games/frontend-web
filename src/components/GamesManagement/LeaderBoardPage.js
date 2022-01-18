@@ -60,8 +60,7 @@ function LeaderBoardPage() {
     
     useEffect(() => {
         window.scrollTo(0, 0);
-        const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)  
-        console.log(date.getTime())
+        const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) 
     }, [])
     return (
         <div className="leaderboard-page fadeInUp animated">
