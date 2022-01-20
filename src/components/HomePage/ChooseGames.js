@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, {useState, useEffect} from 'react';
+import { useDispatch } from "react-redux"
 import { useHistory } from 'react-router';
+import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import Culture from "../../assets/Culture.png";
 import Fifa2 from "../../assets/Fifa2.png";
@@ -10,9 +11,16 @@ import Fifa5 from "../../assets/Fifa5.png";
 import Slider from "react-slick";
 import { Carousel } from 'react-bootstrap';
 import { DummySlider } from './ChooseTournament';
+import { getGames } from '../../redux/actions/tournment.actions';
+import Skeleton from 'react-loading-skeleton';
 
 function ChooseGames() {
+    const history = useHistory();
+    const dispatch = useDispatch()
     const [showDropDown,setShowDropDown] = useState(false);
+    const [gamesList, setGamesList] = useState();
+    const [loading, setLoading] = useState(false);
+    const [originalGamesList, setOriginalGamesList] = useState()
     
     const games = [
         {
@@ -41,20 +49,39 @@ function ChooseGames() {
             image: callOfDutyImage
         }
     ]
-    const settings = {
-        className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
-        speed: 500,
-        rows: 3,
-        slidesPerRow: 3
-    }
-    const history = useHistory();
-    function setGamesPage(){
+    
+    
+    const setGamesPage = () =>{
         history.push("/game-management")
     }
+    const getListOfGames = async () => {
+        setLoading(true)
+        let {status, response} = await dispatch(getGames())
+        console.log(response)
+        setTimeout(()=>{
+            setOriginalGamesList(response)
+        },1500)
+        //
+    }
+    const filter = async (data) => {
+        const filteredList = originalGamesList.filter(
+            (item) => item.name === data
+        );
+        setGamesList(filteredList)
+        setShowDropDown(false)
+        console.log(data, filteredList, originalGamesList, "0000000000000000")
+    }
+
+    const reset = () => {
+        setGamesList(originalGamesList)
+        setShowDropDown(!showDropDown)
+        console.log(gamesList)
+    }
+    useEffect(() => {
+        if (!gamesList){
+            getListOfGames()
+        }
+    }, [gamesList])
     return (
         <div className = "choose-games">
             
@@ -64,7 +91,7 @@ function ChooseGames() {
                 <div className ="choose-games-title">Choose your Games</div>
                 <div className = "align-center flex-column">
                     <div className ="games-filter cursor-pointer">
-                        <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
+                        <div className ="games-filter-inner" onClick= {reset}>
                             <div className ="games-filter-title"> All Games </div>
                             <div className ="mr-2">
                                 <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -81,12 +108,12 @@ function ChooseGames() {
 
                         <Dropdown>
                             <div className= "dropdown-inner">
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
-                                <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+                                <div className = "dropdown-item" onClick= {() => filter("CHESS")}> Chess</div>
+                                <div className = "dropdown-item" onClick= {()=> filter("COD")}> COD</div>
+                                <div className = "dropdown-item" onClick= {()=> filter("FIFA")}> FIFA</div>
+                                <div className = "dropdown-item" onClick= {()=> filter("FORTNITE")}> FORTNITE</div>
+                                <div className = "dropdown-item" onClick= {()=> filter("MINECRAFT")}> MINECRAFT</div>
+                                <div className = "dropdown-item" onClick= {()=> filter("BLACKOPS")}> BLACKOPS</div>
                             </div>
 
                         </Dropdown>
@@ -99,7 +126,8 @@ function ChooseGames() {
             </div>
 
             <div className = "choose-games-section">
-                    {games.map((item, index) => (
+                    {originalGamesList && (
+                        games.map((item, index) => (
                         
                             <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
                                 <img src={item.image} alt ={item.gameType}></img>
@@ -108,8 +136,16 @@ function ChooseGames() {
                                 </div>
                             </div>
                             
+                        )) 
+                        
+                    )}
+                    {!originalGamesList && (
+                        games.map((item, index) => (
+                            <div className ="games-item mt-4 cursor-pointer">
+                                <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
+                            </div>
                         ))
-                    }
+                    )}
             </div>
 
             <div className="flex justify-center hght100"> 
