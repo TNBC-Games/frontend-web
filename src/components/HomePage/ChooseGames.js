@@ -57,7 +57,6 @@ function ChooseGames() {
     const getListOfGames = async () => {
         setLoading(true)
         let {status, response} = await dispatch(getGames())
-        console.log(response)
         setTimeout(()=>{
             setOriginalGamesList(response)
         },1500)
@@ -69,13 +68,12 @@ function ChooseGames() {
         );
         setGamesList(filteredList)
         setShowDropDown(false)
-        console.log(data, filteredList, originalGamesList, "0000000000000000")
+        
     }
 
     const reset = () => {
         setGamesList(originalGamesList)
         setShowDropDown(!showDropDown)
-        console.log(gamesList)
     }
     useEffect(() => {
         if (!gamesList){
@@ -87,68 +85,68 @@ function ChooseGames() {
             
             <ContentBody>
 
-            <div className = "choose-games-header">
-                <div className ="choose-games-title">Choose your Games</div>
-                <div className = "align-center flex-column">
-                    <div className ="games-filter cursor-pointer">
-                        <div className ="games-filter-inner" onClick= {reset}>
-                            <div className ="games-filter-title"> All Games </div>
-                            <div className ="mr-2">
-                                <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
-                                    <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
-                                </svg>
+                <div className = "choose-games-header">
+                    <div className ="choose-games-title">Choose your Games</div>
+                    <div className = "align-center flex-column">
+                        <div className ="games-filter cursor-pointer">
+                            <div className ="games-filter-inner" onClick= {reset}>
+                                <div className ="games-filter-title"> All Games </div>
+                                <div className ="mr-2">
+                                    <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                        <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                    </svg>
+                                </div>
+                                
                             </div>
                             
                         </div>
+
+                        { showDropDown && (
+
+                            <Dropdown>
+                                <div className= "dropdown-inner">
+                                    <div className = "dropdown-item" onClick= {() => filter("CHESS")}> Chess</div>
+                                    <div className = "dropdown-item" onClick= {()=> filter("COD")}> COD</div>
+                                    <div className = "dropdown-item" onClick= {()=> filter("FIFA")}> FIFA</div>
+                                    <div className = "dropdown-item" onClick= {()=> filter("FORTNITE")}> FORTNITE</div>
+                                    <div className = "dropdown-item" onClick= {()=> filter("MINECRAFT")}> MINECRAFT</div>
+                                    <div className = "dropdown-item" onClick= {()=> filter("BLACKOPS")}> BLACKOPS</div>
+                                </div>
+
+                            </Dropdown>
+                        )}
+                        
+
                         
                     </div>
-
-                    { showDropDown && (
-
-                        <Dropdown>
-                            <div className= "dropdown-inner">
-                                <div className = "dropdown-item" onClick= {() => filter("CHESS")}> Chess</div>
-                                <div className = "dropdown-item" onClick= {()=> filter("COD")}> COD</div>
-                                <div className = "dropdown-item" onClick= {()=> filter("FIFA")}> FIFA</div>
-                                <div className = "dropdown-item" onClick= {()=> filter("FORTNITE")}> FORTNITE</div>
-                                <div className = "dropdown-item" onClick= {()=> filter("MINECRAFT")}> MINECRAFT</div>
-                                <div className = "dropdown-item" onClick= {()=> filter("BLACKOPS")}> BLACKOPS</div>
-                            </div>
-
-                        </Dropdown>
-                    )}
-                    
-
                     
                 </div>
-                
-            </div>
 
-            <div className = "choose-games-section">
-                    {originalGamesList && (
-                        games.map((item, index) => (
-                        
-                            <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
-                                <img src={item.image} alt ={item.gameType}></img>
-                                <div className = "games-name-box">
-                                    <div className ="pl-4 pnl-4">{item.gameType}</div>
-                                </div>
-                            </div>
+                <div className = "choose-games-section">
+                        {originalGamesList && (
+                            games.map((item, index) => (
                             
-                        )) 
-                        
-                    )}
-                    {!originalGamesList && (
-                        games.map((item, index) => (
-                            <div className ="games-item mt-4 cursor-pointer">
-                                <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
-                            </div>
-                        ))
-                    )}
-            </div>
+                                <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
+                                    <img src={item.image} alt ={item.gameType}></img>
+                                    <div className = "games-name-box">
+                                        <div className ="pl-4 pnl-4">{item.gameType}</div>
+                                    </div>
+                                </div>
+                                
+                            )) 
+                            
+                        )}
+                        {!originalGamesList && (
+                            games.map((item, index) => (
+                                <div className ="games-item mt-4 cursor-pointer" key={index}>
+                                    <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
+                                </div>
+                            ))
+                        )}
+                </div>
 
-            <div className="flex justify-center hght100"> 
+                <div className="flex justify-center hght100"> 
                     <DummySlider>
                             <div className="box-sm blue-bg"></div>
                             <div className="box-sm"></div>

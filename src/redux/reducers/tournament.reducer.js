@@ -2,9 +2,9 @@ import * as types from "../types/tournament.types"
 
 const initialState = {
     getTournaments : "idle",
-    tournamentsList:[],
+    tournamentsList:false,
     getGames:"idle",
-    gamesList:[]
+    gamesList:false
 }
 
 export const tournamentReducer = (state = initialState, action) => {

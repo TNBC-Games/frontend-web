@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{ useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import Culture from "../../assets/Culture.png";
@@ -8,11 +9,15 @@ import Fifa4 from "../../assets/Fifa4.png";
 import Fifa5 from "../../assets/Fifa5.png";
 import { ProgressBar } from 'react-bootstrap';
 import { ContentBody, Dropdown } from './ChooseGames';
-import Slider from "react-slick"
+import { getTournament } from '../../redux/actions/tournment.actions';
+import Skeleton from 'react-loading-skeleton';
 
 function ChooseTournament() {
+    const dispatch = useDispatch();
     const [showDropDown,setShowDropDown] = useState(false);
-    const games = [
+    const [tournList, setTournList] = useState("");
+    const tournamentList = useSelector(state => state.tournamentState.tournamentsList)
+    const tournaments = [
         {
             gameType: "CHESS",
             image: callOfDutyImage,
@@ -63,16 +68,18 @@ function ChooseTournament() {
         }
     ]
 
-    const settings = {
-        className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
-        speed: 500,
-        rows: 2,
-        slidesPerRow: 2
+    const getListOfTournaments = async () => {
+        let {status, response} = await dispatch(getTournament())
+        setTournList(response)
     }
+
+    useEffect(() => {
+        if(!tournamentList ){
+            getListOfTournaments()
+        }else {
+            setTournList(tournamentList)
+        }
+    }, [tournList])
 
     return (
         <div className = "choose-tournament">
@@ -111,30 +118,38 @@ function ChooseTournament() {
                 </div>
                 
                 <div className = "choose-games-section">
-                {games &&
-                    games.map((item, index) => (
-                        <TournamentView key-={index}>
-                            <div className = "upcoming-tornament-name">{item?.gameType}
-                            </div>
-                            <div>
-                                <img src={item?.image} alt={item?.gameType}></img>
-                            </div>
-                            <TournamentInfo>
-                                <div className ="tourn-name">{item?.gameType}</div>            
-                                <ProgressBar now={item?.completedPercent}/>
-                                <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                                <div className = "fee mb-10"> Fee </div>
-                                <div className = "justify-space " >
-                                    <div className = "fee-amount">{item?.fee} TNBC</div>
-                                    <div className = "join-free float-btn">
-                                        View
-                                    </div>
+                    {tournamentList &&
+                        tournaments.map((item, index) => (
+                            <TournamentView key-={index}>
+                                <div className = "upcoming-tornament-name">{item?.gameType}
                                 </div>
-                            
-                            </TournamentInfo>
-                        </TournamentView>
-                    ))
-                }
+                                <div>
+                                    <img src={item?.image} alt={item?.gameType}></img>
+                                </div>
+                                <TournamentInfo>
+                                    <div className ="tourn-name">{item?.gameType}</div>            
+                                    <ProgressBar now={item?.completedPercent}/>
+                                    <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                                    <div className = "fee mb-10"> Fee </div>
+                                    <div className = "justify-space " >
+                                        <div className = "fee-amount">{item?.fee} TNBC</div>
+                                        <div className = "join-free float-btn">
+                                            View
+                                        </div>
+                                    </div>
+                                
+                                </TournamentInfo>
+                            </TournamentView>
+                        ))
+                    }
+                    {!tournamentList && (
+                        tournaments.map((item, index) => (
+                            <div className ="games-item mt-4 cursor-pointer" key={index}>
+                                <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
+                            </div>
+                        ))
+
+                    )}
                 
                 </div>
                 <div className="flex justify-center hght100"> 

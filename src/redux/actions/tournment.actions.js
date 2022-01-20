@@ -1,5 +1,5 @@
 import * as types from "../types/tournament.types"
-import { getCall } from "../../networking";
+import { getCall, postCall } from "../../networking";
 import { urls } from "../../networking/url";
 
 
@@ -87,7 +87,7 @@ export const updateTournament = (payload,id) => async (dispatch) => {
     
     try {
         let headers = { "Content-Type": "application/json" };
-        const {status, data} = await getCall(id? url : urls.updateTournament, payload, headers);
+        const {status, data} = await postCall(id? url : urls.updateTournament, payload, headers);
         if (status === 200) {
             dispatch({
                 type: types.UPDATE_TOURNAMENT_SUCCEEDED,
@@ -125,7 +125,7 @@ export const createGame = (payload) => async (dispatch) => {
     
     try {
         let headers = { "Content-Type": "application/json" };
-        const {status, data} = await getCall(urls.createGame, payload, headers);
+        const {status, data} = await postCall(urls.createGame, payload, headers);
         if (status === 200) {
             dispatch({
                 type: types.CREATE_GAME_SUCCEEDED,

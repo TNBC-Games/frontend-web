@@ -86,9 +86,7 @@ function AdminView() {
 
     const EditGame =(item)=>{
         setEditItem(item)
-        setShowEditModal(true)
-        
-        
+        setShowEditModal(true) 
     }
 
     const List = ({Index, Name, Prize, Fee, Date, onEdit, onDelete}) => {
