@@ -4,7 +4,9 @@ const initialState = {
     getTournaments : "idle",
     tournamentsList:false,
     getGames:"idle",
-    gamesList:false
+    gamesList:false,
+    leaderboardNames: "",
+    leaderboardCount: null,
 }
 
 export const tournamentReducer = (state = initialState, action) => {
@@ -30,6 +32,12 @@ export const tournamentReducer = (state = initialState, action) => {
                 ...state,
                 getGames: "idle",
                 gamesList: action.payload,
+            }
+        case types.GET_LEADERBOARD_SUCCEEDED:
+            return{
+                ...state,
+                leaderboardNames: action.payload,
+                leaderboardCount: action.count,
             }
         default:
             return state;

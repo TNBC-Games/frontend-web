@@ -155,3 +155,43 @@ export const createGame = (payload) => async (dispatch) => {
         }
     }
 }
+
+export const getLeaderboard = (count) => async (dispatch) => {
+    dispatch({
+        type: types.GET_LEADERBOARD_STARTED,
+    })
+    const url = ` ${urls.getLeaderboard}?sortBy=earnings&limit=${count}&page=1`
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data} = await getCall(url, headers);
+        if (status === 200) {
+            console.log(data,"-----")
+            dispatch({
+                type: types.GET_LEADERBOARD_SUCCEEDED,
+                payload: data.data.leaderBoard,
+                count: count,
+            });
+            return {
+                status: true,
+                response: data.data.leaderBoard,
+            };
+        } else {
+            dispatch({
+                type: types.GET_LEADERBOARD_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_LEADERBOARD_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}

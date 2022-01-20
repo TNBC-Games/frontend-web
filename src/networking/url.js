@@ -7,4 +7,5 @@ export const urls ={
     getGames: "https://tnbc-games-api.herokuapp.com/v1/game/?page=1&limit=30",
     updateTournament: "https://tnbc-games-api.herokuapp.com/v1/tournament",
     createGame: "https://tnbc-games-api.herokuapp.com/v1/game",
+    getLeaderboard: "https://tnbc-games-api.herokuapp.com/v1/user/leaderBoard"
 }

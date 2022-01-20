@@ -1,10 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Skeleton from 'react-loading-skeleton';
 import LeaderBoardHeader from "../../assets/LeaderboardHeader.png";
 import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
+import { getLeaderboard } from '../../redux/actions/tournment.actions';
+
 
 function LeaderBoardPage() {
+    const dispatch = useDispatch();
+    const [leaderboard, setLeaderboard] = useState("")
+    const [count, setCount] = useState(10);
+    const [sortBy, setSortBy] = useState("earnings");
+    const [loading, setLoading] = useState(false);
+    const { leaderboardNames: leaderboardI, leaderboardCount} = useSelector(state => state.tournamentState)
     const LeaderboardItems = [
         {
             rank: 1,
@@ -57,10 +67,34 @@ function LeaderBoardPage() {
     function gotoProfile() {
         history.push("/")
     }
+
+    const getLeaderboardInfo = async (count)  =>{
+        setLoading(true)
+        let {status, response} = await dispatch(getLeaderboard(count))
+        console.log(response)
+        setLeaderboard(response)
+        setLoading(false)
+    }
+
+    const getNext = async () =>{
+        await setCount(count + 10)
+        getLeaderboardInfo(count + 10)
+    }
     
     useEffect(() => {
         window.scrollTo(0, 0);
         const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) 
+    }, [])
+
+    useEffect(()=>{
+        if(!leaderboard){
+            getLeaderboardInfo(count)
+        }  
+    }, [leaderboard])
+
+    useEffect(() => {
+        setLeaderboard(leaderboardI)
+        setCount(leaderboardCount)
     }, [])
     return (
         <div className="leaderboard-page fadeInUp animated">
@@ -116,7 +150,7 @@ function LeaderBoardPage() {
                                 <div className= "filter-item"> LAST 7 DAYS</div>
                             </div>
                             <div className="top-10">
-                                showing top 10
+                                showing top {count? count : 10}
                             </div>
                         </div>
                       
@@ -141,282 +175,56 @@ function LeaderBoardPage() {
                                 <div className=""> Bronze</div>
                             </div>
                         </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">1</span>
-                                    <span className="img mb-2 mr-4 ml-4">
+                        {leaderboard &&
+                            leaderboard.map((item, index)=>(
+                                <div className="table-head ">
+                                    <div className="rank pl-4">
+                                        <div className="align-center">
+                                            <span className="RankNo pr-4">{item.rank}</span>
+                                            <span className="img mb-2 mr-4 ml-4">
 
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
+                                            </span>
+                                            <span className="username pl-4"> {item.username} </span>
 
+                                        </div>
+                                    </div>
+                                    <div className="points">
+                                        <div className="align-center"> {item.points} </div>
+                                    </div>
+                                    <div className="points earning">
+                                        <div className=" align-end align-center">{`${item.earnings} TNBC`}</div>
+                                    </div>
+                                    <div className="points">
+                                        <div className=" align-center">{item.gold}</div>
+                                    </div>
+                                    <div className="points">
+                                        <div className=" align-center"> {item.silver}</div>
+                                    </div>
+                                    <div className="points">
+                                        <div className=" align-center"> {item.bronze}</div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">2</span>
-                                    <span className="img mb-2 mr-4 ml-4">
 
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
+                            )
+                        )}
 
+                        {!leaderboard &&
+                            LeaderboardItems.map((item, index)=>(
+                                <div className="table-head ">
+                                    <Skeleton height={"50px"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5} containerClassName="width-100"/>
                                 </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">3</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">4</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">5</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">6</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">7</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">8</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-4">9</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head ">
-                            <div className="rank pl-4">
-                                <div className="align-center">
-                                    <span className="RankNo pr-3">10</span>
-                                    <span className="img mb-2 mr-4 ml-4">
-
-                                    </span>
-                                    <span className="username pl-4"> WeirdGuy1542 </span>
-
-                                </div>
-                            </div>
-                            <div className="points">
-                                <div className="align-center"> 3500 </div>
-                            </div>
-                            <div className="points earning">
-                                <div className=" align-end align-center">30,000 TNBC</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center">7</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 10</div>
-                            </div>
-                            <div className="points">
-                                <div className=" align-center"> 3</div>
-                            </div>
-                        </div>
-                        <div className="table-head bottom-tab">
-                            <div className="load-more">
+                            ))
+                        }
+                        
+                        
+                        
+                        <div className={`table-head bottom-tab ${loading && " form-loading"}`} onClick={getNext}>
+                            <span className="load-more cursor-pointer">
                                 Load More
-                            </div>
+                            </span>
 
                         </div>
+                        
                         
 
 
