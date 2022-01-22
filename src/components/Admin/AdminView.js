@@ -1,14 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 import { WalletView } from '../Wallets/wallets';
 import Input from '../input';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Modal from '../ReusableComponents/modals';
-import { getTournament, updateTournament, getGames, createGame } from '../../redux/actions/tournment.actions';
+import { getTournament, updateTournament, getGames, createGame, createNewTournament, updateTournamentImage } from '../../redux/actions/tournment.actions';
 import { getHumanDate } from '../../utils/utils';
+import { Dropdown } from '../HomePage/ChooseGames';
+
 
 
 
@@ -27,6 +30,7 @@ function AdminView() {
         apply: "",
         gamesName: "",
         mainCategory: "",
+        game: "",
     });
     const [editSaveButtonDisabled, setEditSaveButtonDisabled] = useState(false)
     const [gameList, setGameList] = useState("");
@@ -34,6 +38,12 @@ function AdminView() {
     const [showEditModal, setShowEditModal] = useState(false);
     const [createTournamentCheck, setCreateTournamentCheck] = useState(false);
     const [createGamesCheck, setCreateGamesCheck] = useState(false);
+    const [createGameLoading, setCreateGameLoading] = useState(false);
+    const [createTournamentLoading, setCreateTournamentLoading] = useState(false)
+    const [showDropDown, setShowDropdown] = useState(false);
+    const [gameId, setGameId] = useState(false);
+    const [imageData, setImageData] = useState('');
+    const [imageUploading, setImageUploading] = useState("")
     const [editItem, setEditItem]=useState({
         name: "",
         prize: "",
@@ -46,7 +56,10 @@ function AdminView() {
         apply: "",
         gamesName: "",
         mainCategory: "",
+        image: "",
     })
+    const accessToken = sessionStorage.getItem("accesstoken");
+    const { register, handleSubmit } = useForm()
 
     const handleChange = (event) => {
         setTournamentValues({
@@ -116,37 +129,77 @@ function AdminView() {
     }
 
     const updateSelectedTournament =  async () =>{
+        
         const data = editItem._id
+        const token = accessToken
         const payload ={
             info: editItem.info,
             rules: editItem.rules,
             howToApply: editItem.howToApply
         }
-        let {status, response} = await dispatch(updateTournament(payload, data))
+        let {status, response} = await dispatch(updateTournament(payload, data, token))
     }
 
     const createTournament = async ()=>{
+        setCreateTournamentLoading(true)
+        const token = accessToken
         const payload ={
             name: tournamentValues.name,
             prize: tournamentValues.prize,
             fee: tournamentValues.fee,
             limit: tournamentValues.limit,
-            startDate: tournamentValues.startDate,
+            startDate: tournamentValues.date,
             info: tournamentValues.info,
             type: tournamentValues.type,
             rules: tournamentValues.rules,
-            howToApply: tournamentValues.apply
+            howToApply: tournamentValues.apply,
+            game: tournamentValues.game
         }
-        let {status, response} = await dispatch(updateTournament(payload))
+        let {status, response} = await dispatch(createNewTournament(payload, token))
+        setCreateTournamentLoading(false)
     }
 
     const createAGame = async ()=>{
+        setCreateGameLoading(true)
         const payload={
             name: tournamentValues.gamesName,
-            mainCategory: tournamentValues.mainCategory
+            mainCategory: tournamentValues.mainCategory,
+           // token: accessToken
         }
-        let {status, response} = await dispatch(createGame(payload))
+        const token = accessToken
+        let {status, response} = await dispatch(createGame(payload, token))
+        
+        setCreateGameLoading(false)
     }
+
+    const filter = (item)=>{
+        const {_id, name} = item
+        setTournamentValues({
+            ...tournamentValues,
+            game: _id,
+            gamesName: name
+        })
+        setShowDropdown(false)
+
+    }
+    const submitImage = async (event)  =>{
+        setEditSaveButtonDisabled(true)
+        const id = editItem._id
+        const token = accessToken
+        setImageUploading("uploading")
+        const formData = new FormData()
+        const file = event.target.files[0]
+        formData.append("picture", file, file.name)
+
+        let {status, response} = await dispatch(updateTournamentImage(formData, id, token))
+        
+        setImageData(formData)
+        console.log(event.target.files[0], ...formData)
+        setEditSaveButtonDisabled(false)
+        setImageUploading("")
+    }
+
+    console.log("hiiii", ...imageData)
 
     useEffect(() => {
         const {rules, info, howToApply } = editItem
@@ -163,15 +216,15 @@ function AdminView() {
             if (view === "tournamentList"){
                 getListOfTournaments()
             }
-            if (view === "gameList"){
+            if (view === "gameList"|| "tournament"){
                 getListOfGames()
             }
         }
     },[view])
 
     useEffect(() => {
-        const {name, prize, fee, limit, date, type, info, rules, apply} = tournamentValues
-        if(!name|| !prize || !fee || !limit || !date || !type || !info || !rules || !apply){
+        const {name, prize, fee, limit, date, type, info, rules, apply, game} = tournamentValues
+        if(!name|| !prize || !fee || !limit || !date || !type || !info || !rules || !apply || !game){
             setCreateTournamentCheck(true)
         }else{
             setCreateTournamentCheck(false)
@@ -283,18 +336,49 @@ function AdminView() {
                                 </div>
 
 
-                                <Input
-                                    className= "formInput mt-2 align-start"
-                                    placeholder="Info"
-                                    type="text"
-                                    onChange={handleChange}
-                                    value = {tournamentValues.info}
-                                    min={1}
-                                    label= {"Info"}
-                                    bodyClass={"align-start "}
-                                    name={"info"}
+                                <div className ="list-flex">
+                                    <Input
+                                        className= "formInput mt-2 align-start"
+                                        placeholder="Info"
+                                        type="text"
+                                        onChange={handleChange}
+                                        value = {tournamentValues.info}
+                                        min={1}
+                                        label= {"Info"}
+                                        bodyClass={"align-start mr-2"}
+                                        name={"info"}
 
-                                />
+                                    />
+                                    <div class="width-100 relative">
+                                        <Input
+                                            className= "formInput mt-2 align-start"
+                                            placeholder="Choose Games"
+                                            type="select"
+                                            onClick={() => setShowDropdown(true)}
+                                            value = {tournamentValues.gamesName}
+                                            min={1}
+                                            label= {"Select Game"}
+                                            bodyClass={"align-start ml-2 relative"}
+                                            autocomplete="off"
+
+                                        />
+
+                                            { showDropDown && (
+
+                                            <GameDropdown>
+                                                <div className= "dropdown-inner">
+                                                    {gameList &&
+                                                        gameList.map((item, index)=>(
+                                                            <div className = "dropdown-item" onClick= {() => filter(item)}> {item.name}</div>
+                                                        ))}
+                                                    
+                                                    
+                                                </div>
+
+                                            </GameDropdown>
+                                            )}
+                                    </div>
+                                </div>
 
 
                                 <Input
@@ -320,7 +404,9 @@ function AdminView() {
                                     bodyClass={"align-start "}
                                     name={"apply"}
                                 />
-                                <button className= {`${createTournamentCheck ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={createTournament}><span>Save</span></button>
+
+                                
+                                <button className= {`${createTournamentCheck ? "grey-disabled ": createTournamentLoading ? "form-loading": ""} save-btn sign-up-btn float-btn`} onClick={createTournament}><span>Save</span></button>
                             </div>
                             
                         )}
@@ -352,7 +438,7 @@ function AdminView() {
                                     name={"mainCategory"}
                                 />
 
-                                <button className= {`${createGamesCheck ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={createAGame}><span>Save</span></button>
+                                <button className= {`${createGamesCheck ? "grey-disabled ": createGameLoading ? "form-loading":""} save-btn sign-up-btn float-btn`} onClick={createAGame}><span>Save</span></button>
                             </div>
                         )}
                         {view === "tournamentList" && (
@@ -439,7 +525,20 @@ function AdminView() {
                     label= {"How to Apply"}
                     bodyClass={"align-start "}
                     name={"howToApply"}
+                   
                 />
+
+                <Input
+                    className= "formInput mt-2 align-start"
+                    placeholder="How To Apply"
+                    type="file"
+                    onChange={submitImage}
+                    //value = {editItem.image}
+                    min={1}
+                    label= {"Upload Tournament Image"}
+                    bodyClass={"align-start "}
+                    name={"picture"}
+                /> 
 
                 <button className= {`${editSaveButtonDisabled ? "grey-disabled ": ""} save-btn sign-up-btn float-btn`} onClick={updateSelectedTournament}><span>Save</span></button>
             </ModalContent>
@@ -527,7 +626,9 @@ const AdminVieww = styled(WalletView)`
         display: flex;
         justify-content: center;
         align-items: center;
-
+    }
+    .relative{
+        position: relative;
     }
 `;
 
@@ -565,4 +666,16 @@ const ModalContent = styled.div`
 
     }
 
+`
+
+const GameDropdown = styled(Dropdown)`
+    position: absolute;
+    top: 120px;
+    margin-left: 0.5rem !important;
+    width: 100%;
+    height: auto;
+    .dropdown-inner {
+        width: 99%;
+        height: auto;
+    }
 `

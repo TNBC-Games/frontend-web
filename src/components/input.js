@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Input({type, placeholder, className, onChange, min, value, max, label, bodyClass, name}) {
+function Input({type, placeholder, className, onChange, min, value, max, label, bodyClass, name, onClick, autocomplete}) {
     return (
         
-        <div className = {`form-section ${bodyClass}`}>
+        <div className = {`form-section ${bodyClass}`} onClick={onClick}>
             {label && (<div className=" white mt-4"> {label}</div>)}
             <input
                 id = "Bullets"
@@ -14,6 +14,7 @@ function Input({type, placeholder, className, onChange, min, value, max, label, 
                 value={value}
                 min={min}
                 name={name}
+                autocomplete={autocomplete? autocomplete: "on"}
             />
         </div>
     )

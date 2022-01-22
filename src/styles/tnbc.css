@@ -410,6 +410,7 @@ input:focus {
     width: 31.5%;
     margin-top: 20px;
     background-color: #FFFFFF;
+    position: relative;
 }
 
 .games-name-box {
@@ -417,8 +418,9 @@ input:focus {
     align-items: center;
     color: #FFFFFF;
     height: 57px;
-    position: relative;
-    bottom: 56px;
+    position: absolute;
+    width:100%;
+    bottom: 0px;
     z-index: 1;
     background: rgba(0, 0, 0, 0.6);
     font-style: normal;
@@ -1127,7 +1129,9 @@ input:focus{
     }
     .games-name-box{
         height: 30px;
-        bottom: 30px;
+        position: absolute;
+        width:100%;
+        bottom: 0px;
         font-size:15px;
         font-weight: 200;  
     }
@@ -1302,5 +1306,28 @@ input:focus{
 .align-center{
     display: flex;
     align-items: center;
+}
+
+.loader--wrap.normal {
+    justify-content: flex-start;
+    margin-top: 30px;
+}
+
+.kuda-loader--wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.loader--wrap.normal .spinner-wrap {
+    position: relative;
+    top: unset;
+    left: unset;
+    transform: none;
+    padding: 7px;
+    background: #fff;
+    border-radius: 100px;
+    box-shadow: 0px 5px 5px rgb(0 0 0 / 5%);
+    border: 1px solid var(--borderOff);
+    z-index: 0;
 }
 

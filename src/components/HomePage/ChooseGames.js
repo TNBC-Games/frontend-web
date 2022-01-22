@@ -22,6 +22,17 @@ function ChooseGames() {
     const [loading, setLoading] = useState(false);
     const [originalGamesList, setOriginalGamesList] = useState()
     
+    const settings = {
+        className: "center",
+        centerMode: true,
+        infinite: true,
+        centerPadding: "60px",
+        slidesToShow: 3,
+        speed: 500,
+        rows: 2,
+        slidesPerRow: 2
+    };
+
     const games = [
         {
             gameType: "CHESS",
@@ -124,13 +135,14 @@ function ChooseGames() {
                 </div>
 
                 <div className = "choose-games-section">
+                    
                         {originalGamesList && (
-                            games.map((item, index) => (
-                            
+                            originalGamesList.map((item, index) => (
+                                
                                 <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
-                                    <img src={item.image} alt ={item.gameType}></img>
+                                    <img src={item.image} alt ={item.name}></img>
                                     <div className = "games-name-box">
-                                        <div className ="pl-4 pnl-4">{item.gameType}</div>
+                                        <div className ="pl-4 pnl-4">{item.name}</div>
                                     </div>
                                 </div>
                                 

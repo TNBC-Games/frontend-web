@@ -17,7 +17,7 @@ export const postFormCall = async (url, data, headers) => {
     });
 };
 
-export const postCall = async (url, data, params, headers) => {
+export const postCall = async (url, data, headers, params) => {
     document.body.classList.add("network-active");
     return axios({
         method: "post",
@@ -36,15 +36,33 @@ export const postCall = async (url, data, params, headers) => {
     });
 };
 
-export const getCall = async (url, params, headers) => {
+export const getCall = async (url,  headers) => {
     return axios({
         method: "get",
         url: url,
-        params: params,
         headers: headers,
     }).catch(function (error) {
         if (!error.response) {
             // network error
+        } else {
+            const { data } = error.response;
+            return data;
+        }
+    });
+};
+
+export const putCall = async (url, data, headers, params) => {
+    document.body.classList.add("network-active");
+    return axios({
+        method: "put",
+        url: url,
+        data: data,
+        headers: headers,
+        params: params,
+    }).catch(function (error) {
+        if (!error.response) {
+            // network error
+           // interceptor(100);
         } else {
             const { data } = error.response;
             return data;

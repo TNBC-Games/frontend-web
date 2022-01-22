@@ -16,7 +16,6 @@ const Background = styled.div`
 
 const ModalWrapper = styled.div`
   width: 800px;
-  height: 500px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #000000;
   color: #000;
@@ -26,6 +25,7 @@ const ModalWrapper = styled.div`
   z-index: 10;
   border-radius: 10px;
   border: 1px solid white;
+  padding: 20px
 `;
 const CloseModalButton = styled(MdClose)`
   cursor: pointer;

@@ -119,17 +119,17 @@ function ChooseTournament() {
                 
                 <div className = "choose-games-section">
                     {tournamentList &&
-                        tournaments.map((item, index) => (
+                        tournamentList.map((item, index) => (
                             <TournamentView key-={index}>
-                                <div className = "upcoming-tornament-name">{item?.gameType}
+                                <div className = "upcoming-tornament-name">{item?.name}
                                 </div>
                                 <div>
-                                    <img src={item?.image} alt={item?.gameType}></img>
+                                    <img src={item?.image} alt={item?.name}></img>
                                 </div>
                                 <TournamentInfo>
-                                    <div className ="tourn-name">{item?.gameType}</div>            
-                                    <ProgressBar now={item?.completedPercent}/>
-                                    <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
+                                    <div className ="tourn-name">{item?.name}</div>            
+                                    <ProgressBar now={20}/>
+                                    <div className = "tourn-completed mt-2">{3} of {12}</div>
                                     <div className = "fee mb-10"> Fee </div>
                                     <div className = "justify-space " >
                                         <div className = "fee-amount">{item?.fee} TNBC</div>

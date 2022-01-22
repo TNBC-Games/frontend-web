@@ -1,5 +1,5 @@
 import * as types from "../types/tournament.types"
-import { getCall, postCall } from "../../networking";
+import { getCall, postCall, putCall } from "../../networking";
 import { urls } from "../../networking/url";
 
 
@@ -79,18 +79,17 @@ export const getGames = () => async (dispatch) => {
     }
 }
 
-export const updateTournament = (payload,id) => async (dispatch) => {
+export const createNewTournament = (payload, token) => async (dispatch) => {
     dispatch({
-        type: types.UPDATE_TOURNAMENT_STARTED,
+        type: types.CREATE_TOURNAMENT_STARTED,
     })
-    const url =`${urls.updateTournament}/${id}`
     
     try {
-        let headers = { "Content-Type": "application/json" };
-        const {status, data} = await postCall(id? url : urls.updateTournament, payload, headers);
+        let headers = { "Content-Type": "application/json", "x-auth-token": token };
+        const {status, data} = await postCall( urls.updateTournament, payload, headers);
         if (status === 200) {
             dispatch({
-                type: types.UPDATE_TOURNAMENT_SUCCEEDED,
+                type: types.CREATE_TOURNAMENT_SUCCEEDED,
                 payload: data.data.results,
             });
             return {
@@ -99,7 +98,7 @@ export const updateTournament = (payload,id) => async (dispatch) => {
             };
         } else {
             dispatch({
-                type: types.UPDATE_TOURNAMENT_FAILED,
+                type: types.CREATE_TOURNAMENT_FAILED,
             })
             return {
                 status: false,
@@ -108,7 +107,7 @@ export const updateTournament = (payload,id) => async (dispatch) => {
         }
     } catch (err) {
         dispatch({
-            type: types.UPDATE_TOURNAMENT_FAILED,
+            type: types.CREATE_TOURNAMENT_FAILED,
             //payload: "Please check your internet connection and try again!",
         });
         return {
@@ -118,13 +117,13 @@ export const updateTournament = (payload,id) => async (dispatch) => {
     }
 }
 
-export const createGame = (payload) => async (dispatch) => {
+export const createGame = (payload, token) => async (dispatch) => {
     dispatch({
         type: types.CREATE_GAME_STARTED,
     })
     
     try {
-        let headers = { "Content-Type": "application/json" };
+        let headers = { "Content-Type": "application/json", "x-auth-token": token};
         const {status, data} = await postCall(urls.createGame, payload, headers);
         if (status === 200) {
             dispatch({
@@ -134,6 +133,7 @@ export const createGame = (payload) => async (dispatch) => {
             return {
                 status: true,
                 response: data.data.results,
+                
             };
         } else {
             dispatch({
@@ -187,6 +187,85 @@ export const getLeaderboard = (count) => async (dispatch) => {
     } catch (err) {
         dispatch({
             type: types.GET_LEADERBOARD_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
+
+
+export const updateTournament = (payload,id, token) => async (dispatch) => {
+    dispatch({
+        type: types.UPDATE_TOURNAMENT_STARTED,
+    })
+    const url =`${urls.updateTournament}/${id}`
+    
+    try {
+        let headers = { "Content-Type": "application/json", "x-auth-token": token };
+        const {status, data} = await putCall( url, payload, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.UPDATE_TOURNAMENT_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.UPDATE_TOURNAMENT_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.UPDATE_TOURNAMENT_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
+
+export const updateTournamentImage = (payload,id, token) => async (dispatch) => {
+    dispatch({
+        type: types.UPDATE_TOURNAMENT_IMAGE_STARTED,
+    })
+    const url =`${urls.uploadTournamentImage}/${id}`
+    
+    try {
+        let headers = { "x-auth-token": token };
+        const {status, data} = await postCall( url, payload, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.UPDATE_TOURNAMENT_IMAGE_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.UPDATE_TOURNAMENT_IMAGE_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.UPDATE_TOURNAMENT_IMAGE_FAILED,
             //payload: "Please check your internet connection and try again!",
         });
         return {
