@@ -18,7 +18,8 @@ function ChooseTournament() {
     const history = useHistory();
     const [showDropDown,setShowDropDown] = useState(false);
     const [tournList, setTournList] = useState("");
-    const tournamentList = useSelector(state => state.tournamentState.tournamentsList)
+    const tournamentList = useSelector(state => state.tournamentState.tournamentsList);
+    const [filteredTournamentList, setFilteredTournamentList] = useState(tournamentList)
     const tournaments = [
         {
             gameType: "CHESS",
@@ -72,13 +73,26 @@ function ChooseTournament() {
 
     const getListOfTournaments = async () => {
         let {status, response} = await dispatch(getTournament())
-        setTournList(response)
+        setFilteredTournamentList(response)
     }
 
     const setTournToView = (data) =>{
         dispatch(setTournament(data))
         history.push("/tournaments")
+    }
 
+    const filter = (data) => {
+        const filteredList = tournamentList.filter(
+            (item) => item.name === data
+        );
+        setFilteredTournamentList(filteredList)
+        setShowDropDown(false)
+        
+    }
+
+    const reset = () => {
+        setFilteredTournamentList(tournamentList)
+        setShowDropDown(!showDropDown)
     }
 
     useEffect(() => {
@@ -97,7 +111,7 @@ function ChooseTournament() {
                     <div className ="choose-games-title">Upcoming Tournament</div>
                     <div className="align-center flex-column">
                         <div className ="games-filter cursor-pointer">
-                            <div className ="games-filter-inner" onClick= {()=> setShowDropDown(!showDropDown)}>
+                            <div className ="games-filter-inner" onClick= {reset}>
                                 <div className ="games-filter-title"> All Games </div>
                                 <div className ="mr-2">
                                     <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -112,12 +126,10 @@ function ChooseTournament() {
                         { showDropDown && (
                             <Dropdown>
                                 <div className= "dropdown-inner">
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> Chess</div>
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> COD</div>
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FIFA</div>
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> FORTNITE</div>
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> MINECRAFT</div>
-                                    <div className = "dropdown-item" onClick= {()=> setShowDropDown(false)}> BLACKOPS</div>
+                                    {tournamentList &&
+                                        tournamentList.map((item, index) => (
+                                        <div className = "dropdown-item" onClick= {()=> filter(item.name)}> {item.name}</div>
+                                    ))}
                                 </div>
 
                             </Dropdown>
@@ -126,13 +138,13 @@ function ChooseTournament() {
                 </div>
                 
                 <div className = "choose-games-section">
-                    {tournamentList &&
-                        tournamentList.map((item, index) => (
+                    {filteredTournamentList &&
+                        filteredTournamentList.map((item, index) => (
                             <TournamentView key-={index}>
                                 <div className = "upcoming-tornament-name">{item?.name}
                                 </div>
                                 <div>
-                                    <img src={item?.image} alt={item?.name}></img>
+                                    <img src={item?.image? item.image :Culture} alt={item?.name} class="max-100"></img>
                                 </div>
                                 <TournamentInfo>
                                     <div className ="tourn-name">{item?.name}</div>            
@@ -178,6 +190,13 @@ export default ChooseTournament
 export const TournamentView = styled.div`
     width: 31.5%;
     filter: ${props => props.grey? "grayscale(100%)": ""};
+
+    .max-100{
+        height: 233px
+    }
+    >img{
+        height: auto !important;
+    }
 
     .upcoming-tornament-name {
         display: flex;

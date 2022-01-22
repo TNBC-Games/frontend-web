@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Portal } from '../../modals/Portal';
 import ProfileBackdrop from "../../assets/profilebackdrop.png";
@@ -6,8 +8,9 @@ import Image from "../../assets/profileImage.png";
 import {ReactComponent as GoldCup} from "../../assets/GoldCup.svg";
 import {ReactComponent as SilverCup} from "../../assets/SilverCup.svg";
 import {ReactComponent as BronzeCup} from "../../assets/Bronze.svg";
-import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
+import { getUser } from '../../redux/actions/signup.actions';
+import { getHumanDate } from '../../utils/utils';
 
 
 function ProfileManagement() {
@@ -30,7 +33,10 @@ function ProfileManagement() {
         silver: 5,
         bronze: 6,
     }
-    const history = useHistory()
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const userDetails = useSelector(state => state.signupState.userDetails)
+    const token = sessionStorage.getItem("accesstoken");
 
     const achievements = [
         {
@@ -71,8 +77,19 @@ function ProfileManagement() {
 
     function showTrophyModal(e){
         setShowModal(true)
-
     }
+
+    const getUserDetails = async (token)=>{
+        let {status, response} = await dispatch(getUser(token))
+        console.log(response,"=====================>>>>>>>>>>++++++++++++++++")
+    }
+    console.log(userDetails)
+
+    useEffect(()=>{
+        if(token && !userDetails){
+            getUserDetails(token)
+        }
+    }, [token, userDetails])
     return (
         <div className = "leaderboard-page fadeInUp animated">
             <Header image = {ProfileBackdrop}>
@@ -80,9 +97,9 @@ function ProfileManagement() {
                     <div className = "profile-info CUR">
                         <ProfileImage image= {profileDetails.image} onClick = {()=> history.push("/setting")}/>
                         <ProfileInfo>
-                            <div className = "profile-name">{profileDetails.profileName}</div>
+                            <div className = "profile-name">{userDetails.username}</div>
                             <div className = "profile-details" >Profile views : {profileDetails.profileViews}</div>
-                            <div className = "profile-details">Joined {profileDetails.joined}</div>
+                            <div className = "profile-details">Joined : {getHumanDate(userDetails.createdAt)}</div>
                             <div className = "profile-details">Game IDs: {profileDetails.gameId}</div>
                         </ProfileInfo>
                     </div>
@@ -125,7 +142,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type ">GOLD TROPHIES</div>
-                            <div className = "trophy-amount">{profileDetails.gold}</div> 
+                            <div className = "trophy-amount">{userDetails.gold}</div> 
                         </div>
                     </CupType>
 
@@ -135,7 +152,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type "> SILVER TROPHIES</div>
-                            <div className = "trophy-amount">{profileDetails.silver}</div> 
+                            <div className = "trophy-amount">{userDetails.silver}</div> 
                         </div>
                     </CupType>
 
@@ -145,7 +162,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type ">BRONZE TROPHIES</div>
-                            <div className = "trophy-amount">{profileDetails.bronze}</div> 
+                            <div className = "trophy-amount">{userDetails.bronze}</div> 
                         </div>
                     </CupType>
 

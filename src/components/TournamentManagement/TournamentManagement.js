@@ -1,33 +1,75 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect, useHistory } from 'react-router';
 import styled from 'styled-components';
 import { ProfileHeader } from '../GamesManagement/GamesHeader';
 import gamesImage from "../../assets/chessGame.png";
 import { TournamentView } from '../HomePage/ChooseTournament';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { getHumanDate } from '../../utils/utils';
+import { enrollIntoTournament } from '../../redux/actions/tournment.actions';
 
 
 function TournamentManagement() {
+    const dispatch = useDispatch();
+    const history = useHistory()
     const [view, setView] = useState("info");
-    const tournament = useSelector(state => state.tournamentState.tournamentInView)
+    const accessToken = sessionStorage.getItem("accesstoken");
+    const tournament = useSelector(state => state.tournamentState.tournamentInView);
+    const myTournament = useSelector(state => state.tournamentState.myTournament);
+    const [enrolState, setEnrolState] = useState("unenrolled")
+
+    const enrollToTournament = async ()=>{
+        setEnrolState("enrolling")
+        const token = accessToken
+        const id = tournament?._id
+        let {status, response} = await dispatch(enrollIntoTournament(token, id))
+        console.log(response,"[[[[[[[[[[[[[[[[[[[[")
+        if(status){
+            setEnrolState("enroled")
+        }else{
+            setEnrolState("enrol")
+        }
+        
+    }
+
+    console.log("========================>",tournament, myTournament)
+    
+    useEffect(()=>{
+
+        const filteredList = myTournament?.filter(
+            (item) => item?.tournament === tournament?._id
+        );
+        console.log(filteredList,"filteredList")
+        if(filteredList.length >=1 ){
+            setEnrolState("enroled")
+        }
+    },[tournament, myTournament])
+
+    useEffect(()=>{
+        if(!tournament){
+            history.push("/")
+            return
+        }
+    },[tournament])
     return (
+        
         <div className ="games-profile">
             <ProfileHeader image ={gamesImage}>
             </ProfileHeader>  
-            <TournamentHeader TournamentImage = {tournament.image}>
+            <TournamentHeader TournamentImage = {tournament?.image}>
                 <div className="image-section">
-                    <div className="tourn-fee">Prize: {tournament.prize} TNBC</div>
+                    <div className="tourn-fee">Prize: {tournament?.prize} TNBC</div>
                 </div>
                 <div className="toun-info ml-3">
-                    <div className="tourn-title mb-3">{tournament.name}</div>
-                    <div className="tourn-extra mb-1"> Type: <span className="content">{tournament.type}</span> | Participant: <span className="content">{"64"} </span> |  Entry Fee: <span className="content">{tournament.fee}</span></div>
-                    <div className="tourn-extra mb-1"> Registration Opens: <span className="content">{getHumanDate(tournament.startDate)}</span></div>
+                    <div className="tourn-title mb-3">{tournament?.name}</div>
+                    <div className="tourn-extra mb-1"> Type: <span className="content">{tournament?.type}</span> | Participant: <span className="content">{"64"} </span> |  Entry Fee: <span className="content">{tournament?.fee}</span></div>
+                    <div className="tourn-extra mb-1"> Registration Opens: <span className="content">{getHumanDate(tournament?.startDate)}</span></div>
                 </div>
             </TournamentHeader>
             <EnrollSection>
                 <div className="yellow-text">Starts in 10d 24hrs 40mins  28secs</div>
-                <button className="enroll-btn"> Enroll</button>
+                <button className={`enroll-btn ${enrolState === "enrolling" ? "form-loading" : "grey-disabled"}`} onClick={enrollToTournament}><span>{enrolState === "enroled" ? "Enrolled" : "Enrol"}</span></button>
             </EnrollSection>
             <TabSection>
                 <div className="inner-tab">
@@ -41,16 +83,16 @@ function TournamentManagement() {
             </TabSection>
             <InfoView>
                 {view === "info" && (
-                    <div className="content"> {tournament.info}
+                    <div className="content"> {tournament?.info}
                     </div>
                 )}
                 {view === "rules" && (
-                    <div className="content"> {tournament.rules}
+                    <div className="content"> {tournament?.rules}
                     </div>
                 )}
 
                 {view === "apply" && (
-                    <div className="content"> {tournament.howToApply}
+                    <div className="content"> {tournament?.howToApply}
                     </div>
                 )}
 

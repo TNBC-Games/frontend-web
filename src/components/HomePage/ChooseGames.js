@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
@@ -18,9 +18,10 @@ function ChooseGames() {
     const history = useHistory();
     const dispatch = useDispatch()
     const [showDropDown,setShowDropDown] = useState(false);
-    const [gamesList, setGamesList] = useState();
     const [loading, setLoading] = useState(false);
-    const [originalGamesList, setOriginalGamesList] = useState()
+    const listOfGames = useSelector(state => state.tournamentState.gamesList);
+    const [filteredGamesList, setFilteredGamesList] = useState(listOfGames);
+    const [gamesList, setGamesList] = useState(listOfGames);
     
     const settings = {
         className: "center",
@@ -69,28 +70,28 @@ function ChooseGames() {
         setLoading(true)
         let {status, response} = await dispatch(getGames())
         setTimeout(()=>{
-            setOriginalGamesList(response)
+            setFilteredGamesList(response)
         },1500)
         //
     }
-    const filter = async (data) => {
-        const filteredList = originalGamesList.filter(
+    const filter = (data) => {
+        const filteredList = listOfGames.filter(
             (item) => item.name === data
         );
-        setGamesList(filteredList)
+        setFilteredGamesList(filteredList)
         setShowDropDown(false)
         
     }
 
     const reset = () => {
-        setGamesList(originalGamesList)
+        setFilteredGamesList(listOfGames)
         setShowDropDown(!showDropDown)
     }
     useEffect(() => {
-        if (!gamesList){
+        if (!listOfGames){
             getListOfGames()
         }
-    }, [gamesList])
+    }, [listOfGames])
     return (
         <div className = "choose-games">
             
@@ -114,15 +115,15 @@ function ChooseGames() {
                         </div>
 
                         { showDropDown && (
-
+                            
                             <Dropdown>
                                 <div className= "dropdown-inner">
-                                    <div className = "dropdown-item" onClick= {() => filter("CHESS")}> Chess</div>
-                                    <div className = "dropdown-item" onClick= {()=> filter("COD")}> COD</div>
-                                    <div className = "dropdown-item" onClick= {()=> filter("FIFA")}> FIFA</div>
-                                    <div className = "dropdown-item" onClick= {()=> filter("FORTNITE")}> FORTNITE</div>
-                                    <div className = "dropdown-item" onClick= {()=> filter("MINECRAFT")}> MINECRAFT</div>
-                                    <div className = "dropdown-item" onClick= {()=> filter("BLACKOPS")}> BLACKOPS</div>
+                                    {listOfGames &&
+                                        listOfGames.map((item, index) => (
+                                            <div className = "dropdown-item" onClick= {() => filter(item.name)}> {item.name}</div>
+                                    
+                                    ))}
+                                    
                                 </div>
 
                             </Dropdown>
@@ -136,11 +137,11 @@ function ChooseGames() {
 
                 <div className = "choose-games-section">
                     
-                        {originalGamesList && (
-                            originalGamesList.map((item, index) => (
+                        {filteredGamesList && (
+                            filteredGamesList.map((item, index) => (
                                 
                                 <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
-                                    <img src={item.image} alt ={item.name}></img>
+                                    <img src={item.image? item.image: Fifa2} alt ={item.name}></img>
                                     <div className = "games-name-box">
                                         <div className ="pl-4 pnl-4">{item.name}</div>
                                     </div>
@@ -149,7 +150,7 @@ function ChooseGames() {
                             )) 
                             
                         )}
-                        {!originalGamesList && (
+                        {!filteredGamesList && (
                             games.map((item, index) => (
                                 <div className ="games-item mt-4 cursor-pointer" key={index}>
                                     <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
@@ -174,8 +175,8 @@ function ChooseGames() {
 export default ChooseGames
 
 export const Dropdown = styled.div`
-        height:298px;
         width:257px;
+        height: auto !important;
         display:flex;
         justify-content: center;
         align-items:center;
@@ -189,7 +190,7 @@ export const Dropdown = styled.div`
             height: 296px
         }
     .dropdown-inner{
-        height: 296px;
+        height: 99% !important;
         width: 255px;
         position: relative;
         background-color: black;

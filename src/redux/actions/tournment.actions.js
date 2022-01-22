@@ -290,6 +290,45 @@ export const getMyTournament = (token) => async (dispatch) => {
     try {
         let headers = {"x-auth-token": token};
         const {status, data} = await getCall(urls.getMyTournaments, headers);
+        console.log(data,"myTournament")
+        if (status === 200) {
+            dispatch({
+                type: types.GET_MY_TOURNAMENT_SUCCEEDED,
+                payload: data.data,
+            });
+            return {
+                status: true,
+                response: data.data,
+            };
+        } else {
+            dispatch({
+                type: types.GET_MY_TOURNAMENT_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_MY_TOURNAMENT_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
+
+export const enrollIntoTournament = (token, id) => async (dispatch) => {
+    dispatch({
+        type: types.GET_MY_TOURNAMENT_STARTED,
+    })
+    const url = `${urls.tournamentEnrollment}/${id}`
+    try {
+        let headers = {"x-auth-token": token};
+        const {status, data} = await postCall(url,"", headers);
         if (status === 200) {
             dispatch({
                 type: types.GET_MY_TOURNAMENT_SUCCEEDED,

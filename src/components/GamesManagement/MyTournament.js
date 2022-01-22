@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import Culture from "../../assets/Culture.png";
@@ -12,13 +13,18 @@ import { ProfileHeader } from './GamesHeader';
 import { ProgressBar } from 'react-bootstrap';
 import { TournamentInfo } from '../HomePage/ChooseTournament';
 import { ContentBody } from '../HomePage/ChooseGames';
+import { getMyTournament } from '../../redux/actions/tournment.actions';
+
 
 
 
 function MyTournament() {
+    const dispatch = useDispatch();
     const [active, setActive] = useState(1);
     const [completedList, setCompletedList] = useState("");
     const [ongoingList, setOngoingList] = useState("");
+    const myTournament = useSelector(state => state.tournamentState.myTournament);
+    const accessToken = sessionStorage.getItem("accesstoken");
     const games = [
         {
             gameType: "CHESS",
@@ -188,6 +194,12 @@ function MyTournament() {
 
     ]
 
+    const getMyTournaments = async () =>{
+        const token = accessToken
+        let {status, response} = await dispatch(getMyTournament(token))
+        console.log(response,"[[[[[[[[[[[[[[[[[[[[")
+    }
+
     useEffect(() => {
         const completedList = games.filter(
             (item) => item.completed === true
@@ -201,6 +213,12 @@ function MyTournament() {
         setOngoingList(ongoing)
 
     }, [active])
+
+    useEffect(() => {
+        if(!myTournament){
+           // getMyTournaments()
+        }
+    }, [myTournament])
 
     return (
         <div className="leaderboard-page fadeInUp animated">
@@ -239,7 +257,7 @@ function MyTournament() {
                                         <div className="upcoming-tornament-name">{item?.gameType}
                                         </div>
                                         <div>
-                                            <img src={item?.image} alt={item?.gameType}></img>
+                                            <img src={item?.image? item.image :Culture} alt={item?.gameType}></img>
                                         </div>
                                         <TournamentInfo>
                                             <div className="tourn-name">{item?.gameType}</div>

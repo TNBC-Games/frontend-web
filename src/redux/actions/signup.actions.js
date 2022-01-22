@@ -1,5 +1,5 @@
 import * as types from "../types/signup.types";
-import { postCall } from "../../networking";
+import { postCall, getCall } from "../../networking";
 import { urls } from "../../networking/url";
 
 
@@ -78,6 +78,45 @@ export const signinUser = (data, type) => async (dispatch) => {
     } catch (err) {
         dispatch({
             type: types.SIGNIN_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        };
+    }
+}
+
+export const getUser = (token) => async (dispatch) => {
+    dispatch({
+        type: types.GET_USER_STARTED,
+    })
+    
+    try {
+        let headers = { "x-auth-token": token };
+        const {status, data, message} = await getCall(urls.getUser, headers);
+        console.log(data,"=====================>>>>>>>>>>++++++++++++++++")
+        if (status === 200) {
+            dispatch({
+                type: types.GET_USER_SUCCEEDED,
+                payload: data.data,
+            });
+            return {
+                status: true,
+                response: data.data
+            };;
+        } else {
+            dispatch({
+                type: types.GET_USER_FAILED,
+            })
+            return {
+                status: false,
+                response: message
+            };
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_USER_FAILED,
             //payload: "Please check your internet connection and try again!",
         });
         return {
