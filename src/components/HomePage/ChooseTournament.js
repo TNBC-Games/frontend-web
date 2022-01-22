@@ -1,5 +1,6 @@
 import React,{ useState, useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import Culture from "../../assets/Culture.png";
@@ -9,11 +10,12 @@ import Fifa4 from "../../assets/Fifa4.png";
 import Fifa5 from "../../assets/Fifa5.png";
 import { ProgressBar } from 'react-bootstrap';
 import { ContentBody, Dropdown } from './ChooseGames';
-import { getTournament } from '../../redux/actions/tournment.actions';
+import { getTournament, setTournament } from '../../redux/actions/tournment.actions';
 import Skeleton from 'react-loading-skeleton';
 
 function ChooseTournament() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [showDropDown,setShowDropDown] = useState(false);
     const [tournList, setTournList] = useState("");
     const tournamentList = useSelector(state => state.tournamentState.tournamentsList)
@@ -71,6 +73,12 @@ function ChooseTournament() {
     const getListOfTournaments = async () => {
         let {status, response} = await dispatch(getTournament())
         setTournList(response)
+    }
+
+    const setTournToView = (data) =>{
+        dispatch(setTournament(data))
+        history.push("/tournaments")
+
     }
 
     useEffect(() => {
@@ -133,7 +141,7 @@ function ChooseTournament() {
                                     <div className = "fee mb-10"> Fee </div>
                                     <div className = "justify-space " >
                                         <div className = "fee-amount">{item?.fee} TNBC</div>
-                                        <div className = "join-free float-btn">
+                                        <div className = "join-free float-btn" onClick = {()=> setTournToView(item)}>
                                             View
                                         </div>
                                     </div>

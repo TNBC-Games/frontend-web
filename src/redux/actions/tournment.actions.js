@@ -274,3 +274,48 @@ export const updateTournamentImage = (payload,id, token) => async (dispatch) => 
         }
     }
 }
+
+export const setTournament =(data)=> (dispatch) => {
+    dispatch({
+        type: types.SET_TOURNAMENT,
+        payload: data
+    })
+}
+
+export const getMyTournament = (token) => async (dispatch) => {
+    dispatch({
+        type: types.GET_MY_TOURNAMENT_STARTED,
+    })
+    
+    try {
+        let headers = {"x-auth-token": token};
+        const {status, data} = await getCall(urls.getMyTournaments, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.GET_MY_TOURNAMENT_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.GET_MY_TOURNAMENT_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_MY_TOURNAMENT_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}

@@ -8,5 +8,6 @@ export const urls ={
     updateTournament: "https://tnbc-games-api.herokuapp.com/v1/tournament",
     createGame: "https://tnbc-games-api.herokuapp.com/v1/game",
     getLeaderboard: "https://tnbc-games-api.herokuapp.com/v1/user/leaderBoard",
-    uploadTournamentImage: "https://tnbc-games-api.herokuapp.com/v1/tournament/uploadImage"
+    uploadTournamentImage: "https://tnbc-games-api.herokuapp.com/v1/tournament/uploadImage",
+    getMyTournaments: "https://tnbc-games-api.herokuapp.com//v1/tournament/myTournaments",
 }

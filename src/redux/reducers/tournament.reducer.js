@@ -7,6 +7,7 @@ const initialState = {
     gamesList:false,
     leaderboardNames: "",
     leaderboardCount: null,
+    tournamentInView: null,
 }
 
 export const tournamentReducer = (state = initialState, action) => {
@@ -38,6 +39,11 @@ export const tournamentReducer = (state = initialState, action) => {
                 ...state,
                 leaderboardNames: action.payload,
                 leaderboardCount: action.count,
+            }
+        case types.SET_TOURNAMENT:
+            return{
+                ...state,
+                tournamentInView: action.payload,
             }
         default:
             return state;

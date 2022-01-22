@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ProfileHeader } from '../GamesManagement/GamesHeader';
 import gamesImage from "../../assets/chessGame.png";
 import { TournamentView } from '../HomePage/ChooseTournament';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
+import { getHumanDate } from '../../utils/utils';
+
 
 function TournamentManagement() {
     const [view, setView] = useState("info");
+    const tournament = useSelector(state => state.tournamentState.tournamentInView)
     return (
         <div className ="games-profile">
             <ProfileHeader image ={gamesImage}>
             </ProfileHeader>  
-            <TournamentHeader TournamentImage = {callOfDutyImage}>
+            <TournamentHeader TournamentImage = {tournament.image}>
                 <div className="image-section">
-                    <div className="tourn-fee">Prize: 10,000 TNBC</div>
+                    <div className="tourn-fee">Prize: {tournament.prize} TNBC</div>
                 </div>
                 <div className="toun-info ml-3">
-                    <div className="tourn-title mb-3">OCTOBER BLITZ</div>
-                    <div className="tourn-extra mb-1"> Type: <span className="content">{"Bracket"}</span> | Participant: <span className="content">{"64"} </span> |  Entry Fee: <span className="content">{"40 TNBC"}</span></div>
-                    <div className="tourn-extra mb-1"> Registration Opens: <span className="content">{"30/10/2021"}</span></div>
+                    <div className="tourn-title mb-3">{tournament.name}</div>
+                    <div className="tourn-extra mb-1"> Type: <span className="content">{tournament.type}</span> | Participant: <span className="content">{"64"} </span> |  Entry Fee: <span className="content">{tournament.fee}</span></div>
+                    <div className="tourn-extra mb-1"> Registration Opens: <span className="content">{getHumanDate(tournament.startDate)}</span></div>
                 </div>
             </TournamentHeader>
             <EnrollSection>
@@ -36,6 +40,19 @@ function TournamentManagement() {
                 </div>
             </TabSection>
             <InfoView>
+                {view === "info" && (
+                    <div className="content"> {tournament.info}
+                    </div>
+                )}
+                {view === "rules" && (
+                    <div className="content"> {tournament.rules}
+                    </div>
+                )}
+
+                {view === "apply" && (
+                    <div className="content"> {tournament.howToApply}
+                    </div>
+                )}
 
             </InfoView>
 
@@ -164,7 +181,7 @@ const TabSection = styled.div`
 `;
 const InfoView = styled.div`
     max-width: 80%;
-    min-height: 554px;
+    min-height: 174px;
     background: #1D1D1D;
     border-radius: 5px;
     padding: 18px 32px;
@@ -172,6 +189,19 @@ const InfoView = styled.div`
     position: relative;
     bottom: 60px;
     margin-top: 2.5rem!important;
+    margin-bottom: 2.5rem!important;
+
+    .content{
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 27px;
+        display: flex;
+        align-items: center;
+        text-align: justify;
+
+        color: #FFFFFF;
+    }
 
     
 
