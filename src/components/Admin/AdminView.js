@@ -189,7 +189,7 @@ function AdminView() {
         setImageUploading("uploading")
         const formData = new FormData()
         const file = event.target.files[0]
-        formData.append("picture", file, file.name)
+        formData.append("image", file)
 
         let {status, response} = await dispatch(updateTournamentImage(formData, id, token))
         

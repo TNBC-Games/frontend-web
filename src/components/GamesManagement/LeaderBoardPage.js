@@ -5,7 +5,8 @@ import Skeleton from 'react-loading-skeleton';
 import LeaderBoardHeader from "../../assets/LeaderboardHeader.png";
 import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
-import { getLeaderboard } from '../../redux/actions/tournment.actions';
+import { getLeaderboard, getLeaderboardUser } from '../../redux/actions/tournment.actions';
+import { getUser } from '../../redux/actions/signup.actions';
 
 
 function LeaderBoardPage() {
@@ -79,6 +80,14 @@ function LeaderBoardPage() {
     const getNext = async () =>{
         await setCount(count + 10)
         getLeaderboardInfo(count + 10)
+    }
+
+    const getUser = async (id)=>{
+        let {status, response} = await dispatch(getLeaderboardUser(id));
+        if(status){
+            history.push()
+        }
+        
     }
     
     useEffect(() => {
@@ -178,7 +187,7 @@ function LeaderBoardPage() {
                         {leaderboard &&
                             leaderboard.map((item, index)=>(
                                 <div className="table-head ">
-                                    <div className="rank pl-4">
+                                    <div className="rank pl-4 cursor-pointer" onClick={()=>getUser(item._id)} >
                                         <div className="align-center">
                                             <span className="RankNo pr-4">{item.rank}</span>
                                             <span className="img mb-2 mr-4 ml-4">

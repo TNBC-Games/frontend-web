@@ -243,7 +243,7 @@ export const updateTournamentImage = (payload,id, token) => async (dispatch) => 
     const url =`${urls.uploadTournamentImage}/${id}`
     
     try {
-        let headers = { "x-auth-token": token };
+        let headers = { "x-auth-token": token, "Content-Type": " multipart/form-data;",};
         const {status, data} = await postCall( url, payload, headers);
         if (status === 200) {
             dispatch({
@@ -356,5 +356,45 @@ export const enrollIntoTournament = (token, id) => async (dispatch) => {
             status: false,
             message: err
         }
+    }
+}
+
+export const getLeaderboardUser = (id) => async (dispatch) => {
+    dispatch({
+        type: types.GET_LEADERBOARD_USER_STARTED,
+    })
+    let url = `${urls.getUser}/profile/${id}`
+    
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data, message} = await getCall(url);
+        console.log(data,"=================getLeaderboardUser+++++++++++")
+        if (status === 200) {
+            dispatch({
+                type: types.GET_LEADERBOARD_USER_SUCCEEDED,
+                payload: data.data,
+            });
+            return {
+                status: true,
+                response: data.data
+            };;
+        } else {
+            dispatch({
+                type: types.GET_LEADERBOARD_USER_FAILED,
+            })
+            return {
+                status: false,
+                response: message
+            };
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_LEADERBOARD_USER_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        };
     }
 }
