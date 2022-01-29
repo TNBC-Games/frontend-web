@@ -99,29 +99,31 @@ function TransactionView() {
                         </div>
                         <div className="icon"><ArrowIcon/></div>
                     </div>
-                    <div className={`transact-tab mt-3 ${activeTab === 1 && " active-tab"}`} onClick={()=>setActiveTab(1)}>
-                        <div className="flex align-center">
-                            <div className="blue dot mr-2"></div> Tranasctions
+                    <div className="transactionTabs">
+                        <div className={`transact-tab mt-3 ${activeTab === 1 && " active-tab"}`} onClick={()=>setActiveTab(1)}>
+                            <div className="flex align-center">
+                                <div className="blue dot mr-2"></div> Tranasctions
+                            </div>
+                            <div><RightArrowIcon/></div>
                         </div>
-                        <div><RightArrowIcon/></div>
-                    </div>
-                    <div className={`transact-tab ${activeTab === 2 && " active-tab"}`} onClick={()=>setActiveTab(2)}>
-                        <div className="flex align-center">
-                            <div className="orange dot mr-2"> </div>Deposit
+                        <div className={`transact-tab ${activeTab === 2 && " active-tab"}`} onClick={()=>setActiveTab(2)}>
+                            <div className="flex align-center">
+                                <div className="orange dot mr-2"> </div>Deposit
+                            </div>
+                            <div><RightArrowIcon/></div>
                         </div>
-                        <div><RightArrowIcon/></div>
-                    </div>
-                    <div className={`transact-tab ${activeTab === 3 && "active-tab"}`} onClick={()=>setActiveTab(3)}>
-                        <div className="flex align-center">
-                            <div className="green dot mr-2"></div>Withdraw
+                        <div className={`transact-tab ${activeTab === 3 && "active-tab"}`} onClick={()=>setActiveTab(3)}>
+                            <div className="flex align-center">
+                                <div className="green dot mr-2"></div>Withdraw
+                            </div>
+                            <div><RightArrowIcon/></div>
                         </div>
-                        <div><RightArrowIcon/></div>
-                    </div>
-                    <div className={`transact-tab ${activeTab === 4 && "active-tab"}`} onClick={()=>setActiveTab(4)}>
-                        <div className="flex align-center" >
-                            <div className="blue dot mr-2"></div>Account
+                        <div className={`transact-tab ${activeTab === 4 && "active-tab"}`} onClick={()=>setActiveTab(4)}>
+                            <div className="flex align-center" >
+                                <div className="blue dot mr-2"></div>Account
+                            </div>
+                            <div><RightArrowIcon/></div>
                         </div>
-                        <div><RightArrowIcon/></div>
                     </div>
 
                 </div>

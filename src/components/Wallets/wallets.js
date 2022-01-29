@@ -209,7 +209,7 @@ function Wallet() {
                                     Recent Transaction
                                 </div>
                                 <div className="transaction-filter mb-5">
-                                    Today
+                                   <span className="ml-3">Today</span> 
                                 </div>
                                 <div>
                                     <TransactionList transactionList={transactionList}/>
@@ -257,6 +257,69 @@ export default Wallet;
 export const WalletView = styled.div`
     max-width: 95vw;
     display: flex;
+    
+    @media only screen and (max-width: 962px) {
+        flex-direction: column;
+        margin: auto;
+        .wallet-sidebar{
+            flex-direction: row !important;
+            width: 100% !important;
+            margin-top: 60px;
+            margin-bottom: 30px;
+            justify-content: space-between;
+            margin-right: 0rem!important;
+            margin-left: 0rem!important;
+        }
+        .action-btn{
+            max-width: 110px;
+            max-height: 45px;
+            font-size: 14px !important;
+        }
+        .balance-session{
+            flex-direction: column;
+        }
+        .heading{
+            font-size: 14px ;
+        }
+        .amount{
+            font-size: 24px !important;
+        }
+        .info-section {
+            padding: 38px 15px !important;
+        }
+        .chart-session{
+            max-width: 100% !important;
+        }
+        .recent {
+            font-size: 21px !important;
+        }
+        .amount {
+            font-size: 20px !important;
+        }
+        .item-title{
+            font-size: 14px !important;   
+        }
+        .account-deposit {
+            padding: 43px 20px !important;
+        }
+        .red-text {
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            line-height: 117.69% !important;
+        }
+        .wallet-title {
+            font-size: 18px !important;
+        }
+        .wallet-input {
+            max-height: 54px
+        }
+        .wallet-input-tnbc {
+            max-height: 54px
+        }
+        .wallet-tnbc {
+            height: 54px;
+        }
+    }
 
     .wallet-sidebar{
         width: 37%;
