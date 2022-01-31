@@ -35,7 +35,8 @@ function ProfileManagement() {
     }
     const history = useHistory();
     const dispatch = useDispatch();
-    const userDetails = useSelector(state => state.signupState.userDetails)
+    //const userDetails = useSelector(state => state.signupState.userDetails)
+    const profileInView = useSelector(state => state.tournamentState.profileInView)
     const token = sessionStorage.getItem("accesstoken");
 
     const achievements = [
@@ -79,15 +80,11 @@ function ProfileManagement() {
         setShowModal(true)
     }
 
-    const getUserDetails = async (token)=>{
-        let {status, response} = await dispatch(getUser(token))
+    if(!profileInView.userEarnings){
+        history.push("/")
+        return
     }
 
-    useEffect(()=>{
-        if(token && !userDetails){
-            getUserDetails(token)
-        }
-    }, [token, userDetails])
     return (
         <div className = "leaderboard-page fadeInUp animated">
             <Header image = {ProfileBackdrop}>
@@ -95,10 +92,10 @@ function ProfileManagement() {
                     <div className = "profile-info CUR">
                         <ProfileImage image= {profileDetails.image} onClick = {()=> history.push("/setting")}/>
                         <ProfileInfo>
-                            <div className = "profile-name">{userDetails.username}</div>
+                            <div className = "profile-name">{profileInView.username}</div>
                             <div className = "profile-details" >Profile views : {profileDetails.profileViews}</div>
-                            <div className = "profile-details">Joined : {getHumanDate(userDetails.createdAt)}</div>
-                            <div className = "profile-details">Game IDs: {profileDetails.gameId}</div>
+                            <div className = "profile-details">Joined : {getHumanDate(profileInView.createdAt)}</div>
+                            <div className = "profile-details">Game IDs: {profileInView._id}</div>
                         </ProfileInfo>
                     </div>
                 </ContentBody>
@@ -108,12 +105,12 @@ function ProfileManagement() {
                 
                         <div className = "profile-record">
                             <div className = "record-heading">POINTS</div>
-                            <div className = "record-details">{profileDetails.points} TP</div>
+                            <div className = "record-details">{profileInView.userEarnings.points} TP</div>
                             <div className = "record-rank"> RANKED # {profileDetails.pointsRank}</div>
                         </div>
                         <div className = "profile-record">
                             <div className = "record-heading">EARNINGS</div>
-                            <div className = "record-details">{profileDetails.earnings} TP</div>
+                            <div className = "record-details">{profileInView.userEarnings.earnings} TP</div>
                             <div className = "record-rank"> RANKED # {profileDetails.earningsRank}</div>
                         </div>
                         <div className = "profile-record">
@@ -140,7 +137,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type ">GOLD TROPHIES</div>
-                            <div className = "trophy-amount">{userDetails.gold}</div> 
+                            <div className = "trophy-amount">{profileInView.userEarnings.gold}</div> 
                         </div>
                     </CupType>
 
@@ -150,7 +147,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type "> SILVER TROPHIES</div>
-                            <div className = "trophy-amount">{userDetails.silver}</div> 
+                            <div className = "trophy-amount">{profileInView.userEarnings.silver}</div> 
                         </div>
                     </CupType>
 
@@ -160,7 +157,7 @@ function ProfileManagement() {
                         </div>
                         <div className = "trophy-record">
                             <div className = "trophy-type ">BRONZE TROPHIES</div>
-                            <div className = "trophy-amount">{userDetails.bronze}</div> 
+                            <div className = "trophy-amount">{profileInView.userEarnings.bronze}</div> 
                         </div>
                     </CupType>
 

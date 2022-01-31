@@ -8,7 +8,8 @@ const initialState = {
     leaderboardNames: "",
     leaderboardCount: null,
     tournamentInView: null,
-    myTournament: null
+    profileInView: "",
+    myTournament: ""
 }
 
 export const tournamentReducer = (state = initialState, action) => {
@@ -50,6 +51,11 @@ export const tournamentReducer = (state = initialState, action) => {
             return{
                 ...state,
                 myTournament: action.payload,
+            }
+        case types.SET_PROFILE_IN_VIEW:
+            return{
+                ...state,
+                profileInView: action.payload,
             }
         default:
             return state;

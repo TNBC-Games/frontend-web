@@ -396,3 +396,11 @@ export const getLeaderboardUser = (id) => async (dispatch) => {
         };
     }
 }
+
+export const setProfileInView = (data) => async (dispatch) => {
+    dispatch({
+        type: types.SET_PROFILE_IN_VIEW,
+        payload: data
+    })
+
+}

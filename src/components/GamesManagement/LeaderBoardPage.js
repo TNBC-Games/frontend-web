@@ -5,7 +5,7 @@ import Skeleton from 'react-loading-skeleton';
 import LeaderBoardHeader from "../../assets/LeaderboardHeader.png";
 import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
-import { getLeaderboard, getLeaderboardUser } from '../../redux/actions/tournment.actions';
+import { getLeaderboard, getLeaderboardUser, setProfileInView } from '../../redux/actions/tournment.actions';
 import { getUser } from '../../redux/actions/signup.actions';
 import { Dropdown } from '../HomePage/ChooseGames';
 
@@ -121,10 +121,6 @@ function LeaderBoardPage() {
     }
 
     const filter = async (sortBy)  => {
-        // const filteredList = listOfGames.filter(
-        //     (item) => item.name === data
-        // );
-
         setFilteredEarningsList(sortBy)
         await getLeaderboardInfo(count, sortBy, game, timeSpan)
         setShowDropDown(false)
@@ -133,14 +129,15 @@ function LeaderBoardPage() {
     
 
     const filterGames = async (game)  => {
-        // const filteredList = listOfGames.filter(
-        //     (item) => item.name === data
-        // );
-
         setGame(game)
         await getLeaderboardInfo(count, sortBy, game, timeSpan)
-        setShowGamesDropDown(false)
-        
+        setShowGamesDropDown(false)  
+    }
+
+    const viewProfile = async(data) =>{
+        await dispatch(setProfileInView(data))
+        history.push("/profile")
+
     }
     
     useEffect(() => {
@@ -167,12 +164,11 @@ function LeaderBoardPage() {
         }
     },[leaderboardI, leaderboardCount ])
 
-    useEffect(()=>{
-        if(!listOfGames){
-            history.push("/")
-            return
-        }
-    })
+
+    if(!listOfGames){
+        history.push("/")
+        return
+    }
     return (
         <div className="leaderboard-page fadeInUp animated">
             <Header image={LeaderBoardHeader}>
@@ -291,8 +287,8 @@ function LeaderBoardPage() {
                             </div>
                         </div>
                         {leaderboard &&
-                            leaderboard.map((item, index)=>(
-                                <div className="table-head ">
+                            leaderboard.map((item, index) =>(
+                                <div className="table-head" onClick={()=> viewProfile(item)}>
                                     <div className="rank pl-4 cursor-pointer" onClick={()=>getUser(item._id)} >
                                         <div className="align-center">
                                             <span className="RankNo pr-4">{item.rank}</span>
