@@ -36,10 +36,11 @@ export const postCall = async (url, data, headers, params) => {
     });
 };
 
-export const getCall = async (url,  headers) => {
+export const getCall = async (url,  headers, params) => {
     return axios({
         method: "get",
         url: url,
+        params: params,
         headers: headers,
     }).catch(function (error) {
         if (!error.response) {

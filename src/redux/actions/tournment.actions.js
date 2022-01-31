@@ -156,19 +156,21 @@ export const createGame = (payload, token) => async (dispatch) => {
     }
 }
 
-export const getLeaderboard = (count) => async (dispatch) => {
+export const getLeaderboard = (count, sortBy, game, timeSpan) => async (dispatch) => {
     dispatch({
         type: types.GET_LEADERBOARD_STARTED,
     })
-    const url = ` ${urls.getLeaderboard}?sortBy=earnings&limit=${count}&page=1`
+    const url = ` ${urls.getLeaderboard}?sortBy=${sortBy}&limit=${count}&page=1&game=${game}&timeSpan=${timeSpan}`
+
     try {
         let headers = { "Content-Type": "application/json" };
         const {status, data} = await getCall(url, headers);
+        console.log(status, data, "hiiiiiiiiiiiiiii")
         if (status === 200) {
             console.log(data,"-----")
             dispatch({
                 type: types.GET_LEADERBOARD_SUCCEEDED,
-                payload: data.data.leaderBoard,
+                payload: data.data.leaderboard,
                 count: count,
             });
             return {
@@ -367,7 +369,7 @@ export const getLeaderboardUser = (id) => async (dispatch) => {
     
     try {
         let headers = { "Content-Type": "application/json" };
-        const {status, data, message} = await getCall(url);
+        const {status, data, message} = await getCall(url, headers);
         console.log(data,"=================getLeaderboardUser+++++++++++")
         if (status === 200) {
             dispatch({

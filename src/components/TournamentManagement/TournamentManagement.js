@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import { ProfileHeader } from '../GamesManagement/GamesHeader';
 import gamesImage from "../../assets/chessGame.png";
-import { TournamentView } from '../HomePage/ChooseTournament';
-import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import { getHumanDate } from '../../utils/utils';
 import { enrollIntoTournament } from '../../redux/actions/tournment.actions';
 
@@ -50,7 +48,7 @@ function TournamentManagement() {
         if(!tournament){
             history.push("/")
             return
-        }
+        } 
     },[tournament])
     return (
         

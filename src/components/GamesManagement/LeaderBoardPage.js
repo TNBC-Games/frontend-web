@@ -15,7 +15,10 @@ function LeaderBoardPage() {
     const [count, setCount] = useState(10);
     const [sortBy, setSortBy] = useState("earnings");
     const [loading, setLoading] = useState(false);
+    const [timeSpan, setTimeSpan] = useState("All Time");
+    const [showMore, setShowMore] = useState(false)
     const { leaderboardNames: leaderboardI, leaderboardCount} = useSelector(state => state.tournamentState)
+    console.log(leaderboardI, "yooooooooooooo", leaderboard)
     const LeaderboardItems = [
         {
             rank: 1,
@@ -65,13 +68,20 @@ function LeaderBoardPage() {
         
     ]
     const history = useHistory();
-    function gotoProfile() {
+    const gotoProfile= ()=>{
         history.push("/")
     }
 
-    const getLeaderboardInfo = async (count)  =>{
+    const setDate = (timeSpan)=>{
+        setTimeSpan(timeSpan)
+        getLeaderboardInfo(count, timeSpan)
+
+    }
+
+    const getLeaderboardInfo = async (count, timeSpan)  =>{
         setLoading(true)
-        let {status, response} = await dispatch(getLeaderboard(count))
+        const game = "chess"
+        let {status, response} = await dispatch(getLeaderboard(count, sortBy, game, timeSpan))
         console.log(response)
         setLeaderboard(response)
         setLoading(false)
@@ -79,7 +89,7 @@ function LeaderBoardPage() {
 
     const getNext = async () =>{
         await setCount(count + 10)
-        getLeaderboardInfo(count + 10)
+        getLeaderboardInfo(count + 10, timeSpan)
     }
 
     const getUser = async (id)=>{
@@ -104,7 +114,13 @@ function LeaderBoardPage() {
     useEffect(() => {
         setLeaderboard(leaderboardI)
         setCount(leaderboardCount)
-    }, [])
+    }, [leaderboardI, leaderboardCount])
+
+    useEffect(()=>{
+        if(leaderboardI.length === leaderboardCount){
+            setShowMore(true)
+        }
+    })
     return (
         <div className="leaderboard-page fadeInUp animated">
             <Header image={LeaderBoardHeader}>
@@ -154,9 +170,9 @@ function LeaderBoardPage() {
                     <LeaderboardTable >
                         <div className = "table-head filter-heading">
                             <div className="flex">
-                                <div className= "filter-item white"> All TIME</div>
-                                <div className= "filter-item"> LAST 30 DAYS</div>
-                                <div className= "filter-item"> LAST 7 DAYS</div>
+                                <div className={`filter-item ${timeSpan === "All Time" && "white"} `} onClick={() => setDate("All Time")}> All TIME</div>
+                                <div className= {`filter-item ${timeSpan === "Last 30 days" && "white"}`} onClick={() => setDate("Last 30 days")}> LAST 30 DAYS</div>
+                                <div className= {`filter-item ${timeSpan === "Last 7 days" && "white"}`} onClick={() => setDate("Last 7 days")}> LAST 7 DAYS</div>
                             </div>
                             <div className="top-10">
                                 showing top {count? count : 10}
@@ -198,19 +214,19 @@ function LeaderBoardPage() {
                                         </div>
                                     </div>
                                     <div className="points">
-                                        <div className="align-center"> {item.points} </div>
+                                        <div className="align-center"> {item.userEarnings.points} </div>
                                     </div>
                                     <div className="points earning">
-                                        <div className=" align-end align-center">{`${item.earnings} TNBC`}</div>
+                                        <div className=" align-end align-center">{`${item.userEarnings.earnings} TNBC`}</div>
                                     </div>
                                     <div className="points">
-                                        <div className=" align-center">{item.gold}</div>
+                                        <div className=" align-center">{item.userEarnings.gold}</div>
                                     </div>
                                     <div className="points">
-                                        <div className=" align-center"> {item.silver}</div>
+                                        <div className=" align-center"> {item.userEarnings.silver}</div>
                                     </div>
                                     <div className="points">
-                                        <div className=" align-center"> {item.bronze}</div>
+                                        <div className=" align-center"> {item.userEarnings.bronze}</div>
                                     </div>
                                 </div>
 
@@ -227,12 +243,14 @@ function LeaderBoardPage() {
                         
                         
                         
-                        <div className={`table-head bottom-tab ${loading && " form-loading"}`} onClick={getNext}>
-                            <span className="load-more cursor-pointer">
-                                Load More
-                            </span>
+                        {showMore && (
+                            <div className={`table-head bottom-tab ${loading && " form-loading"}`} onClick={getNext}>
+                                <span className="load-more cursor-pointer">
+                                    Load More
+                                </span>
 
-                        </div>
+                            </div>
+                        )}
                         
                         
 

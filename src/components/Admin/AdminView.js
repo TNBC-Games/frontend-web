@@ -362,8 +362,7 @@ function AdminView() {
                                             autocomplete="off"
 
                                         />
-
-                                            { showDropDown && (
+                                        { showDropDown && (
 
                                             <GameDropdown>
                                                 <div className= "dropdown-inner">
@@ -376,7 +375,7 @@ function AdminView() {
                                                 </div>
 
                                             </GameDropdown>
-                                            )}
+                                        )}
                                     </div>
                                 </div>
 
