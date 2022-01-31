@@ -165,9 +165,7 @@ export const getLeaderboard = (count, sortBy, game, timeSpan) => async (dispatch
     try {
         let headers = { "Content-Type": "application/json" };
         const {status, data} = await getCall(url, headers);
-        console.log(status, data, "hiiiiiiiiiiiiiii")
         if (status === 200) {
-            console.log(data,"-----")
             dispatch({
                 type: types.GET_LEADERBOARD_SUCCEEDED,
                 payload: data.data.leaderboard,
@@ -292,7 +290,6 @@ export const getMyTournament = (token) => async (dispatch) => {
     try {
         let headers = {"x-auth-token": token};
         const {status, data} = await getCall(urls.getMyTournaments, headers);
-        console.log(data,"myTournament")
         if (status === 200) {
             dispatch({
                 type: types.GET_MY_TOURNAMENT_SUCCEEDED,
@@ -370,7 +367,6 @@ export const getLeaderboardUser = (id) => async (dispatch) => {
     try {
         let headers = { "Content-Type": "application/json" };
         const {status, data, message} = await getCall(url, headers);
-        console.log(data,"=================getLeaderboardUser+++++++++++")
         if (status === 200) {
             dispatch({
                 type: types.GET_LEADERBOARD_USER_SUCCEEDED,

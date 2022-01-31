@@ -22,7 +22,6 @@ function TournamentManagement() {
         const token = accessToken
         const id = tournament?._id
         let {status, response} = await dispatch(enrollIntoTournament(token, id))
-        console.log(response,"[[[[[[[[[[[[[[[[[[[[")
         if(status){
             setEnrolState("enroled")
         }else{
@@ -31,14 +30,12 @@ function TournamentManagement() {
         
     }
 
-    console.log("========================>",tournament, myTournament)
     
     useEffect(()=>{
 
         const filteredList = myTournament?.filter(
             (item) => item?.tournament === tournament?._id
         );
-        console.log(filteredList,"filteredList")
         if(filteredList.length >=1 ){
             setEnrolState("enroled")
         }

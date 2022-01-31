@@ -194,12 +194,10 @@ function AdminView() {
         let {status, response} = await dispatch(updateTournamentImage(formData, id, token))
         
         setImageData(formData)
-        console.log(event.target.files[0], ...formData)
         setEditSaveButtonDisabled(false)
         setImageUploading("")
     }
 
-    console.log("hiiii", ...imageData)
 
     useEffect(() => {
         const {rules, info, howToApply } = editItem
@@ -210,7 +208,6 @@ function AdminView() {
         }
         
     }, [editItem])
-    console.log(tournamentValues,"okkkk")
     useEffect(()=>{
         if(view === "tournamentList" || "gameList"){
             if (view === "tournamentList"){

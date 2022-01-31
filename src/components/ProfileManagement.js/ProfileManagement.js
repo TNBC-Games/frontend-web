@@ -81,9 +81,7 @@ function ProfileManagement() {
 
     const getUserDetails = async (token)=>{
         let {status, response} = await dispatch(getUser(token))
-        console.log(response,"=====================>>>>>>>>>>++++++++++++++++")
     }
-    console.log(userDetails)
 
     useEffect(()=>{
         if(token && !userDetails){

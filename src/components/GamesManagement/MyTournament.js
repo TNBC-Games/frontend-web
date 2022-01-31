@@ -197,7 +197,6 @@ function MyTournament() {
     const getMyTournaments = async () =>{
         const token = accessToken
         let {status, response} = await dispatch(getMyTournament(token))
-        console.log(response,"[[[[[[[[[[[[[[[[[[[[")
     }
 
     useEffect(() => {

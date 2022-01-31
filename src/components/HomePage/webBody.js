@@ -23,13 +23,11 @@ function WebBody() {
 
     const getUserDetails = async (token)=>{
         let {status, response} = await dispatch(getUser(token))
-        console.log(response,"=====================>>>>>>>>>>++++++++++++++++")
     }
 
     const getMyTournaments = async () =>{
         // const token = token
         let {status, response} = await dispatch(getMyTournament(token))
-        console.log(response,"[[[[[[[[[[[[[[[[[[[[")
     }
 
     useEffect(() => {

@@ -95,7 +95,6 @@ export const getUser = (token) => async (dispatch) => {
     try {
         let headers = { "x-auth-token": token };
         const {status, data, message} = await getCall(urls.getUser, headers);
-        console.log(data,"=====================>>>>>>>>>>++++++++++++++++")
         if (status === 200) {
             dispatch({
                 type: types.GET_USER_SUCCEEDED,

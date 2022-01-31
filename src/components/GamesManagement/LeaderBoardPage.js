@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
 import { getLeaderboard, getLeaderboardUser } from '../../redux/actions/tournment.actions';
 import { getUser } from '../../redux/actions/signup.actions';
+import { Dropdown } from '../HomePage/ChooseGames';
 
 
 function LeaderBoardPage() {
@@ -16,9 +17,13 @@ function LeaderBoardPage() {
     const [sortBy, setSortBy] = useState("earnings");
     const [loading, setLoading] = useState(false);
     const [timeSpan, setTimeSpan] = useState("All Time");
-    const [showMore, setShowMore] = useState(false)
+    const [showMore, setShowMore] = useState(false);
+    const [showDropDown,setShowDropDown] = useState(false);
+    const [showGamesDropDown,setShowGamesDropDown] = useState(false);
+    const listOfGames = useSelector(state => state.tournamentState.gamesList);
+    const [game, setGame] = useState("All Games");
+    const [filteredEarningsList,setFilteredEarningsList] = useState("Earnings");
     const { leaderboardNames: leaderboardI, leaderboardCount} = useSelector(state => state.tournamentState)
-    console.log(leaderboardI, "yooooooooooooo", leaderboard)
     const LeaderboardItems = [
         {
             rank: 1,
@@ -67,6 +72,14 @@ function LeaderBoardPage() {
         },
         
     ]
+    const filterList = [
+        {
+            name: "Earnings"
+        },
+        {
+            name: "Points"
+        }
+    ]
     const history = useHistory();
     const gotoProfile= ()=>{
         history.push("/")
@@ -74,22 +87,21 @@ function LeaderBoardPage() {
 
     const setDate = (timeSpan)=>{
         setTimeSpan(timeSpan)
-        getLeaderboardInfo(count, timeSpan)
+        getLeaderboardInfo(count, sortBy, game, timeSpan)
 
     }
 
-    const getLeaderboardInfo = async (count, timeSpan)  =>{
+    const getLeaderboardInfo = async (count,sortBy, game, timeSpan)  =>{
         setLoading(true)
-        const game = "chess"
-        let {status, response} = await dispatch(getLeaderboard(count, sortBy, game, timeSpan))
-        console.log(response)
+        const allGame = game === "All Games" ? "" : game
+        let {status, response} = await dispatch(getLeaderboard(count, sortBy, allGame, timeSpan))
         setLeaderboard(response)
         setLoading(false)
     }
 
     const getNext = async () =>{
         await setCount(count + 10)
-        getLeaderboardInfo(count + 10, timeSpan)
+        getLeaderboardInfo(count + 10, sortBy, game, timeSpan)
     }
 
     const getUser = async (id)=>{
@@ -97,6 +109,37 @@ function LeaderBoardPage() {
         if(status){
             history.push()
         }
+        
+    }
+
+    const reset = () => {
+        setShowDropDown(!showDropDown)
+    }
+
+    const resetGames =()=>{
+        setShowGamesDropDown(!showGamesDropDown)
+    }
+
+    const filter = async (sortBy)  => {
+        // const filteredList = listOfGames.filter(
+        //     (item) => item.name === data
+        // );
+
+        setFilteredEarningsList(sortBy)
+        await getLeaderboardInfo(count, sortBy, game, timeSpan)
+        setShowDropDown(false)
+        
+    }
+    
+
+    const filterGames = async (game)  => {
+        // const filteredList = listOfGames.filter(
+        //     (item) => item.name === data
+        // );
+
+        setGame(game)
+        await getLeaderboardInfo(count, sortBy, game, timeSpan)
+        setShowGamesDropDown(false)
         
     }
     
@@ -107,7 +150,7 @@ function LeaderBoardPage() {
 
     useEffect(()=>{
         if(!leaderboard){
-            getLeaderboardInfo(count)
+            getLeaderboardInfo(count, sortBy, game, timeSpan)
         }  
     }, [leaderboard])
 
@@ -119,6 +162,15 @@ function LeaderBoardPage() {
     useEffect(()=>{
         if(leaderboardI.length === leaderboardCount){
             setShowMore(true)
+        } else {
+            setShowMore(false)
+        }
+    },[leaderboardI, leaderboardCount ])
+
+    useEffect(()=>{
+        if(!listOfGames){
+            history.push("/")
+            return
         }
     })
     return (
@@ -134,28 +186,66 @@ function LeaderBoardPage() {
 
 
                         <div className = "hii flex mt-4">
+                            <div className = "align-center flex-column mr-3">
+                                <div className ="games-filter cursor-pointer">
+                                    <div className ="games-filter-inner" onClick= {reset}>
+                                        <div className ="games-filter-title"> {filteredEarningsList} </div>
+                                        <div className ="mr-2">
+                                            <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                                <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                            </svg>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
 
-                            <div className ="games-filter mr-4">
-                                <div className ="games-filter-inner">
-                                    <div className ="games-filter-title"> All Games </div>
-                                    <div className ="mr-4 align-center">
-                                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
-                                            <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
-                                        </svg>
-                                    </div>
-                                </div>
+                                { showDropDown && (
+                                    
+                                    <Dropdown>
+                                        <div className= "dropdown-inner">
+                                            {filterList &&
+                                                filterList.map((item, index) => (
+                                                    <div className = "dropdown-item" onClick= {() => filter(item.name)}> {item.name}</div>
+                                            
+                                            ))}
+                                            
+                                        </div>
+
+                                    </Dropdown>
+                                )}
+                                
+
+                                
                             </div>
-                            <div className ="games-filter ml-4">
-                                <div className ="games-filter-inner">
-                                    <div className ="games-filter-title"> All Games </div>
-                                    <div className ="mr-4 align-center">
-                                        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
-                                            <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
-                                        </svg>
+                            <div className = "align-center flex-column ml-3">
+                                <div className ="games-filter cursor-pointer">
+                                    <div className ="games-filter-inner" onClick={resetGames}>
+                                        <div className ="games-filter-title">{game}</div>
+                                        <div className ="mr-4 align-center">
+                                            <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.5 0L10.2631 6H0.73686L5.5 0Z" fill="white"/>
+                                                <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
+                                {showGamesDropDown && (
+                                    
+                                    <Dropdown>
+                                        <div className= "dropdown-inner">
+                                            <div className = "dropdown-item" onClick= {() => filterGames("All Games")}> All Games</div>
+                                            {listOfGames &&
+                                                listOfGames.map((item, index) => (
+                                                    <div key ={index} className = "dropdown-item" onClick= {() => filterGames(item.name)}> {item.name}</div>
+                                            
+                                            ))}
+                                            
+                                        </div>
+
+                                    </Dropdown>
+                                )}
                             </div>
                         </div>
 
