@@ -112,7 +112,7 @@ function AdminView() {
                 {Fee &&(<div className="coll">{Fee}</div>)}
                 {Date && (<div className="coll">{getHumanDate(Date)}</div>)}
                 <div className="coll" onClick={!status? publishItem: unpublishItem}>{status ? "Published": "Publish"}</div>
-                <div className="list-flex">
+                <div className="flex">
                     <div className="icons mr-3" onClick={onEdit}><FiEdit2/></div> 
                     <div className="icons ml-3" onClick={onDelete}><AiOutlineDelete/></div>
                 </div>
@@ -461,7 +461,7 @@ function AdminView() {
                                 <div className="coll">Fee</div>
                                 <div className="coll">Start Date</div>
                                 <div className="coll">Status</div>
-                                <div className="list-flex hidee">
+                                <div className="flex hidee">
                                     <div className="icons mr-3"><FiEdit2/></div> 
                                     <div className="icons ml-3"><AiOutlineDelete/></div>
                                 </div>
@@ -491,7 +491,7 @@ function AdminView() {
                                 <div className="col hidee">1</div>
                                 <div className="coll">Name</div>
                                 <div className="coll">Status</div>
-                                <div className="list-flex hidee">
+                                <div className="flex hidee">
                                     <div className="icons mr-3"><FiEdit2/></div> 
                                     <div className="icons ml-3"><AiOutlineDelete/></div>
                                 </div>
@@ -665,6 +665,24 @@ const AdminVieww = styled(WalletView)`
     .relative{
         position: relative;
     }
+    @media only screen and (max-width: 962px) {
+        .wallet-sidebar{
+            flex-direction: column !important;
+            .action-btn{
+                max-width: 100%;
+            }
+        }
+        .list-flex{
+            flex-direction: column !important;
+        }
+
+        .list{
+            min-width: 796px !important;
+        }
+        .info-section{
+            overflow-x:scroll ;
+        }
+    }
 `;
 
 const ModalContent = styled.div`
@@ -681,6 +699,9 @@ const ModalContent = styled.div`
     }
     .form-section{
         width: 60%;
+        @media only screen and (max-width: 962px) {
+            width: 100%;
+        }
     }
     .save-btn{
         height: 50px;

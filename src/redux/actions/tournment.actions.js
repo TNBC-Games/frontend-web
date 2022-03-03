@@ -487,7 +487,7 @@ export const unpublishGame = (payload,token) => async (dispatch) => {
     })
     let url = `${urls.unpublishGame}/${payload}`
     try {
-        let headers = { "Content-Type": "application/json", "x-auth-token" : token };
+        let headers = {"x-auth-token" : token };
         const {status, data} = await postCall( url,"", headers);
         if (status === 200) {
             dispatch({

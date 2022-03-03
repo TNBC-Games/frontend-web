@@ -25,7 +25,11 @@ const ModalWrapper = styled.div`
   z-index: 10;
   border-radius: 10px;
   border: 1px solid white;
-  padding: 20px
+  padding: 20px;
+  @media only screen and (max-width: 962px) {
+    width: 90%;
+    margin: auto;
+  }
 `;
 const CloseModalButton = styled(MdClose)`
   cursor: pointer;

@@ -219,6 +219,7 @@ function Navbarr() {
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
                                             <div className = "inner-item"> Refer & earn</div>
                                             <div className = "inner-item"> Help</div>
+                                            <div className = "inner-item" onClick ={()=> history.push("/admin")}> Admin</div>
                                             <div className = "inner-item" onClick ={logout}> Log out</div>
                                         </div>
                                     </div>
