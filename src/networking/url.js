@@ -12,4 +12,6 @@ export const urls ={
     getMyTournaments: "https://tnbc-games-api.herokuapp.com/v1/tournament/myTournaments",
     getUser: "https://tnbc-games-api.herokuapp.com/v1/user",
     tournamentEnrollment: "https://tnbc-games-api.herokuapp.com/v1/tournament/enter",
+    publishGame: "https://tnbc-games-api.herokuapp.com/v1/game/publish",
+    unpublishGame: "https://tnbc-games-api.herokuapp.com/v1/game/unpublish"
 }

@@ -404,3 +404,117 @@ export const setProfileInView = (data) => async (dispatch) => {
     })
 
 }
+
+export const publishTournament = (payload, token) => async (dispatch) => {
+    dispatch({
+        type: types.PUBLISH_TOURNAMENT_STARTED,
+    })
+    let url = `${urls.getUser}/profile/${payload}`
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data} = await postCall( url, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.PUBLISH_TOURNAMENT_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.PUBLISH_TOURNAMENT_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.PUBLISH_TOURNAMENT_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
+
+export const publishGame = (payload) => async (dispatch) => {
+    dispatch({
+        type: types.PUBLISH_GAME_STARTED,
+    })
+    let url = `${urls.publishGame}/${payload}`
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data} = await postCall( url, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.PUBLISH_GAME_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.PUBLISH_GAME_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.PUBLISH_GAME_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}
+
+export const unpublishGame = (payload,token) => async (dispatch) => {
+    dispatch({
+        type: types.UNPUBLISH_GAME_STARTED,
+    })
+    let url = `${urls.unpublishGame}/${payload}`
+    try {
+        let headers = { "Content-Type": "application/json", "x-auth-token" : token };
+        const {status, data} = await postCall( url,"", headers);
+        if (status === 200) {
+            dispatch({
+                type: types.UNPUBLISH_GAME_SUCCEEDED,
+                payload: data.data.results,
+            });
+            return {
+                status: true,
+                response: data.data.results,
+            };
+        } else {
+            dispatch({
+                type: types.UNPUBLISH_GAME_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.UNPUBLISH_GAME_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}

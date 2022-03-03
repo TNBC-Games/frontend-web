@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 import callOfDutyImage from "../../assets/callOfDutyPng.png";
 import Culture from "../../assets/Culture.png";
@@ -14,11 +15,14 @@ import { ProgressBar } from 'react-bootstrap';
 import { TournamentInfo } from '../HomePage/ChooseTournament';
 import { ContentBody } from '../HomePage/ChooseGames';
 import { getMyTournament } from '../../redux/actions/tournment.actions';
+import { getHumanDate } from '../../utils/utils';
+import { setTournament } from '../../redux/actions/tournment.actions';
 
 
 
 
 function MyTournament() {
+    const history = useHistory()
     const dispatch = useDispatch();
     const [active, setActive] = useState(1);
     const [completedList, setCompletedList] = useState("");
@@ -199,6 +203,11 @@ function MyTournament() {
         let {status, response} = await dispatch(getMyTournament(token))
     }
 
+    const setTournToView = (data) =>{
+        dispatch(setTournament(data))
+        history.push("/tournaments")
+    }
+
     useEffect(() => {
         const completedList = games.filter(
             (item) => item.completed === true
@@ -214,10 +223,10 @@ function MyTournament() {
     }, [active])
 
     useEffect(() => {
-        if(!myTournament){
-           // getMyTournaments()
-        }
-    }, [myTournament])
+       // if(!myTournament){
+            getMyTournaments()
+        //}
+    }, [])
 
     return (
         <div className="leaderboard-page fadeInUp animated">
@@ -249,23 +258,23 @@ function MyTournament() {
                     {active === 1 ? (
                         <>
                             {ongoingList &&
-                                ongoingList.map((item, index) => (
+                                myTournament.map((item, index) => (
 
                                     <TournamentView key={index}>
 
-                                        <div className="upcoming-tornament-name">{item?.gameType}
+                                        <div className="upcoming-tornament-name">{item?.tournamentInfo.name}
                                         </div>
                                         <div>
-                                            <img src={item?.image? item.image :Culture} alt={item?.gameType}></img>
+                                            <img src={item?.tournamentInfo.image? item.tournamentInfo.image :Culture} alt={item?.tournamentInfo.name}></img>
                                         </div>
                                         <TournamentInfo>
-                                            <div className="tourn-name">{item?.gameType}</div>
+                                            <div className="tourn-name">{item?.tournamentInfo.name}</div>
                                             <ProgressBar now={item?.completedPercent} />
                                             <div className="tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                                            <div className="fee"> Starts in </div>
+                                            <div className="fee"> Starts </div>
                                             <div className="justify-space " >
-                                                <div className="fee-amount">{item?.fee}</div>
-                                                <div className="join-free float-btn">
+                                                <div className="fee-amount">{getHumanDate(item?.tournamentInfo.startDate)}</div>
+                                                <div className="join-free float-btn" onClick={()=>setTournToView(item.tournamentInfo)}>
                                                     View
                                                 </div>
                                             </div>

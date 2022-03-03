@@ -8,7 +8,7 @@ import Input from '../input';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Modal from '../ReusableComponents/modals';
-import { getTournament, updateTournament, getGames, createGame, createNewTournament, updateTournamentImage } from '../../redux/actions/tournment.actions';
+import { getTournament, updateTournament, getGames, createGame, createNewTournament, updateTournamentImage, publishGame, unpublishGame} from '../../redux/actions/tournment.actions';
 import { getHumanDate } from '../../utils/utils';
 import { Dropdown } from '../HomePage/ChooseGames';
 
@@ -102,7 +102,8 @@ function AdminView() {
         setShowEditModal(true) 
     }
 
-    const List = ({Index, Name, Prize, Fee, Date, onEdit, onDelete}) => {
+    const List = ({Index, Name, Prize, Fee, Date, onEdit, onDelete, status, publishItem, unpublishItem}) => {
+
         return( 
             <div className="list">
                 <div className="col">{`${Index + 1}.`}</div>
@@ -110,6 +111,7 @@ function AdminView() {
                 {Prize && (<div className="coll">{Prize}</div>)}
                 {Fee &&(<div className="coll">{Fee}</div>)}
                 {Date && (<div className="coll">{getHumanDate(Date)}</div>)}
+                <div className="coll" onClick={!status? publishItem: unpublishItem}>{status ? "Published": "Publish"}</div>
                 <div className="list-flex">
                     <div className="icons mr-3" onClick={onEdit}><FiEdit2/></div> 
                     <div className="icons ml-3" onClick={onDelete}><AiOutlineDelete/></div>
@@ -180,7 +182,20 @@ function AdminView() {
             gamesName: name
         })
         setShowDropdown(false)
+    }
 
+    const publishTournament =async(item)=>{
+        
+    }
+    const publishGame=async(item)=>{
+        const payload = item.name
+        let {status, response} = await dispatch(publishGame(payload))
+    }
+
+    const unpublishGameItem=async(item)=>{
+        const payload = item.name
+        //console.log(item.name, "item")
+        let {status, response} = await dispatch(unpublishGame(payload, accessToken))
     }
     const submitImage = async (event)  =>{
         setEditSaveButtonDisabled(true)
@@ -445,13 +460,25 @@ function AdminView() {
                                 <div className="coll">Prize</div>
                                 <div className="coll">Fee</div>
                                 <div className="coll">Start Date</div>
+                                <div className="coll">Status</div>
                                 <div className="list-flex hidee">
                                     <div className="icons mr-3"><FiEdit2/></div> 
                                     <div className="icons ml-3"><AiOutlineDelete/></div>
                                 </div>
                             </div>
                             {tournList ? tournList.map((item, index)=>(
-                                <List Index= {index} Name={item.name} Prize={item.prize} Fee={item.fee} Date={item.startDate} onDelete={()=>  DeleteTournament(item)} onEdit = {()=> EditTournament(item)}/>
+                                <List 
+                                    Index= {index} 
+                                    Name={item.name} 
+                                    Prize={item.prize} 
+                                    Fee={item.fee} 
+                                    Date={item.startDate} 
+                                    onDelete={()=>  DeleteTournament(item)} 
+                                    onEdit = {()=> EditTournament(item)} 
+                                    status={item.game.published} 
+                                    // publishItem={()=> publishTournament(item)} 
+                                    // unpublishItem={()=> unpublishTouranament(item)}
+                                />
 
                             )):(
                                 <Skeleton height={50} count={10} baseColor= "#262626" highlightColor="#404040" borderRadius={5} containerClassName="mb-10"/>
@@ -463,13 +490,25 @@ function AdminView() {
                             <div className="list black">
                                 <div className="col hidee">1</div>
                                 <div className="coll">Name</div>
+                                <div className="coll">Status</div>
                                 <div className="list-flex hidee">
                                     <div className="icons mr-3"><FiEdit2/></div> 
                                     <div className="icons ml-3"><AiOutlineDelete/></div>
                                 </div>
                             </div>
                             {gameList ? gameList.map((item, index)=>(
-                                <List Index= {index} Name={item.name} Prize={item.prize} Fee={item.fee} Date={item.date} onDelete={()=> DeleteGame(item)} onEdit = {()=> EditGame(item)}/>
+                                <List 
+                                    Index= {index} 
+                                    Name={item.name} 
+                                    Prize={item.prize} 
+                                    Fee={item.fee} 
+                                    Date={item.date} 
+                                    onDelete={()=> DeleteGame(item)} 
+                                    onEdit = {()=> EditGame(item)} 
+                                    status={item.published} 
+                                    publishItem={()=> publishGame(item)}
+                                    unpublishItem={()=> unpublishGameItem(item)}
+                                />
 
                             )):(
                                 <Skeleton height={50} count={10} baseColor= "#262626" highlightColor="#404040" borderRadius={5} containerClassName="mb-10"/>

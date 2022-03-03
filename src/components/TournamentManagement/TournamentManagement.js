@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -6,6 +6,7 @@ import { ProfileHeader } from '../GamesManagement/GamesHeader';
 import gamesImage from "../../assets/chessGame.png";
 import { getHumanDate } from '../../utils/utils';
 import { enrollIntoTournament } from '../../redux/actions/tournment.actions';
+
 
 
 function TournamentManagement() {
@@ -31,17 +32,19 @@ function TournamentManagement() {
     }
 
     
-    useEffect(()=>{
-
-        const filteredList = myTournament?.filter(
-            (item) => item?.tournament === tournament?._id
-        );
-        if(filteredList.length >=1 ){
-            setEnrolState("enroled")
+    useLayoutEffect(()=>{
+        if(myTournament.length >= 1){
+            const filteredList = myTournament?.filter(
+                (item) => item?.tournament === tournament?._id
+            );
+        
+            if(filteredList.length >=1 ){
+                setEnrolState("enroled")
+            }
         }
     },[tournament, myTournament])
 
-    useEffect(()=>{
+    useLayoutEffect(()=>{
         if(!tournament){
             history.push("/")
             return
@@ -64,7 +67,7 @@ function TournamentManagement() {
             </TournamentHeader>
             <EnrollSection>
                 <div className="yellow-text">Starts in 10d 24hrs 40mins  28secs</div>
-                <button className={`enroll-btn ${enrolState === "enrolling" ? "form-loading" : "grey-disabled"}`} onClick={enrollToTournament}><span>{enrolState === "enroled" ? "Enrolled" : "Enrol"}</span></button>
+                <button className={`enroll-btn ${enrolState === "enrolling" ? "form-loading" : enrolState === "enroled"? "grey-disabled":""}`} onClick={enrollToTournament}><span>{enrolState === "enroled" ? "Enrolled" : "Enrol"}</span></button>
             </EnrollSection>
             <TabSection>
                 <div className="inner-tab">
