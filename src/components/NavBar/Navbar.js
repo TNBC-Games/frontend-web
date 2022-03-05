@@ -13,7 +13,8 @@ import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg";
 
 
 function Navbarr() {
-    const loggedIn = useSelector(state=> state.signupState.userLoggedIn)
+    const loggedIn = useSelector(state=> state.signupState.userLoggedIn);
+    const superAdminStatus = useSelector(state=> state.signupState.userDetails.user.superAdmin)
     const userEmail = sessionStorage.getItem("userEmail");
     const accessToken = sessionStorage.getItem("accesstoken");
     const location = useLocation();
@@ -44,17 +45,7 @@ function Navbarr() {
     // }
     // };
 
-    useEffect(() => {
-        if(location.pathname === "/signup"){
-            setSignUpActive(true)
-            setLoginActive(false)
-        }else if(location.pathname === "/login") {
-            setLoginActive(true)
-            setSignUpActive(false)
 
-
-        }
-    }, [location])
 
    
     const handleResize = ()=>{
@@ -110,6 +101,18 @@ function Navbarr() {
         setShowDesktopMore("")
         history.push("/leaderboard")
     }
+
+    useEffect(() => {
+        if(location.pathname === "/signup"){
+            setSignUpActive(true)
+            setLoginActive(false)
+        }else if(location.pathname === "/login") {
+            setLoginActive(true)
+            setSignUpActive(false)
+
+
+        }
+    }, [location])
 
     return (        
         <div className={isMobile ? "navv black-bg" : "navv"}>
@@ -219,7 +222,7 @@ function Navbarr() {
                                         <div className = "dropdown-item" onClick= {()=> setShowDesktopDropDown(false)}>
                                             <div className = "inner-item"> Refer & earn</div>
                                             <div className = "inner-item"> Help</div>
-                                            <div className = "inner-item" onClick ={()=> history.push("/admin")}> Admin</div>
+                                            {superAdminStatus && (<div className = "inner-item" onClick ={()=> history.push("/admin")}> Admin</div>)}
                                             <div className = "inner-item" onClick ={logout}> Log out</div>
                                         </div>
                                     </div>
@@ -255,6 +258,11 @@ function Navbarr() {
                             <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Help
                             </div>
+                            {superAdminStatus && (
+                                <div className="single-item flex mb-2" onClick ={()=> history.push("/admin")}>
+                                    •     Admin
+                                </div>
+                            )}
                             <div className="single-item flex mb-2" onClick= {()=> setShowMobileDropDown(false)}>
                                 •     Refer & earn
                             </div>

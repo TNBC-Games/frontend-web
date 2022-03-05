@@ -1,4 +1,5 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import CustomButton from '../ReusableComponents/customButton';
 import {
@@ -13,6 +14,9 @@ import {
 import { Bar} from "react-chartjs-2";
 import {ReactComponent as CopyIcon} from '../../assets/copyIcon.svg'
 import TransactionList from '../ReusableComponents/TransactionList';
+import {getMyAccountDetails} from '../../redux/actions/signup.actions';
+import {copyTextToClipboard} from "../../utils/utils.js";
+import toastr from "toastr";
 
 ChartJS.register(
     CategoryScale,
@@ -24,6 +28,8 @@ ChartJS.register(
 );
 
 function Wallet() {
+    const dispatch = useDispatch()
+    const tnbcBalance = useSelector(state=> state.signupState.userDetails.user.balance)
     const [walletDisplay, setWalletDisplay] = useState('wallet');
     const [userInfo, setUserInfo] = useState({
         amount: "",
@@ -31,7 +37,9 @@ function Wallet() {
         accountNo: "",
     });
     const [sameAccountNumber, setSameAccountNumber] = useState(false);
-    const [accountNo, setAccountNo] = useState("1100327415")
+    const [accountNo, setAccountNo] = useState("1100327415");
+    const [memo, setMemo] = useState("");
+    const token = sessionStorage.getItem("accesstoken");
     const transactionList =[
         {
             debit: false,
@@ -84,9 +92,34 @@ function Wallet() {
         setUserInfo({ ...userInfo, memo: event.target.value });
                     
     }
-    const WalletInput = ({Title, inputText, Icon, className, amount, onChange, value})=> {
+
+    function copyAccountNo() {
+        copyTextToClipboard(userInfo.accountNo);
+        toastr.notify("Account Number Copied", {
+          duration: 5000,
+          position: "bottom",
+        });
+    }
+
+    function copyMemo() {
+        copyTextToClipboard(userInfo.memo);
+        toastr.notify("Account Number Copied", {
+          duration: 5000,
+          position: "bottom",
+        });
+    }
+
+    const getAccountDetails =async()=>{
+        let {status, response} = await dispatch(getMyAccountDetails(token))
+        setUserInfo({
+            ...userInfo,        
+            accountNo: response.acctNumber,
+            memo:response.memo
+        })
+    }
+    const WalletInput = ({Title, inputText, Icon, className, amount, onClick, value})=> {
         return (
-            <div className={`${className}`}>
+            <div className={`${className}`} onClick={onClick}>
                 <div className="wallet-title"><p>{Title}</p></div>
                 {amount ? (
                     <div className="wallet-input-tnbc">
@@ -96,9 +129,10 @@ function Wallet() {
                                 className= {`formInput `}
                                 placeholder={""}
                                 type= {"text"}
-                                onChange={onChange}
+                                
                                 value={value}
                                 min={2}
+                                readOnly
                             />
                         </div>
                         {amount && (
@@ -114,7 +148,7 @@ function Wallet() {
                                 className= {`formInput `}
                                 placeholder={""}
                                 type= {"email"}
-                                onChange={onChange}
+                                readOnly
                                 value={value}
                                 min={2}
                             />
@@ -128,6 +162,11 @@ function Wallet() {
             </div>
         )
     }
+    useEffect(()=>{
+        if(walletDisplay === "deposit" ){
+            getAccountDetails()
+        }
+    },[walletDisplay])
     return (
         <div className ="leaderboard-page fadeInUp animated">
             <WalletView>
@@ -140,7 +179,7 @@ function Wallet() {
                     <div className="balance-session mb-4">
                         <div className="balance">
                             <div className="heading">TNBC Balance</div>
-                            <div className="amount">10,000 TNBC</div>
+                            <div className="amount">{tnbcBalance} TNBC</div>
                         </div>
                         <div className="deposit-withdraw">
                             <CustomButton height="50px" width="136.5px" innerH="48px" innerW="98%" addedClass="mr-2" bgColor="#1D1D1D" text="withdraw"/>
@@ -220,8 +259,8 @@ function Wallet() {
                             <div className="flex justify-center mt-5">
                                 <div className="account-deposit mt-5">
                                     <div className="red-text"><p>Kindly Send the amount you wish to deposit into the account below using the memo as description</p></div>
-                                    <WalletInput Title={"Account Number"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onChange={handleAmountInput} value ={userInfo.amount}/>
-                                    <WalletInput Title={"Memo"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onChange={handleMemoInput} value ={userInfo.memo}/>
+                                    <WalletInput Title={"Account Number"} inputText={userInfo.accountNo} Icon={CopyIcon} className="mt-5" onClick={copyAccountNo} value ={userInfo.accountNo}/>
+                                    <WalletInput Title={"Memo"} inputText={userInfo.memo} Icon={CopyIcon} className="mt-5" onClick={copyMemo} value ={userInfo.memo}/>
                                     <p className="mt-3 small-text">Note: As soon as the deposit is made, it will reflect on your wallet</p>
                                 </div>
                                
@@ -231,8 +270,8 @@ function Wallet() {
                             <div className="flex justify-center mt-5">
                                 <div className="account-deposit mt-5">
                                     <div className="red-text"><p>Kindly Send the amount you wish to deposit into the account below using the memo as description</p></div>
-                                    <WalletInput Title={"Amount"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" amount={true} onChange={handleAmountInput} value ={userInfo.amount}/>
-                                    <WalletInput Title={"Memo"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onChange={handleMemoInput} value ={sameAccountNumber? accountNo: userInfo.accountNo}/>
+                                    <WalletInput Title={"Amount"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" amount={true} onClick={copyAccountNo} value ={userInfo.amount}/>
+                                    <WalletInput Title={"Memo"} inputText={"43825754423457274089"} Icon={CopyIcon} className="mt-5" onClick={copyMemo} value ={sameAccountNumber? accountNo: userInfo.accountNo}/>
                                     <div className="mt-3 flex align-center" onClick= {()=> setSameAccountNumber(!sameAccountNumber)}>
                                         <div className=" circle mr-2 mt-1">{sameAccountNumber && <div className="inner-circle"></div>}</div>
                                         <div> Use existing account number</div>

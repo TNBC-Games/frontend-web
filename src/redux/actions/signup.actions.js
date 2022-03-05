@@ -124,3 +124,42 @@ export const getUser = (token) => async (dispatch) => {
         };
     }
 }
+
+export const getMyAccountDetails = (token) => async (dispatch) => {
+    dispatch({
+        type: types.GET_ACCOUNT_DETAILS_STARTED,
+    })
+    
+    try {
+        let headers = { "x-auth-token": token };
+        const {status, data, message} = await getCall(urls.getAccountDetails, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.GET_ACCOUNT_DETAILS_SUCCEEDED,
+                payload: data.data,
+            });
+            return {
+                status: true,
+                response: data.data
+            };;
+        } else {
+            dispatch({
+                type: types.GET_ACCOUNT_DETAILS_FAILED,
+            })
+            return {
+                status: false,
+                response: message
+            };
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_ACCOUNT_DETAILS_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        };
+    }
+}
+

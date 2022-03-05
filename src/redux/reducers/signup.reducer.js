@@ -3,7 +3,11 @@ import * as types from "../types/signup.types";
 const initialState = {
     userEmail : false,
     userLoggedIn: false,
-    userDetails: ""
+    userDetails: {
+        user: {
+            superAdmin: false,
+        }
+    }
 }
 
 export const signupReducer = (state = initialState, action) => {
