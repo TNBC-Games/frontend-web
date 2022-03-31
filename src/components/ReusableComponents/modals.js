@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
-import { MdClose } from 'react-icons/md';
+// import { MdClose } from 'react-icons/md';
 
 const Background = styled.div`
   width: 100%;
@@ -31,16 +31,16 @@ const ModalWrapper = styled.div`
     margin: auto;
   }
 `;
-const CloseModalButton = styled(MdClose)`
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  z-index: 10;
-`;
+// const CloseModalButton = styled(MdClose)`
+//   cursor: pointer;
+//   position: absolute;
+//   top: 20px;
+//   right: 20px;
+//   width: 32px;
+//   height: 32px;
+//   padding: 0;
+//   z-index: 10;
+// `;
 
 export const Modal = ({ showModal, setShowModal, children }) => {
   const modalRef = useRef();

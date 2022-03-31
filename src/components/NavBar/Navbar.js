@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ReactComponent as TnbcIcon } from "../../assets/tnbcLogo.svg";
-import { SIGNUP_STARTED } from '../../redux/types/signup.types';
 import { useLocation } from 'react-router';
 import { Dropdown } from '../HomePage/ChooseGames';
 import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg";
@@ -13,9 +12,9 @@ import {ReactComponent as GlobeIcon} from "../../assets/GlobeIcon.svg";
 
 
 function Navbarr() {
-    const loggedIn = useSelector(state=> state.signupState.userLoggedIn);
+    // const loggedIn = useSelector(state=> state.signupState.userLoggedIn);
     const superAdminStatus = useSelector(state=> state.signupState.userDetails.user.superAdmin)
-    const userEmail = sessionStorage.getItem("userEmail");
+    // const userEmail = sessionStorage.getItem("userEmail");
     const accessToken = sessionStorage.getItem("accesstoken");
     const location = useLocation();
     const [signupActive, setSignUpActive] = useState(false);
@@ -27,14 +26,16 @@ function Navbarr() {
     const [showMobileMore, setShowMobileMore] = useState(false);
     const history = useHistory();
 
-    var className = "black-bg";
-    var scrollTrigger = 10;
+    console.log(signupActive, loginActive)
 
-    const Shopper = <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 28C11.1046 28 12 27.1046 12 26C12 24.8954 11.1046 24 10 24C8.89543 24 8 24.8954 8 26C8 27.1046 8.89543 28 10 28Z" fill="white"/>
-    <path d="M24 28C25.1046 28 26 27.1046 26 26C26 24.8954 25.1046 24 24 24C22.8954 24 22 24.8954 22 26C22 27.1046 22.8954 28 24 28Z" fill="white"/>
-    <path d="M28 5.00002H5.82L5 0.80002C4.95325 0.570744 4.82758 0.365123 4.64486 0.218948C4.46214 0.0727735 4.23395 -0.0046976 4 2.03336e-05H0V2.00002H3.18L7 21.2C7.04675 21.4293 7.17242 21.6349 7.35514 21.7811C7.53786 21.9273 7.76605 22.0047 8 22H26V20H8.82L8 16H26C26.2312 16.0057 26.4571 15.931 26.6395 15.7888C26.8218 15.6466 26.9492 15.4456 27 15.22L29 6.22002C29.0335 6.07165 29.0327 5.91758 28.9977 5.76955C28.9627 5.62152 28.8944 5.48343 28.798 5.36579C28.7015 5.24815 28.5795 5.15405 28.4413 5.09067C28.303 5.02729 28.1521 4.99628 28 5.00002ZM25.2 14H7.62L6.22 7.00002H26.75L25.2 14Z" fill="white"/>
-    </svg>
+    // var className = "black-bg";
+    // var scrollTrigger = 10;
+
+    // const Shopper = <svg width="30" height="28" viewBox="0 0 30 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    // <path d="M10 28C11.1046 28 12 27.1046 12 26C12 24.8954 11.1046 24 10 24C8.89543 24 8 24.8954 8 26C8 27.1046 8.89543 28 10 28Z" fill="white"/>
+    // <path d="M24 28C25.1046 28 26 27.1046 26 26C26 24.8954 25.1046 24 24 24C22.8954 24 22 24.8954 22 26C22 27.1046 22.8954 28 24 28Z" fill="white"/>
+    // <path d="M28 5.00002H5.82L5 0.80002C4.95325 0.570744 4.82758 0.365123 4.64486 0.218948C4.46214 0.0727735 4.23395 -0.0046976 4 2.03336e-05H0V2.00002H3.18L7 21.2C7.04675 21.4293 7.17242 21.6349 7.35514 21.7811C7.53786 21.9273 7.76605 22.0047 8 22H26V20H8.82L8 16H26C26.2312 16.0057 26.4571 15.931 26.6395 15.7888C26.8218 15.6466 26.9492 15.4456 27 15.22L29 6.22002C29.0335 6.07165 29.0327 5.91758 28.9977 5.76955C28.9627 5.62152 28.8944 5.48343 28.798 5.36579C28.7015 5.24815 28.5795 5.15405 28.4413 5.09067C28.303 5.02729 28.1521 4.99628 28 5.00002ZM25.2 14H7.62L6.22 7.00002H26.75L25.2 14Z" fill="white"/>
+    // </svg>
 
     //window.onscroll = function() {
     // We add pageYOffset for compatibility with IE.

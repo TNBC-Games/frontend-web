@@ -10,7 +10,7 @@ import Fifa4 from "../../assets/Fifa4.png";
 import Fifa5 from "../../assets/Fifa5.png";
 import myTournamentImage from "../../assets/myTournamentImage.png";
 import { TournamentView } from '../HomePage/ChooseTournament';
-import { ProfileHeader } from './GamesHeader';
+// import { ProfileHeader } from './GamesHeader';
 import { ProgressBar } from 'react-bootstrap';
 import { TournamentInfo } from '../HomePage/ChooseTournament';
 import { ContentBody } from '../HomePage/ChooseGames';
@@ -200,7 +200,8 @@ function MyTournament() {
 
     const getMyTournaments = async () =>{
         const token = accessToken
-        let {status, response} = await dispatch(getMyTournament(token))
+        // let {status, response} = 
+        await dispatch(getMyTournament(token))
     }
 
     const setTournToView = (data) =>{
@@ -219,13 +220,14 @@ function MyTournament() {
 
         setCompletedList(completedList);
         setOngoingList(ongoing)
-
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [active])
 
     useEffect(() => {
        // if(!myTournament){
             getMyTournaments()
         //}
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

@@ -141,7 +141,7 @@ function SignUp() {
         }
 
         window.scrollTo(0, 0);
-    }, [inputValues])
+    }, [inputValues, showSamePasswordError])
 
 
 

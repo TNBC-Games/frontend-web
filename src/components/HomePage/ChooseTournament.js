@@ -72,7 +72,7 @@ function ChooseTournament() {
     ]
 
     const getListOfTournaments = async () => {
-        let {status, response} = await dispatch(getTournament())
+        let { response} = await dispatch(getTournament())
         setFilteredTournamentList(response)
     }
 
@@ -101,6 +101,7 @@ function ChooseTournament() {
         }else {
             setTournList(tournamentList)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tournList])
 
     return (

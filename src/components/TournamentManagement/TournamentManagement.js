@@ -22,7 +22,8 @@ function TournamentManagement() {
         setEnrolState("enrolling")
         const token = accessToken
         const id = tournament?._id
-        let {status, response} = await dispatch(enrollIntoTournament(token, id))
+        let {status} = await dispatch(enrollIntoTournament(token, id))
+        
         if(status){
             setEnrolState("enroled")
         }else{
@@ -49,6 +50,7 @@ function TournamentManagement() {
             history.push("/")
             return
         } 
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[tournament])
     return (
         

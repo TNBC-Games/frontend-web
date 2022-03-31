@@ -8,8 +8,8 @@ import Fifa2 from "../../assets/Fifa2.png";
 import Fifa3 from "../../assets/Fifa3.png";
 import Fifa4 from "../../assets/Fifa4.png";
 import Fifa5 from "../../assets/Fifa5.png";
-import Slider from "react-slick";
-import { Carousel } from 'react-bootstrap';
+// import Slider from "react-slick";
+// import { Carousel } from 'react-bootstrap';
 import { DummySlider } from './ChooseTournament';
 import { getGames } from '../../redux/actions/tournment.actions';
 import Skeleton from 'react-loading-skeleton';
@@ -21,18 +21,20 @@ function ChooseGames() {
     const [loading, setLoading] = useState(false);
     const listOfGames = useSelector(state => state.tournamentState.gamesList);
     const [filteredGamesList, setFilteredGamesList] = useState(listOfGames);
-    const [gamesList, setGamesList] = useState(listOfGames);
+    // const [gamesList, setGamesList] = useState(listOfGames);
     
-    const settings = {
-        className: "center",
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
-        speed: 500,
-        rows: 2,
-        slidesPerRow: 2
-    };
+    // const settings = {
+    //     className: "center",
+    //     centerMode: true,
+    //     infinite: true,
+    //     centerPadding: "60px",
+    //     slidesToShow: 3,
+    //     speed: 500,
+    //     rows: 2,
+    //     slidesPerRow: 2
+    // };
+
+    console.log(loading)
 
     const games = [
         {
@@ -68,7 +70,7 @@ function ChooseGames() {
     }
     const getListOfGames = async () => {
         setLoading(true)
-        let {status, response} = await dispatch(getGames())
+        let { response} = await dispatch(getGames())
         setTimeout(()=>{
             setFilteredGamesList(response)
         },1500)
@@ -91,6 +93,7 @@ function ChooseGames() {
         if (!listOfGames){
             getListOfGames()
         }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [listOfGames])
     return (
         <div className = "choose-games">

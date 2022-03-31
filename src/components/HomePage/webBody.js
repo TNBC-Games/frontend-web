@@ -22,12 +22,12 @@ function WebBody() {
 
 
     const getUserDetails = async (token)=>{
-        let {status, response} = await dispatch(getUser(token))
+        await dispatch(getUser(token))
     }
 
     const getMyTournaments = async () =>{
         // const token = token
-        let {status, response} = await dispatch(getMyTournament(token))
+        await dispatch(getMyTournament(token))
     }
 
     useEffect(() => {
@@ -35,6 +35,7 @@ function WebBody() {
             sessionStorage.setItem("accesstoken", accessToken);
             history.push("/")
         }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [accessToken])
 
 
@@ -42,12 +43,14 @@ function WebBody() {
         if(token && !userDetails){
             getUserDetails(token)
         }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token, userDetails])
 
     useEffect(() => {
         if(!myTournament){
             getMyTournaments()
         }
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [myTournament])
 
     return (

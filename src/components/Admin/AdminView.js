@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 import { WalletView } from '../Wallets/wallets';
 import Input from '../input';
 import { FiEdit2 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import Modal from '../ReusableComponents/modals';
-import { getTournament, updateTournament, getGames, createGame, createNewTournament, updateTournamentImage, publishGame, unpublishGame} from '../../redux/actions/tournment.actions';
+import { getTournament,updateTournament, getGames, createGame, createNewTournament, updateTournamentImage, unpublishGame} from '../../redux/actions/tournment.actions';
 import { getHumanDate } from '../../utils/utils';
 import { Dropdown } from '../HomePage/ChooseGames';
 
@@ -41,9 +41,9 @@ function AdminView() {
     const [createGameLoading, setCreateGameLoading] = useState(false);
     const [createTournamentLoading, setCreateTournamentLoading] = useState(false)
     const [showDropDown, setShowDropdown] = useState(false);
-    const [gameId, setGameId] = useState(false);
-    const [imageData, setImageData] = useState('');
-    const [imageUploading, setImageUploading] = useState("")
+    // const [gameId, setGameId] = useState(false);
+    // const [imageData, setImageData] = useState('');
+    // const [imageUploading, setImageUploading] = useState("")
     const [editItem, setEditItem]=useState({
         name: "",
         prize: "",
@@ -59,7 +59,7 @@ function AdminView() {
         image: "",
     })
     const accessToken = sessionStorage.getItem("accesstoken");
-    const { register, handleSubmit } = useForm()
+    // const { register, handleSubmit } = useForm()
 
     const handleChange = (event) => {
         setTournamentValues({
@@ -122,12 +122,18 @@ function AdminView() {
 
     const getListOfTournaments = async () => {
         let {status, response} = await dispatch(getTournament())
-        setTournList(response)
+        if(status){
+            setTournList(response)
+        }
+        
     }
 
     const getListOfGames = async () => {
         let {status, response} = await dispatch(getGames())
-        setGameList(response)
+        if(status) {
+            setGameList(response)
+        }
+       
     }
 
     const updateSelectedTournament =  async () =>{
@@ -139,7 +145,8 @@ function AdminView() {
             rules: editItem.rules,
             howToApply: editItem.howToApply
         }
-        let {status, response} = await dispatch(updateTournament(payload, data, token))
+        // let {status, response} = 
+        await dispatch(updateTournament(payload, data, token))
     }
 
     const createTournament = async ()=>{
@@ -157,7 +164,8 @@ function AdminView() {
             howToApply: tournamentValues.apply,
             game: tournamentValues.game
         }
-        let {status, response} = await dispatch(createNewTournament(payload, token))
+        //let {status, response} = 
+        await dispatch(createNewTournament(payload, token))
         setCreateTournamentLoading(false)
     }
 
@@ -169,7 +177,8 @@ function AdminView() {
            // token: accessToken
         }
         const token = accessToken
-        let {status, response} = await dispatch(createGame(payload, token))
+        //let {status, response} = 
+        await dispatch(createGame(payload, token))
         
         setCreateGameLoading(false)
     }
@@ -184,33 +193,36 @@ function AdminView() {
         setShowDropdown(false)
     }
 
-    const publishTournament =async(item)=>{
+    // const publishTournament =async(item)=>{
         
-    }
+    // }
     const publishGame=async(item)=>{
         const payload = item.name
-        let {status, response} = await dispatch(publishGame(payload))
+        //let {status, response} = 
+        await dispatch(publishGame(payload))
     }
 
     const unpublishGameItem=async(item)=>{
         const payload = item.name
         //console.log(item.name, "item")
-        let {status, response} = await dispatch(unpublishGame(payload, accessToken))
+        //let {status, response} = 
+        await dispatch(unpublishGame(payload, accessToken))
     }
     const submitImage = async (event)  =>{
         setEditSaveButtonDisabled(true)
         const id = editItem._id
         const token = accessToken
-        setImageUploading("uploading")
+        // setImageUploading("uploading")
         const formData = new FormData()
         const file = event.target.files[0]
         formData.append("image", file)
 
-        let {status, response} = await dispatch(updateTournamentImage(formData, id, token))
+       // let {status, response} = 
+        await dispatch(updateTournamentImage(formData, id, token))
         
-        setImageData(formData)
+        // setImageData(formData)
         setEditSaveButtonDisabled(false)
-        setImageUploading("")
+        // setImageUploading("")
     }
 
 
@@ -221,7 +233,7 @@ function AdminView() {
         }else{
             setEditSaveButtonDisabled(false)
         }
-        
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [editItem])
     useEffect(()=>{
         if(view === "tournamentList" || "gameList"){
@@ -232,6 +244,7 @@ function AdminView() {
                 getListOfGames()
             }
         }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
     },[view])
 
     useEffect(() => {
@@ -241,11 +254,12 @@ function AdminView() {
         }else{
             setCreateTournamentCheck(false)
         }
+                // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tournamentValues])
 
     useEffect(() => {
         const {gamesName, mainCategory} = tournamentValues
-        if(!gamesName, !mainCategory){
+        if(!gamesName || !mainCategory) {
             setCreateGamesCheck(true)
         }else{
             setCreateGamesCheck(false)

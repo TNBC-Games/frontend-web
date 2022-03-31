@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 
-function AchievmentCard({position, name, image, earned, }) {
+
+function AchievmentCard({position, image, }) {
     return (
         <div className = {`${position === 1 ? "red" : position === 2? "yellow": position ===3 ? "grey": ""} justify-center`}>
             <div className = {`${position === 1 ? "red-top adjust-first" : position === 2 ? "yellow-top": "grey-top"} achievement-card`}>
                 <div className ="width-100 height-70 justify-center">
                     <div className = "user-image">
-                        <img src = {image} ></img>
+                        <img src = {image} alt={"user"} ></img>
                         <div className ={`${position === 1 ? "red-background" : position === 2 ? "yellow-background": "grey-background"} user-position`}>{position}</div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@ import LeaderBoardHeader from "../../assets/LeaderboardHeader.png";
 import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
 import { getLeaderboard, getLeaderboardUser, setProfileInView } from '../../redux/actions/tournment.actions';
-import { getUser } from '../../redux/actions/signup.actions';
+// import { getUser } from '../../redux/actions/signup.actions';
 import { Dropdown } from '../HomePage/ChooseGames';
 
 
@@ -81,9 +81,9 @@ function LeaderBoardPage() {
         }
     ]
     const history = useHistory();
-    const gotoProfile= ()=>{
-        history.push("/")
-    }
+    // const gotoProfile= ()=>{
+    //     history.push("/")
+    // }
 
     const setDate = (timeSpan)=>{
         setTimeSpan(timeSpan)
@@ -94,7 +94,7 @@ function LeaderBoardPage() {
     const getLeaderboardInfo = async (count,sortBy, game, timeSpan)  =>{
         setLoading(true)
         const allGame = game === "All Games" ? "" : game
-        let {status, response} = await dispatch(getLeaderboard(count, sortBy, allGame, timeSpan))
+        let { response} = await dispatch(getLeaderboard(count, sortBy, allGame, timeSpan))
         setLeaderboard(response)
         setLoading(false)
     }
@@ -142,18 +142,20 @@ function LeaderBoardPage() {
     
     useEffect(() => {
         window.scrollTo(0, 0);
-        const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) 
+        // const date = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) 
     }, [])
 
     useEffect(()=>{
         if(!leaderboard){
             getLeaderboardInfo(count, sortBy, game, timeSpan)
         }  
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [leaderboard])
 
     useEffect(() => {
         setLeaderboard(leaderboardI)
         setCount(leaderboardCount)
+         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [leaderboardI, leaderboardCount])
 
     useEffect(()=>{
@@ -327,8 +329,6 @@ function LeaderBoardPage() {
                             ))
                         }
                         
-                        
-                        
                         {showMore && (
                             <div className={`table-head bottom-tab ${loading && " form-loading"}`} onClick={getNext}>
                                 <span className="load-more cursor-pointer">
@@ -337,13 +337,6 @@ function LeaderBoardPage() {
 
                             </div>
                         )}
-                        
-                        
-
-
-
-                        
-  
 
                     </LeaderboardTable>
                     </div>
@@ -544,13 +537,13 @@ const LeaderboardTable = styled.div`
         border-bottom: none !important
     }
 `
-const DateFilter = styled.div`
-    width: 100%;
-    height:
+// const DateFilter = styled.div`
+//     width: 100%;
+//     height:
 
-`
-const TD = styled.div`
-    display:flex;
-    height: 78px;
-    width: 100%;
-`;
+// `
+// const TD = styled.div`
+//     display:flex;
+//     height: 78px;
+//     width: 100%;
+// `;

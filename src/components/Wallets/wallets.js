@@ -38,7 +38,7 @@ function Wallet() {
     });
     const [sameAccountNumber, setSameAccountNumber] = useState(false);
     const [accountNo, setAccountNo] = useState("1100327415");
-    const [memo, setMemo] = useState("");
+    // const [memo, setMemo] = useState("");
     const token = sessionStorage.getItem("accesstoken");
     const transactionList =[
         {
@@ -83,15 +83,15 @@ function Wallet() {
             amount: 18000
         }
     ]
-    function handleAmountInput(event) {
-        event.preventDefault()
-        setUserInfo({ ...userInfo, amount: event.target.value });
-    }
-    function handleMemoInput(event) {
-        event.preventDefault()
-        setUserInfo({ ...userInfo, memo: event.target.value });
-                    
-    }
+            
+    // }function handleAmountInput(event) {
+    //     event.preventDefault()
+    //     setUserInfo({ ...userInfo, amount: event.target.value });
+    // }
+    // function handleMemoInput(event) {
+    //     event.preventDefault()
+    //     setUserInfo({ ...userInfo, memo: event.target.value });
+            
 
     function copyAccountNo() {
         copyTextToClipboard(userInfo.accountNo);
@@ -111,11 +111,14 @@ function Wallet() {
 
     const getAccountDetails =async()=>{
         let {status, response} = await dispatch(getMyAccountDetails(token))
-        setUserInfo({
-            ...userInfo,        
-            accountNo: response.acctNumber,
-            memo:response.memo
-        })
+        if(status){
+            setUserInfo({
+                ...userInfo,        
+                accountNo: response.acctNumber,
+                memo:response.memo
+            })
+        }
+        
     }
     const WalletInput = ({Title, inputText, Icon, className, amount, onClick, value})=> {
         return (
@@ -165,7 +168,9 @@ function Wallet() {
     useEffect(()=>{
         if(walletDisplay === "deposit" ){
             getAccountDetails()
+            setAccountNo("1100327415")
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[walletDisplay])
     return (
         <div className ="leaderboard-page fadeInUp animated">

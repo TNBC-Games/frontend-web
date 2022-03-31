@@ -20,7 +20,7 @@ function SignIn() {
 
     // for validating email address
 
-    const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // const mailFormat = /^\w+([\.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/;
     function handleInputEmailChange(event) {
         setUserInfo({ ...userInfo, email: event.target.value });
     }

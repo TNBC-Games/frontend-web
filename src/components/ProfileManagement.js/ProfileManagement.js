@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Portal } from '../../modals/Portal';
 import ProfileBackdrop from "../../assets/profilebackdrop.png";
 import Image from "../../assets/profileImage.png";
 import {ReactComponent as GoldCup} from "../../assets/GoldCup.svg";
-import {ReactComponent as SilverCup} from "../../assets/SilverCup.svg";
-import {ReactComponent as BronzeCup} from "../../assets/Bronze.svg";
+// import {ReactComponent as SilverCup} from "../../assets/SilverCup.svg";
+// import {ReactComponent as BronzeCup} from "../../assets/Bronze.svg";
 import { ContentBody } from '../HomePage/ChooseGames';
-import { getUser } from '../../redux/actions/signup.actions';
+// import { getUser } from '../../redux/actions/signup.actions';
 import { getHumanDate } from '../../utils/utils';
 
 
@@ -34,10 +34,10 @@ function ProfileManagement() {
         bronze: 6,
     }
     const history = useHistory();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     //const userDetails = useSelector(state => state.signupState.userDetails)
     const profileInView = useSelector(state => state.tournamentState.profileInView)
-    const token = sessionStorage.getItem("accesstoken");
+    // const token = sessionStorage.getItem("accesstoken");
 
     const achievements = [
         {
@@ -74,7 +74,7 @@ function ProfileManagement() {
         },     
     ]
     const [showModal, setShowModal]= useState(true);
-    const [modalData, setModalData] = useState("");
+    // const [modalData, setModalData] = useState("");
 
     function showTrophyModal(e){
         setShowModal(true)
