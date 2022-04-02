@@ -9,7 +9,8 @@ const initialState = {
     leaderboardCount: null,
     tournamentInView: null,
     profileInView: "",
-    myTournament: ""
+    myTournament: "",
+    gameInView: ""
 }
 
 export const tournamentReducer = (state = initialState, action) => {
@@ -56,6 +57,11 @@ export const tournamentReducer = (state = initialState, action) => {
             return{
                 ...state,
                 profileInView: action.payload,
+            }
+        case types.GET_GAME_SUCCEEDED:
+            return {
+                ...state,
+                gameInView: action.payload
             }
         default:
             return state;

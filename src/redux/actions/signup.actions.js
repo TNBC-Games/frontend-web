@@ -60,7 +60,7 @@ export const signinUser = (data, type) => async (dispatch) => {
         if (response.data.code === 200) {
             dispatch({
                 type: types.SIGNIN_SUCCEEDED,
-                payload: data,
+                payload: response.data.data,
             });
             return {
                 status: true,

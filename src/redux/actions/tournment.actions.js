@@ -518,3 +518,42 @@ export const unpublishGame = (payload,token) => async (dispatch) => {
         }
     }
 }
+
+
+export const getGame = (payload) => async (dispatch) => {
+    dispatch({
+        type: types.GET_GAME_STARTED,
+    })
+    let url = `${urls.getGame}/${payload}`
+    try {
+        let headers = { "Content-Type": "application/json" };
+        const {status, data} = await getCall(url, headers);
+        if (status === 200) {
+            dispatch({
+                type: types.GET_GAME_SUCCEEDED,
+                payload: data.data,
+            });
+            return {
+                status: true,
+                response: data,
+            };
+        } else {
+            dispatch({
+                type: types.GET_GAME_FAILED,
+            })
+            return {
+                status: false,
+                response: data.message
+            }
+        }
+    } catch (err) {
+        dispatch({
+            type: types.GET_GAME_FAILED,
+            //payload: "Please check your internet connection and try again!",
+        });
+        return {
+            status: false,
+            message: err
+        }
+    }
+}

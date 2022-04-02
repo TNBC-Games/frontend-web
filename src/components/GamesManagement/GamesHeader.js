@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import gamesImage from "../../assets/chessGame.png";
 import styled from 'styled-components';
 import {ReactComponent as LeaderIcon} from "../../assets/LeaderboardIcon.svg";
@@ -14,6 +15,7 @@ import { useHistory } from 'react-router';
 import { ContentBody } from '../HomePage/ChooseGames';
 
 function GamesHeader() {
+    const {gameInView} = useSelector(state => state.tournamentState);
     const games = [
         {
             gameType: "CHESS",
@@ -71,7 +73,7 @@ function GamesHeader() {
                 <ProfileHeader image ={gamesImage}>
                     <GamesContentBody>
                         <GameName>
-                            CHESS
+                            {gameInView?.name}
                         </GameName>
                         <LiveMatch>
                             <RoundDot/>
@@ -133,31 +135,29 @@ function GamesHeader() {
                     </UpcomingTournamentHead>
 
                     <div className = "choose-games-section choose-games-padding">
-                    {games &&
-                        games.map((item, index) => (
-                            <div key ={index} className ="tourn-item">
-                                <div className = "upcoming-tornament-name">{item?.gameType}
-                                </div>
-                                <div>
-                                    <img src={item?.image} alt={item?.gameType}></img>
-                                </div>
-                                <div className ="tourn-more-info">
-                                    <div className ="tourn-name">{item?.gameType}</div>            
-                                    <ProgressBar now={item?.completedPercent}/>
-                                    <div className = "tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
-                                    <div className = "fee"> Fee </div>
-                                    <div className = "justify-space " >
-                                        <div className = "fee-amount">{item?.fee} TNBC</div>
-                                        <div className = "join-free float-btn">
-                                            View
+                        {gameInView.tournaments &&
+                            gameInView.tournaments.map((item, index) => (
+                                <div key ={index} className ="tourn-item">
+                                    <div className = "upcoming-tornament-name">{item?.name}</div>
+                                    <img src={item?.image} alt={item?.name} class={"max-100"}></img>
+                                    
+                                    <div className ="tourn-more-info">
+                                        <div className ="tourn-name">{item?.name}</div>            
+                                        <ProgressBar now={item?.completedPercent}/>
+                                        <div className = "tourn-completed mt-2">{item?.noOfPlayers} of {item?.limit}</div>
+                                        <div className = "fee"> Fee </div>
+                                        <div className = "justify-space " >
+                                            <div className = "fee-amount">{item?.fee} TNBC</div>
+                                            <div className = "join-free float-btn">
+                                                View
+                                            </div>
                                         </div>
+                                    
                                     </div>
-                                
+                                    
                                 </div>
-                                
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
                     </div>
                 </ContentBody>
             

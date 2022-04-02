@@ -41,10 +41,12 @@ function TournamentManagement() {
         
             if(filteredList.length >=1 ){
                 setEnrolState("enroled")
+            }else if(tournament?.noOfPlayers === tournament?.limit){
+                setEnrolState("filled")
             }
         }
-    },[tournament, myTournament])
 
+    },[tournament, myTournament])
     useLayoutEffect(()=>{
         if(!tournament){
             history.push("/")
@@ -69,7 +71,7 @@ function TournamentManagement() {
             </TournamentHeader>
             <EnrollSection>
                 <div className="yellow-text">Starts in 10d 24hrs 40mins  28secs</div>
-                <button className={`enroll-btn ${enrolState === "enrolling" ? "form-loading" : enrolState === "enroled"? "grey-disabled":""}`} onClick={enrollToTournament}><span>{enrolState === "enroled" ? "Enrolled" : "Enrol"}</span></button>
+                <button className={`enroll-btn ${enrolState === "enrolling" ? "form-loading" : enrolState === "enroled"? "grey-disabled": enrolState === "filled" ? "grey-disabled": ""}`} onClick={enrollToTournament}><span>{enrolState === "enroled" ? "Enrolled" : enrolState === "filled" ? "Filled" : "Enrol"}</span></button>
             </EnrollSection>
             <TabSection>
                 <div className="inner-tab">

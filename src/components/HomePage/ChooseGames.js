@@ -11,7 +11,7 @@ import Fifa5 from "../../assets/Fifa5.png";
 // import Slider from "react-slick";
 // import { Carousel } from 'react-bootstrap';
 import { DummySlider } from './ChooseTournament';
-import { getGames } from '../../redux/actions/tournment.actions';
+import { getGames, getGame } from '../../redux/actions/tournment.actions';
 import Skeleton from 'react-loading-skeleton';
 
 function ChooseGames() {
@@ -34,7 +34,6 @@ function ChooseGames() {
     //     slidesPerRow: 2
     // };
 
-    console.log(loading)
 
     const games = [
         {
@@ -65,7 +64,8 @@ function ChooseGames() {
     ]
     
     
-    const setGamesPage = () =>{
+    const setGamesPage = async(item) =>{
+        await dispatch(getGame(item.name))
         history.push("/game-management")
     }
     const getListOfGames = async () => {
@@ -99,7 +99,6 @@ function ChooseGames() {
         <div className = "choose-games">
             
             <ContentBody>
-
                 <div className = "choose-games-header">
                     <div className ="choose-games-title">Choose your Games</div>
                     <div className = "align-center flex-column">
@@ -112,65 +111,51 @@ function ChooseGames() {
                                         <path d="M5.5 16L0.73686 10H10.2631L5.5 16Z" fill="white"/>
                                     </svg>
                                 </div>
-                                
                             </div>
-                            
                         </div>
 
-                        { showDropDown && (
-                            
+                        {showDropDown && (
                             <Dropdown>
                                 <div className= "dropdown-inner">
                                     {listOfGames &&
                                         listOfGames.map((item, index) => (
                                             <div className = "dropdown-item" onClick= {() => filter(item.name)}> {item.name}</div>
                                     
-                                    ))}
-                                    
+                                        ))
+                                    }
                                 </div>
-
                             </Dropdown>
                         )}
-                        
-
-                        
                     </div>
-                    
                 </div>
 
                 <div className = "choose-games-section">
-                    
-                        {filteredGamesList && (
-                            filteredGamesList.map((item, index) => (
-                                
-                                <div className ="games-item mt-4 cursor-pointer" onClick={setGamesPage} key={index}>
-                                    <img src={item.image? item.image: Fifa2} alt ={item.name}></img>
-                                    <div className = "games-name-box">
-                                        <div className ="pl-4 pnl-4">{item.name}</div>
-                                    </div>
+                    {filteredGamesList && (
+                        filteredGamesList.map((item, index) => (
+                            <div className ="games-item mt-4 cursor-pointer" onClick={() => setGamesPage(item)} key={index}>
+                                <img src={item.image? item.image: Fifa2} alt ={item.name}></img>
+                                <div className = "games-name-box">
+                                    <div className ="pl-4 pnl-4">{item.name}</div>
                                 </div>
-                                
-                            )) 
-                            
-                        )}
-                        {!filteredGamesList && (
-                            games.map((item, index) => (
-                                <div className ="games-item mt-4 cursor-pointer" key={index}>
-                                    <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
-                                </div>
-                            ))
-                        )}
+                            </div>
+                        ))
+                    )}
+                    {!filteredGamesList && (
+                        games.map((item, index) => (
+                            <div className ="games-item mt-4 cursor-pointer" key={index}>
+                                <Skeleton height={"100%"} width={"100%"} baseColor= "#262626" highlightColor="#404040" borderRadius={5}/>
+                            </div>
+                        ))
+                    )}
                 </div>
-
                 <div className="flex justify-center hght100"> 
                     <DummySlider>
-                            <div className="box-sm blue-bg"></div>
-                            <div className="box-sm"></div>
-                            <div className="box-sm"></div>
+                        <div className="box-sm blue-bg"></div>
+                        <div className="box-sm"></div>
+                        <div className="box-sm"></div>
                     </DummySlider>
                 </div>
             </ContentBody>
-            
         </div>
     )
 }

@@ -1,5 +1,5 @@
 .navv {
-    height: 80px;
+    min-height: 87px;
     width: 100vw;
     display: flex;
     z-index: 10;
@@ -21,8 +21,11 @@
 
 img{
     width:100%;
-    height: 100%;
-    
+    height: 100%; 
+}
+
+.max-100{
+    height: 233px
 }
 
 .nav-section {

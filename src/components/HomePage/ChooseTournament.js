@@ -149,8 +149,8 @@ function ChooseTournament() {
                                 </div>
                                 <TournamentInfo>
                                     <div className ="tourn-name">{item?.name}</div>            
-                                    <ProgressBar now={20}/>
-                                    <div className = "tourn-completed mt-2">{3} of {12}</div>
+                                    <ProgressBar now={((item?.noOfPlayers/ item?.limit)* 100)}/>
+                                    <div className = "tourn-completed mt-2">{item?.noOfPlayers} of {item?.limit}</div>
                                     <div className = "fee mb-10"> Fee </div>
                                     <div className = "justify-space " >
                                         <div className = "fee-amount">{item?.fee} TNBC</div>

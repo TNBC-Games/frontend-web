@@ -6,8 +6,9 @@ const initialState = {
     userDetails: {
         user: {
             superAdmin: false,
-        }
-    }
+        },
+    },
+    admin: false
 }
 
 export const signupReducer = (state = initialState, action) => {
@@ -31,6 +32,7 @@ export const signupReducer = (state = initialState, action) => {
             return{
                 ...state,
                 userLoggedIn: true,
+                admin: action?.payload?.user?.superAdmin
             }
         case types.GET_USER_SUCCEEDED:
             return{
