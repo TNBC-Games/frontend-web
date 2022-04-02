@@ -15,4 +15,5 @@ export const urls ={
     publishGame: "https://tnbc-games-api.herokuapp.com/v1/game/publish",
     unpublishGame: "https://tnbc-games-api.herokuapp.com/v1/game/unpublish",
     getAccountDetails: "https://tnbc-games-api.herokuapp.com/v1/transaction/details",
+    getGame: "https://tnbc-games-api.herokuapp.com/v1/game"
 }

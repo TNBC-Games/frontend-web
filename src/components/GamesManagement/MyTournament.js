@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
@@ -27,7 +27,7 @@ function MyTournament() {
     const [active, setActive] = useState(1);
     const [completedList, setCompletedList] = useState("");
     const [ongoingList, setOngoingList] = useState("");
-    const myTournament = useSelector(state => state.tournamentState.myTournament);
+    const {myTournament, tournamentInView} = useSelector(state => state.tournamentState);
     const accessToken = sessionStorage.getItem("accesstoken");
     const games = [
         {
@@ -209,7 +209,7 @@ function MyTournament() {
         history.push("/tournaments")
     }
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const completedList = games.filter(
             (item) => item.completed === true
         );
@@ -259,7 +259,7 @@ function MyTournament() {
                 <div className="choose-games-section my-tournaments py-5">
                     {active === 1 ? (
                         <>
-                            {ongoingList &&
+                            {myTournament &&
                                 myTournament.map((item, index) => (
 
                                     <TournamentView key={index}>
@@ -271,7 +271,7 @@ function MyTournament() {
                                         </div>
                                         <TournamentInfo>
                                             <div className="tourn-name">{item?.tournamentInfo.name}</div>
-                                            <ProgressBar now={item?.completedPercent} />
+                                            {/* <ProgressBar now={((item?.tournamentInView.noOfPlayers /item?.tournamentInView.limit) * 100)} /> */}
                                             <div className="tourn-completed mt-2">{item?.completedTournament} of {item?.totalTournament}</div>
                                             <div className="fee"> Starts </div>
                                             <div className="justify-space " >
